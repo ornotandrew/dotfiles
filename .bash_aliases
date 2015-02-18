@@ -4,5 +4,4 @@ alias upgrade="sudo apt-get upgrade"
 alias remove="sudo apt-get remove"
 alias purge="sudo apt-get purge"
 alias x="sudo halt -p"
-alias proxyon="sudo mv /etc/apt/apt.conf.d/01proxy.bak /etc/apt/apt.conf.d/01proxy"
-alias proxyoff="sudo mv /etc/apt/apt.conf.d/01proxy /etc/apt/apt.conf.d/01proxy.bak"
+
