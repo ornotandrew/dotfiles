@@ -1,32 +1,32 @@
-" GVim
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
-
 " Key mappings
 let mapleader=","
 nnoremap ; :
 cmap w!! w !sudo tee > /dev/null %
-nnoremap <leader>s :mksession<CR>
 nmap <C-t> :NERDTree<CR>
 map <Leader><Space> :noh<CR>
+nnoremap <F3> :set list!<CR>
+nmap <Leader>s :NERDTreeClose<CR> :mksession!<CR> :NERDTree<CR>
+nmap <Leader>o :source Session.vim<CR> :NERDTree<CR>
 
 " General
 set backspace=indent,eol,start
 set undolevels=1000
+filetype plugin on
 
 " Colors
-syntax on "display syntax
+syntax on
 colorscheme molokai
-set t_Co=256
+if !has('gui_running')
+  set t_Co=256
+endif
 
 " Indentation
+filetype indent on
 set autoindent
 set copyindent
 set tabstop=4
 set shiftwidth=4
-filetype indent on
+set noexpandtab
 
 " UI
 set laststatus=2 "always display the statusline in all windows
@@ -35,6 +35,8 @@ set nowrap
 set showcmd
 set wildmenu
 set mouse=a
+set listchars=eol:¬,tab:▸\ ,trail:~,extends:>,precedes:<
+set cursorline
 
 " Search
 set incsearch
@@ -43,12 +45,11 @@ set ignorecase
 set smartcase
 
 " Copy/Paste
-set pastetoggle=<F2>
+"set pastetoggle=<F2>
 set clipboard=unnamedplus
 
 " Plugins
 execute pathogen#infect()
-autocmd VimEnter * NERDTree
 let NERDTreeShowBookmarks=1
 
 " Use different directories for backup files
@@ -59,7 +60,7 @@ set undodir=~/.vim/undo//
 
 " Reload .vimrc on save
 augroup reload_vimrc
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+	autocmd!
+	autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
 

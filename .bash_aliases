@@ -4,4 +4,5 @@ alias upgrade="sudo apt-get upgrade"
 alias remove="sudo apt-get remove"
 alias purge="sudo apt-get purge"
 alias x="sudo halt -p"
+alias xclip="xclip -sel clip"
 
