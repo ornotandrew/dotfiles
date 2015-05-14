@@ -1,17 +1,63 @@
+" ============
+" Vundle stuff
+" ============
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Plugins
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'shime/vim-livedown'
+Plugin 'tpope/vim-surround'
+Plugin 'Valloric/YouCompleteMe'
+
+" Color schemes
+Plugin 'tomasr/molokai'
+
+" Syntax
+Plugin 'HTML5-Syntax-File'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" ============
 " Key mappings
+" ============
 let mapleader=","
 nnoremap ; :
 cmap w!! w !sudo tee > /dev/null %
 nmap <C-t> :NERDTree<CR>
 map <Leader><Space> :noh<CR>
-nnoremap <F3> :set list!<CR>
-nmap <Leader>s :NERDTreeClose<CR> :mksession!<CR> :NERDTree<CR>
-nmap <Leader>o :source Session.vim<CR> :NERDTree<CR>
+nnoremap <F2> :setlocal spell!<CR>
+nnoremap <F3> :setlocal list!<CR>
+nnoremap <F4> :setlocal wrap!<CR>
+nmap <Leader>s :mksession!<CR>
+nmap <Leader>o :source Session.vim<CR>
+nmap <Leader>b :w<CR> :!pdflatex %<CR>
+nmap <Leader>m :LivedownPreview<CR>
+nmap <Leader>qm :LivedownKill<CR>
+nmap <Up> g<UP>
+nmap <Down> g<Down>
+imap <Up> <Esc>gka
+imap <Down> <Esc>gja
+nmap j gj
+nmap k gk
 
+" =======
 " General
+" =======
 set backspace=indent,eol,start
 set undolevels=1000
-filetype plugin on
+set spelllang=en_gb
 
 " Colors
 syntax on
@@ -21,7 +67,6 @@ if !has('gui_running')
 endif
 
 " Indentation
-filetype indent on
 set autoindent
 set copyindent
 set tabstop=4
@@ -29,13 +74,14 @@ set shiftwidth=4
 set noexpandtab
 
 " UI
+set ttyfast
 set laststatus=2 "always display the statusline in all windows
+set mouse=a
 set number
 set nowrap
 set showcmd
 set wildmenu
-set mouse=a
-set listchars=eol:¬,tab:▸\ ,trail:~,extends:>,precedes:<
+set listchars=eol:¬,tab:\¦\ ,trail:~,extends:>,precedes:<
 set cursorline
 
 " Search
@@ -45,12 +91,10 @@ set ignorecase
 set smartcase
 
 " Copy/Paste
-"set pastetoggle=<F2>
 set clipboard=unnamedplus
 
-" Plugins
-execute pathogen#infect()
-let NERDTreeShowBookmarks=1
+" Filetype specific
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 " Use different directories for backup files
 " (the directories need to exist)
@@ -58,9 +102,9 @@ set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 
-" Reload .vimrc on save
-augroup reload_vimrc
-	autocmd!
-	autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END
+"" Reload .vimrc on save
+"augroup reload_vimrc
+	"autocmd!
+	"autocmd BufWritePost $MYVIMRC source $MYVIMRC
+"augroup END
 
