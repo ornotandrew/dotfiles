@@ -18,6 +18,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'shime/vim-livedown'
 Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'FredKSchott/CoVim'
 
 " Color schemes
 Plugin 'tomasr/molokai'
