@@ -35,22 +35,26 @@ filetype plugin indent on    " required
 let mapleader=","
 nnoremap ; :
 cmap w!! w !sudo tee > /dev/null %
-nmap <C-t> :NERDTree<CR>
-map <Leader><Space> :noh<CR>
-nnoremap <F2> :setlocal spell!<CR>
-nnoremap <F3> :setlocal list!<CR>
-nnoremap <F4> :setlocal wrap!<CR>
-nmap <Leader>s :mksession!<CR>
+nmap <Leader><Space> :noh<CR>
+nmap <Leader>s :setlocal spell!<CR>
+nmap <Leader>l :setlocal list!<CR>
+nmap <Leader>w :setlocal wrap!<CR>
+nmap <Leader>S :mksession!<CR>
 nmap <Leader>o :source Session.vim<CR>
 nmap <Leader>b :w<CR> :!pdflatex %<CR>
 nmap <Leader>m :LivedownPreview<CR>
-nmap <Leader>qm :LivedownKill<CR>
+
+" Visual movement
 nmap <Up> g<UP>
 nmap <Down> g<Down>
 imap <Up> <Esc>gka
 imap <Down> <Esc>gja
 nmap j gj
 nmap k gk
+
+" Tabs
+map <C-PageUp> :tabp<CR>
+map <C-PageDown> :tabn<CR>
 
 " =======
 " General
@@ -61,10 +65,10 @@ set spelllang=en_gb
 
 " Colors
 syntax on
-colorscheme molokai
-if !has('gui_running')
-  set t_Co=256
+if !has("gui_running")
+	set t_Co=256
 endif
+colorscheme molokai
 
 " Indentation
 set autoindent
@@ -79,6 +83,7 @@ set laststatus=2 "always display the statusline in all windows
 set mouse=a
 set number
 set nowrap
+set linebreak
 set showcmd
 set wildmenu
 set listchars=eol:¬,tab:\¦\ ,trail:~,extends:>,precedes:<
@@ -102,9 +107,9 @@ set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 
-"" Reload .vimrc on save
-"augroup reload_vimrc
-	"autocmd!
-	"autocmd BufWritePost $MYVIMRC source $MYVIMRC
-"augroup END
+" Reload .vimrc on save
+augroup reload_vimrc
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
 
