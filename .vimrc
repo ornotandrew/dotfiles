@@ -1,8 +1,8 @@
 " ============
 " Vundle stuff
 " ============
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible			  " be iMproved, required
+filetype off				  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -18,7 +18,10 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'shime/vim-livedown'
 Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'FredKSchott/CoVim'
+Plugin 'SirVer/ultisnips'
+Plugin 'ervandew/supertab'
+Plugin 'scrooloose/syntastic'
+"Plugin 'FredKSchott/CoVim'
 
 " Color schemes
 Plugin 'tomasr/molokai'
@@ -27,8 +30,28 @@ Plugin 'tomasr/molokai'
 Plugin 'HTML5-Syntax-File'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()			 " required
+filetype plugin indent on	 " required
+
+" ===============
+" Plugin settings
+" ===============
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" Syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " ============
 " Key mappings
@@ -110,7 +133,6 @@ set undodir=~/.vim/undo//
 
 " Reload .vimrc on save
 augroup reload_vimrc
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+	autocmd!
+	autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
-
