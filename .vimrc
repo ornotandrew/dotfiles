@@ -47,6 +47,9 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
+" YCM
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -59,6 +62,7 @@ let g:syntastic_check_on_wq = 0
 let mapleader=","
 nnoremap ; :
 cmap w!! w !sudo tee > /dev/null %
+nmap <Leader>v :tabe $MYVIMRC<CR>
 nmap <Leader><Space> :noh<CR>
 nmap <Leader>s :setlocal spell!<CR>
 nmap <Leader>l :setlocal list!<CR>
