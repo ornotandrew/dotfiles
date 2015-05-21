@@ -1,8 +1,5 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/home/wraithy/.oh-my-zsh
-export WORKON_HOME=$HOME/code/envs
-export PROJECT_HOME=$HOME/code
-source /usr/local/bin/virtualenvwrapper.sh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -48,12 +45,16 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-syntax-highlighting)
 
 # User configuration
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
+fpath=($ZSH/custom/plugins/zsh-completions/src $fpath)
+
+# space-invaders
+export PATH=$PATH:~/code/entelect/runner
 
 source $ZSH/oh-my-zsh.sh
 
@@ -83,5 +84,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias install="sudo apt-get install"
 alias remove="sudo apt-get remove"
+alias purge="sudo apt-get purge"
 alias update="sudo apt-get update"
 alias upgrade="sudo apt-get upgrade"
+alias please='sudo $(fc -ln -1)'
+alias open="xdg-open"
+#alias vim="nvim"
