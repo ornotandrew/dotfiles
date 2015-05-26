@@ -89,4 +89,3 @@ alias update="sudo apt-get update"
 alias upgrade="sudo apt-get upgrade"
 alias please='sudo $(fc -ln -1)'
 alias open="xdg-open"
-#alias vim="nvim"

@@ -56,6 +56,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" NERDCommenter
+let NERDSpaceDelims=1
+
 " ============
 " Key mappings
 " ============
@@ -71,6 +74,10 @@ nmap <Leader>S :mksession!<CR>
 nmap <Leader>o :source Session.vim<CR>
 nmap <Leader>b :w<CR> :!pdflatex %<CR>
 nmap <Leader>m :LivedownPreview<CR>
+
+if has("nvim")
+	tnoremap <C-\> <C-\><C-n>
+endi
 
 " Visual movement
 nmap <Up> g<UP>
@@ -117,6 +124,7 @@ set nowrap
 set linebreak
 set showcmd
 set wildmenu
+set wildmode=longest,full
 set listchars=eol:¬,tab:\¦\ ,trail:~,extends:>,precedes:<
 set cursorline
 
