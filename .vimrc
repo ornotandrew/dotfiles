@@ -74,12 +74,15 @@ nmap <Leader>S :mksession!<CR>
 nmap <Leader>o :source Session.vim<CR>
 nmap <Leader>b :w<CR> :!pdflatex %<CR>
 nmap <Leader>m :LivedownPreview<CR>
+nmap <Leader>qm :LivedownKill<CR>
+nnoremap Y y$
 
 if has("nvim")
 	tnoremap <C-\> <C-\><C-n>
 endi
 
 " Visual movement
+set scrolloff=3
 nmap <Up> g<UP>
 nmap <Down> g<Down>
 imap <Up> <Esc>gka

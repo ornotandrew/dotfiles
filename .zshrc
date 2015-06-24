@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting)
+plugins=(git mercurial zsh-syntax-highlighting)
 
 # User configuration
 
@@ -82,10 +82,5 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias install="sudo apt-get install"
-alias remove="sudo apt-get remove"
-alias purge="sudo apt-get purge"
-alias update="sudo apt-get update"
-alias upgrade="sudo apt-get upgrade"
 alias please='sudo $(fc -ln -1)'
-alias open="xdg-open"
+alias svim="sudo -E vim"
