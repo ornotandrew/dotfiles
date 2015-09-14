@@ -12,16 +12,16 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Plugins
+Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'ervandew/supertab'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'shime/vim-livedown'
-Plugin 'tpope/vim-surround'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
-Plugin 'ervandew/supertab'
 Plugin 'scrooloose/syntastic'
-"Plugin 'FredKSchott/CoVim'
+Plugin 'shime/vim-livedown'
+Plugin 'suan/vim-instant-markdown'
+Plugin 'tpope/vim-surround'
 
 " Color schemes
 Plugin 'tomasr/molokai'
@@ -70,11 +70,7 @@ nmap <Leader><Space> :noh<CR>
 nmap <Leader>s :setlocal spell!<CR>
 nmap <Leader>l :setlocal list!<CR>
 nmap <Leader>w :setlocal wrap!<CR>
-nmap <Leader>S :mksession!<CR>
-nmap <Leader>o :source Session.vim<CR>
-nmap <Leader>b :w<CR> :!pdflatex %<CR>
-nmap <Leader>m :LivedownPreview<CR>
-nmap <Leader>qm :LivedownKill<CR>
+nmap <Leader>m :SyntasticToggleMode<CR>
 nnoremap Y y$
 
 if has("nvim")
@@ -141,7 +137,8 @@ set smartcase
 set clipboard=unnamedplus
 
 " Filetype specific
-au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+au BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown wrap spell
+au BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
 
 " Use different directories for backup files
 " (the directories need to exist)

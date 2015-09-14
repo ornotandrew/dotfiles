@@ -5,7 +5,7 @@ export ZSH=/home/wraithy/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="lukerandall"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git mercurial zsh-syntax-highlighting)
+plugins=(git docker mercurial zsh-syntax-highlighting)
 
 # User configuration
 
@@ -84,3 +84,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias please='sudo $(fc -ln -1)'
 alias svim="sudo -E vim"
+alias install="sudo apt-get install"
+alias remove="sudo apt-get remove"
+alias update="sudo apt-get update"
+alias upgrade="sudo apt-get upgrade"
