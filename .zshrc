@@ -53,9 +53,6 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 # export MANPATH="/usr/local/man:$MANPATH"
 fpath=($ZSH/custom/plugins/zsh-completions/src $fpath)
 
-# space-invaders
-export PATH=$PATH:~/code/entelect/runner
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment

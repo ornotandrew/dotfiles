@@ -321,7 +321,7 @@ max-args=10
 ignored-argument-names=_.*
 
 # Maximum number of locals for function / method body
-max-locals=15
+max-locals=20
 
 # Maximum number of return / yield for function / method body
 max-returns=6
@@ -336,7 +336,7 @@ max-statements=50
 max-parents=7
 
 # Maximum number of attributes for a class (see R0902).
-max-attributes=10
+max-attributes=99
 
 # Minimum number of public methods for a class (see R0903).
 min-public-methods=2
