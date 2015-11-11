@@ -1,18 +1,25 @@
 " Neovim compatability {{{
 
+let g:vimdir = '~/.vim'
 if has('nvim')
-    let g:vimprefix = '~/.config/nvim'
-else
-    let g:vimprefix = '~/.vim'
+    let g:vimdir = '~/.config/nvim'
 endif
 
 " }}}
-" NeoBundle stuff {{{
+" NeoBundle {{{
+
+" Install NeoBundle if it doesn't exist
+if !filereadable(expand(g:vimdir . '/bundle/neobundle.vim/README.md'))
+  echo "Installing NeoBundle..."
+  echo ""
+  execute 'silent !mkdir -p ' . g:vimdir . '/bundle'
+  execute 'silent !git clone https://github.com/Shougo/neobundle.vim ' . g:vimdir . '/bundle/neobundle.vim/'
+endif
 
 set nocompatible
-exe 'set runtimepath+=' . g:vimprefix . '/bundle/neobundle.vim/'
+execute 'set runtimepath+=' . g:vimdir . '/bundle/neobundle.vim/'
 
-call neobundle#begin(expand(g:vimprefix . '/bundle/'))
+call neobundle#begin(expand(g:vimdir . '/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -107,6 +114,12 @@ imap <Down> <Esc>gja
 nmap j gj
 nmap k gk
 
+" Switching windows
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+
 " }}}
 " General {{{
 
@@ -160,9 +173,9 @@ au BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
 " Backups {{{
 
 " (the directories need to exist)
-exe 'set backupdir=' . g:vimprefix . '/backup//'
-exe 'set directory=' . g:vimprefix . '/swap//'
-exe 'set undodir='   . g:vimprefix . '/undo//'
+execute 'set backupdir=' . g:vimdir . '/backup//'
+execute 'set directory=' . g:vimdir . '/swap//'
+execute 'set undodir='   . g:vimdir . '/undo//'
 
 " }}}
 " Custom autocommands {{{
