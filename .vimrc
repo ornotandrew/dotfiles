@@ -8,6 +8,8 @@ endif
 " }}}
 " NeoBundle {{{
 
+filetype off
+
 " Install NeoBundle if it doesn't exist
 if !filereadable(expand(g:vimdir . '/bundle/neobundle.vim/README.md'))
   echo "Installing NeoBundle..."
@@ -25,35 +27,37 @@ call neobundle#begin(expand(g:vimdir . '/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Plugins
-NeoBundle 'SirVer/ultisnips'
+NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'benekastah/neomake'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'scrooloose/syntastic'
 NeoBundle 'suan/vim-instant-markdown'
+NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'Valloric/YouCompleteMe', {
-\ 'build' : {
-\     'mac' : './install.sh --clang-completer',
-\     'unix' : './install.sh --clang-completer',
-\     'windows' : './install.sh --clang-completer',
-\     'cygwin' : './install.sh --clang-completer'
-\    }
-\ }
+          \ 'build' : {
+          \     'mac' : './install.sh --clang-completer',
+          \     'unix' : './install.sh --clang-completer',
+          \     'windows' : './install.sh --clang-completer',
+          \     'cygwin' : './install.sh --clang-completer'
+          \    }
+          \ }
 NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
+          \ 'build' : {
+          \     'windows' : 'tools\\update-dll-mingw',
+          \     'cygwin' : 'make -f make_cygwin.mak',
+          \     'mac' : 'make',
+          \     'linux' : 'make',
+          \     'unix' : 'gmake',
+          \    },
+          \ }
 
 " Color schemes
 NeoBundle 'tomasr/molokai'
+NeoBundle 'nanotech/jellybeans.vim'
 
 " Syntax
 NeoBundle 'HTML5-Syntax-File'
@@ -65,26 +69,37 @@ NeoBundleCheck            " Check for updates on startup
 " }}}
 " Plugin settings {{{
 
-" make YCM compatible with UltiSnips
-let g:ycm_key_list_select_completion = ['<tab>', '<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<s-tab>', '<C-p>', '<Up>']
-
+" UltiSnips
 let g:UltiSnipsExpandTrigger = "<C-j>"
 let g:UltiSnipsJumpForwardTrigger = "<C-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+let g:UltiSnipsUsePythonVersion = 2
 
-" YCM
+" YCM Completing
+let g:ycm_key_list_select_completion = ['<tab>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<s-tab>', '<C-p>', '<Up>']
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = g:vimdir . '/ycm_default_flags.py'
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_show_diagnostics_ui = 0 " Let Neomake do the linting
 
-" Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-" NERDCommenter
-let NERDSpaceDelims=1
+" Neomake
+let g:neomake_cpp_gcc_maker = {
+    \ 'args': [
+    \     '-Wall',
+    \     '-Wextra',
+    \     '-Werror',
+    \     '-Wno-variadic-macros',
+    \     '-fexceptions',
+    \     '-DNDEBUG',
+    \     '-std=c++11',
+    \     '-x',
+    \     'c++',
+    \     '-I/usr/local/include/SDL2',
+    \     '-Iinclude'
+    \ ]
+    \ }
 
 " }}}
 " Key mappings {{{
@@ -99,7 +114,8 @@ nmap <Leader>l :setlocal list!<CR>
 nmap <Leader>w :setlocal wrap!<CR>
 nmap <Leader>m :SyntasticToggleMode<CR>
 nnoremap Y y$
-nmap <Leader>u :Unite file file_rec buffer<CR>
+nmap <Leader>u :Unite file file_rec buffer<CR>i
+nmap <Leader>b :Unite buffer<CR>i
 
 if has("nvim")
 	tnoremap <C-\> <C-\><C-n>
@@ -142,8 +158,8 @@ set expandtab
 
 colorscheme molokai
 
+syntax on
 set ttyfast
-set laststatus=2
 set mouse=n
 set number
 set nowrap
@@ -151,8 +167,19 @@ set linebreak
 set showcmd
 set wildmenu
 set wildmode=longest,full
+set wildignore=*.o
 set listchars=eol:¬,tab:\¦\ ,trail:~,extends:>,precedes:<
 set cursorline
+
+" Statusline
+set laststatus=2
+set statusline=%f        " file path
+set statusline+=\ %m     " modified flag
+set statusline+=%r       " read-only flag
+set statusline+=%y       " filetype
+set statusline+=%=       " switch to right side
+set statusline+=\ %l/%L  " lines in file
+set statusline+=\        " space before end
 
 " }}}
 " Search {{{
@@ -166,8 +193,21 @@ set smartcase
 " Filetype specific {{{
 
 set modelines=1
-au BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown wrap spell
-au BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
+augroup filetypes
+    autocmd!
+    autocmd BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown wrap spell
+    autocmd BufNewFile,BufFilePre,BufRead Dockerfile.* setlocal filetype=dockerfile
+    autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
+augroup END
+
+" }}}
+" Autocommands {{{
+
+augroup custom
+    autocmd!
+    autocmd BufRead,BufWritePost * Neomake
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
 
 " }}}
 " Backups {{{
@@ -176,15 +216,6 @@ au BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
 execute 'set backupdir=' . g:vimdir . '/backup//'
 execute 'set directory=' . g:vimdir . '/swap//'
 execute 'set undodir='   . g:vimdir . '/undo//'
-
-" }}}
-" Custom autocommands {{{
-
-" Reload vimrc on save
-augroup reload_vimrc
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END
 
 " }}}
 " vim:foldmethod=marker:foldlevel=0
