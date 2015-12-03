@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/wraithy/.oh-my-zsh
+export ZSH=/home/andrew/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -87,3 +87,5 @@ alias update="sudo apt-get update"
 alias upgrade="sudo apt-get upgrade"
 alias vim="echo Use nvim."
 alias g="git"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

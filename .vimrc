@@ -28,7 +28,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Plugins
 NeoBundle 'vim-scripts/a.vim'
-NeoBundle 'Shougo/unite.vim'
+" NeoBundle 'Shougo/unite.vim'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'benekastah/neomake'
 NeoBundle 'honza/vim-snippets'
@@ -37,6 +37,9 @@ NeoBundle 'suan/vim-instant-markdown'
 NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-vinegar'
+NeoBundle 'junegunn/fzf'
+NeoBundle 'junegunn/fzf.vim'
 NeoBundle 'Valloric/YouCompleteMe', {
           \ 'build' : {
           \     'mac' : './install.sh --clang-completer',
@@ -101,6 +104,17 @@ let g:neomake_cpp_gcc_maker = {
     \ ]
     \ }
 
+" FZF
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=161 ctermbg=251
+  highlight fzf2 ctermfg=23 ctermbg=251
+  highlight fzf3 ctermfg=237 ctermbg=251
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
 " }}}
 " Key mappings {{{
 
@@ -112,14 +126,16 @@ nmap <Leader><Space> :noh<CR>
 nmap <Leader>s :setlocal spell!<CR>
 nmap <Leader>l :setlocal list!<CR>
 nmap <Leader>w :setlocal wrap!<CR>
-nmap <Leader>m :SyntasticToggleMode<CR>
 nnoremap Y y$
-nmap <Leader>u :Unite file file_rec buffer<CR>i
-nmap <Leader>b :Unite buffer<CR>i
 
 if has("nvim")
 	tnoremap <C-\> <C-\><C-n>
 endi
+
+" FZF
+nmap <Leader>b :Buffers<CR>
+nmap <Leader>a :Ag<CR>
+nmap <Leader>f :Files<CR>
 
 " Visual movement
 set scrolloff=3
@@ -160,7 +176,7 @@ colorscheme molokai
 
 syntax on
 set ttyfast
-set mouse=n
+set mouse=a
 set number
 set nowrap
 set linebreak
