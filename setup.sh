@@ -28,6 +28,9 @@ link .vimrc .vim/init.vim
 # git
 link .gitconfig
 
+# mercurial
+link .hgrc
+
 # pylint
 link .pylintrc
 

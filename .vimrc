@@ -28,6 +28,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Plugins
 NeoBundle 'vim-scripts/a.vim'
+NeoBundle 'mkitt/tabline.vim'
 " NeoBundle 'Shougo/unite.vim'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'benekastah/neomake'
@@ -106,14 +107,20 @@ let g:neomake_cpp_gcc_maker = {
 
 " FZF
 function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=251
-  highlight fzf2 ctermfg=23 ctermbg=251
-  highlight fzf3 ctermfg=237 ctermbg=251
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+    highlight fzf1 ctermfg=161 ctermbg=251
+    highlight fzf2 ctermfg=23 ctermbg=251
+    highlight fzf3 ctermfg=237 ctermbg=251
+    setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
 
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
+if has('nvim')
+    autocmd! User FzfStatusLine call <SID>fzf_statusline()
+    let $FZF_DEFAULT_OPTS .= ' --inline-info'
+endif
+
+if executable('ag')
+    let $FZF_DEFAULT_COMMAND='ag -g ""'
+endif
 
 " }}}
 " Key mappings {{{
@@ -175,12 +182,14 @@ set expandtab
 colorscheme molokai
 
 syntax on
+set t_Co=256
 set ttyfast
 set mouse=a
 set number
 set nowrap
 set linebreak
 set showcmd
+set title
 set wildmenu
 set wildmode=longest,full
 set wildignore=*.o
@@ -214,6 +223,7 @@ augroup filetypes
     autocmd BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown wrap spell
     autocmd BufNewFile,BufFilePre,BufRead Dockerfile.* setlocal filetype=dockerfile
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
+    autocmd BufNewFile,BufFilePre,BufRead *.py setlocal sw=4 ts=4
 augroup END
 
 " }}}
@@ -223,6 +233,7 @@ augroup custom
     autocmd!
     autocmd BufRead,BufWritePost * Neomake
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
+    autocmd BufEnter * let &titlestring = hostname() . " - vim - [ " . expand("%:t") . " ]"
 augroup END
 
 " }}}
