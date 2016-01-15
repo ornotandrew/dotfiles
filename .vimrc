@@ -42,22 +42,22 @@ NeoBundle 'tpope/vim-vinegar'
 NeoBundle 'junegunn/fzf'
 NeoBundle 'junegunn/fzf.vim'
 NeoBundle 'Valloric/YouCompleteMe', {
-          \ 'build' : {
-          \     'mac' : './install.sh --clang-completer',
-          \     'unix' : './install.sh --clang-completer',
-          \     'windows' : './install.sh --clang-completer',
-          \     'cygwin' : './install.sh --clang-completer'
-          \    }
-          \ }
+	  \ 'build' : {
+	  \     'mac' : './install.sh --clang-completer',
+	  \     'unix' : './install.sh --clang-completer',
+	  \     'windows' : './install.sh --clang-completer',
+	  \     'cygwin' : './install.sh --clang-completer'
+	  \    }
+	  \ }
 NeoBundle 'Shougo/vimproc.vim', {
-          \ 'build' : {
-          \     'windows' : 'tools\\update-dll-mingw',
-          \     'cygwin' : 'make -f make_cygwin.mak',
-          \     'mac' : 'make',
-          \     'linux' : 'make',
-          \     'unix' : 'gmake',
-          \    },
-          \ }
+	  \ 'build' : {
+	  \     'windows' : 'tools\\update-dll-mingw',
+	  \     'cygwin' : 'make -f make_cygwin.mak',
+	  \     'mac' : 'make',
+	  \     'linux' : 'make',
+	  \     'unix' : 'gmake',
+	  \    },
+	  \ }
 
 " Color schemes
 NeoBundle 'tomasr/molokai'
@@ -135,10 +135,6 @@ nmap <Leader>l :setlocal list!<CR>
 nmap <Leader>w :setlocal wrap!<CR>
 nnoremap Y y$
 
-if has("nvim")
-	tnoremap <C-\> <C-\><C-n>
-endi
-
 " FZF
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>a :Ag<CR>
@@ -195,16 +191,18 @@ set wildmode=longest,full
 set wildignore=*.o
 set listchars=eol:¬,tab:\¦\ ,trail:~,extends:>,precedes:<
 set cursorline
+set hidden
 
 " Statusline
 set laststatus=2
-set statusline=%f        " file path
-set statusline+=\ %m     " modified flag
-set statusline+=%r       " read-only flag
-set statusline+=%y       " filetype
-set statusline+=%=       " switch to right side
-set statusline+=\ %l/%L  " lines in file
-set statusline+=\        " space before end
+set statusline=%f               " file path
+set statusline+=\ %m            " modified flag
+set statusline+=%r              " read-only flag
+set statusline+=%y              " filetype
+set statusline+=%=              " switch to right side
+set statusline+=col\:%3v        " column on line
+set statusline+=\ line\:%4l/%L  " lines in file
+set statusline+=\               " space before end
 
 " }}}
 " Search {{{

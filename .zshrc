@@ -1,6 +1,6 @@
 export ZSH=/home/andrew/.oh-my-zsh
 
-ZSH_THEME="lukerandall"
+ZSH_THEME="wraithy"
 
 plugins=(git docker mercurial zsh-syntax-highlighting)
 
