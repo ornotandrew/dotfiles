@@ -1,4 +1,4 @@
-export ZSH=/home/andrew/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="wraithy"
 
@@ -36,8 +36,9 @@ bindkey '^Z' fancy-ctrl-z
 # FZF bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# The next line updates PATH for the Google Cloud SDK.
-source '/home/andrew/code/google-cloud-sdk/path.zsh.inc'
-
-# The next line enables shell command completion for gcloud.
-source '/home/andrew/code/google-cloud-sdk/completion.zsh.inc'
+# Google cloud sdk
+GCLOUD_SDK="$HOME/code/google-cloud-sdk"
+if [ -d $GCLOUD_SDK ]; then
+    source $GCLOUD_SDK/path.zsh.inc; # updates PATH
+    source $GCLOUD_SDK/completion.zsh.inc; # enables shell completion
+fi

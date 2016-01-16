@@ -11,13 +11,14 @@ link()
     # If we specify a directory, link to that
     if [ -n "$2" ]
     then
-        $LINK `realpath -s $1` `realpath -s $2` 2>/dev/null \
+        mkdir -p `dirname $2` # make sure the path exists
+        $LINK `realpath -sm $1` `realpath -sm $2` 2>/dev/null \
             && echo "+ Linked $1 to $2" \
             || echo "- $2 already exists"
 
     # Otherwise, link to the home dir of the current user
     else
-        $LINK `realpath -s $1` $HOME/$1 2>/dev/null \
+        $LINK `realpath -sm $1` $HOME/$1 2>/dev/null \
             && echo "+ Linked $1 to ~" \
             || echo "- $HOME/$1 already exists"
     fi
@@ -25,7 +26,7 @@ link()
 
 # zsh
 link .zshrc
-link wraithy.zsh-theme ~/.oh-my-zsh/custom/themes
+link wraithy.zsh-theme ~/.oh-my-zsh/custom/themes/wraithy.zsh-theme
 
 # vim
 link .vim
