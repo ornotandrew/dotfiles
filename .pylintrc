@@ -5,7 +5,7 @@
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
-init-hook='import sys; sys.path.append("/home/andrew/code/google_appengine"); sys.path.append("/home/andrew/code/google_appengine/lib"); sys.path.append("/home/andrew/code/google_appengine/lib/yaml/lib/yaml"); sys.path.append("/home/andrew/code/google_appengine/lib/webapp2-2.5.1"); sys.path.append("/home/andrew/code/Nomanini/backend/src/api/lib")'
+init-hook="import sys,os; libs=['google_appengine'+p for p in ['','/lib','lib/yaml/lib/yaml','lib/webapp2-2.5.1']]+['nomanini-backend/src/api/lib']; sys.path+=[os.path.expanduser('~')+'/code/'+l for l in libs];"
 
 # Profiled execution.
 profile=no
