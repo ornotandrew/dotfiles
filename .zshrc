@@ -4,7 +4,20 @@ ZSH_THEME="wraithy"
 
 plugins=(git docker mercurial zsh-syntax-highlighting)
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
+path+="/usr/local/sbin"
+path+="/usr/local/bin"
+path+="/usr/sbin"
+path+="/usr/bin"
+path+="/sbin"
+path+="/bin"
+path+="/usr/games"
+path+="/usr/local/games"
+path+="/usr/lib/jvm/java-8-oracle/bin"
+path+="/usr/lib/jvm/java-8-oracle/db/bin"
+path+="/usr/lib/jvm/java-8-oracle/jre/bin"
+path+="$HOME/code/google_appengine"
+export PATH
+
 fpath=($ZSH/custom/plugins/zsh-completions/src $fpath)
 
 source $ZSH/oh-my-zsh.sh

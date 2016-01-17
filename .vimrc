@@ -222,6 +222,7 @@ augroup filetypes
     autocmd BufNewFile,BufFilePre,BufRead Dockerfile.* setlocal filetype=dockerfile
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal sw=4 ts=4
+    autocmd BufNewFile,BufFilePre,BufRead *.yaml setlocal sw=2 ts=2
 augroup END
 
 " }}}
