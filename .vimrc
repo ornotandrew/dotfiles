@@ -73,6 +73,9 @@ NeoBundleCheck            " Check for updates on startup
 " }}}
 " Plugin settings {{{
 
+" a.vim
+let g:alternateSearchPath = 'reg:/src/inc/g/,reg:/inc/src/g/'
+
 " UltiSnips
 let g:UltiSnipsExpandTrigger = "<C-j>"
 let g:UltiSnipsJumpForwardTrigger = "<C-j>"
@@ -83,7 +86,6 @@ let g:UltiSnipsUsePythonVersion = 2
 let g:ycm_key_list_select_completion = ['<tab>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<s-tab>', '<C-p>', '<Up>']
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_global_ycm_extra_conf = g:vimdir . '/ycm_default_flags.py'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_show_diagnostics_ui = 0 " Let Neomake do the linting
@@ -100,7 +102,10 @@ let g:neomake_cpp_gcc_maker = {
     \     '-std=c++11',
     \     '-x',
     \     'c++',
-    \     '-I/usr/local/include/SDL2',
+    \     '-I',
+    \     '/home/andrew/code/nomanini-elula/inc',
+    \     '-I',
+    \     '/usr/local/include/SDL2',
     \     '-Iinclude'
     \ ]
     \ }
@@ -133,6 +138,8 @@ nmap <Leader><Space> :noh<CR>
 nmap <Leader>s :setlocal spell!<CR>
 nmap <Leader>l :setlocal list!<CR>
 nmap <Leader>w :setlocal wrap!<CR>
+nmap <F5> :tp<CR>
+nmap <F6> :tn<CR>
 nnoremap Y y$
 
 " FZF
@@ -204,6 +211,13 @@ set statusline+=col\:%3v        " column on line
 set statusline+=\ line\:%4l/%L  " lines in file
 set statusline+=\               " space before end
 
+" Cursor
+if has('nvim')
+    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+    au! InsertEnter * :redraw!
+    au! InsertLeave * :redraw!
+endif
+
 " }}}
 " Search {{{
 
@@ -225,6 +239,9 @@ augroup filetypes
     autocmd BufNewFile,BufFilePre,BufRead *.yaml setlocal sw=2 ts=2
 augroup END
 
+" }}}
+" Registers {{{
+let @u='s/\v"([^"]*)"/u''\1''/g'
 " }}}
 " Autocommands {{{
 

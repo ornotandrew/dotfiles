@@ -16,6 +16,8 @@ path+="/usr/lib/jvm/java-8-oracle/bin"
 path+="/usr/lib/jvm/java-8-oracle/db/bin"
 path+="/usr/lib/jvm/java-8-oracle/jre/bin"
 path+="$HOME/code/google_appengine"
+path+="$HOME/code/venv/bin"
+path+="$HOME/code/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin"
 export PATH
 
 fpath=($ZSH/custom/plugins/zsh-completions/src $fpath)
@@ -29,9 +31,10 @@ alias install="sudo apt-get install"
 alias remove="sudo apt-get remove"
 alias update="sudo apt-get update"
 alias upgrade="sudo apt-get upgrade"
-alias vim="echo Use nvim."
+alias nvim="echo Use vim."
 alias g="git"
 alias hpu="hg pull && hg update"
+alias hcm="hg commit -m Merge"
 
 # Fancy suspend
 fancy-ctrl-z () {

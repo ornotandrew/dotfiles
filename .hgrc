@@ -1,6 +1,7 @@
 [ui]
 username = Andrew van Rooyen <andrew@nomanini.com>
 editor = nvim
+merge = nvim -d
 
 [alias]
 lg = log -G --limit 5
