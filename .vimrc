@@ -28,19 +28,13 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Plugins
 NeoBundle 'vim-scripts/a.vim'
-NeoBundle 'mkitt/tabline.vim'
-" NeoBundle 'Shougo/unite.vim'
+" NeoBundle 'mkitt/tabline.vim'
+NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'benekastah/neomake'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'suan/vim-instant-markdown'
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-vinegar'
-NeoBundle 'junegunn/fzf'
-NeoBundle 'junegunn/fzf.vim'
+NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'Valloric/YouCompleteMe', {
 	  \ 'build' : {
 	  \     'mac' : './install.sh --clang-completer',
@@ -59,6 +53,17 @@ NeoBundle 'Shougo/vimproc.vim', {
 	  \    },
 	  \ }
 
+" == tpope
+NeoBundle 'tpope/vim-commentary'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-vinegar'
+NeoBundle 'tpope/vim-markdown'
+
+" == FZF
+NeoBundle 'junegunn/fzf'
+NeoBundle 'junegunn/fzf.vim'
+
 " Color schemes
 NeoBundle 'tomasr/molokai'
 NeoBundle 'nanotech/jellybeans.vim'
@@ -75,6 +80,22 @@ NeoBundleCheck            " Check for updates on startup
 
 " a.vim
 let g:alternateSearchPath = 'reg:/src/inc/g/,reg:/inc/src/g/'
+
+" indentLine
+let g:indentLine_faster = 1
+let g:indentLine_enabled = 0
+let g:indentLine_char = '┆'
+
+" lightline
+let g:lightline = {
+    \ 'colorscheme': 'jellybeans',
+    \ 'component': {'filename': '%f'},
+    \ 'separator': { 'left': '', 'right': '' },
+    \ 'subseparator': { 'left': '', 'right': '' }
+    \ }
+
+" vim-markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'json']
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger = "<C-j>"
@@ -142,6 +163,9 @@ nmap <F5> :tp<CR>
 nmap <F6> :tn<CR>
 nnoremap Y y$
 
+" indentLine
+nmap <Leader>i :IndentLinesToggle<CR>
+
 " FZF
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>a :Ag<CR>
@@ -199,17 +223,18 @@ set wildignore=*.o
 set listchars=eol:¬,tab:\¦\ ,trail:~,extends:>,precedes:<
 set cursorline
 set hidden
+set noshowmode " use lightline instead
 
 " Statusline
-set laststatus=2
-set statusline=%f               " file path
-set statusline+=\ %m            " modified flag
-set statusline+=%r              " read-only flag
-set statusline+=%y              " filetype
-set statusline+=%=              " switch to right side
-set statusline+=col\:%3v        " column on line
-set statusline+=\ line\:%4l/%L  " lines in file
-set statusline+=\               " space before end
+" set laststatus=2
+" set statusline=%f               " file path
+" set statusline+=\ %m            " modified flag
+" set statusline+=%r              " read-only flag
+" set statusline+=%y              " filetype
+" set statusline+=%=              " switch to right side
+" set statusline+=col\:%3v        " column on line
+" set statusline+=\ line\:%4l/%L  " lines in file
+" set statusline+=\               " space before end
 
 " Cursor
 if has('nvim')
@@ -229,7 +254,7 @@ set smartcase
 " }}}
 " Filetype specific {{{
 
-set modelines=1
+" set modelines=1
 augroup filetypes
     autocmd!
     autocmd BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown wrap spell
@@ -243,12 +268,15 @@ augroup END
 " Registers {{{
 let @u='s/\v"([^"]*)"/u''\1''/g'
 " }}}
-" Autocommands {{{
+" Autocommands and functions {{{
+augroup reload_vimrc
+    autocmd!
+    autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
+augroup END
 
 augroup custom
     autocmd!
     autocmd BufRead,BufWritePost * Neomake
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
     autocmd BufEnter * let &titlestring = hostname() . " - vim - [ " . expand("%:t") . " ]"
 augroup END
 
