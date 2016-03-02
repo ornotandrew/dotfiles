@@ -27,14 +27,16 @@ call neobundle#begin(expand(g:vimdir . '/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Plugins
-NeoBundle 'vim-scripts/a.vim'
-" NeoBundle 'mkitt/tabline.vim'
-NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'SirVer/ultisnips'
+NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'benekastah/neomake'
+NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'honza/vim-snippets'
-NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'jiangmiao/auto-pairs'
+NeoBundle 'tweekmonster/braceless.vim'
+NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'Valloric/YouCompleteMe', {
 	  \ 'build' : {
 	  \     'mac' : './install.sh --clang-completer',
@@ -81,6 +83,9 @@ NeoBundleCheck            " Check for updates on startup
 " a.vim
 let g:alternateSearchPath = 'reg:/src/inc/g/,reg:/inc/src/g/'
 
+" Braceless
+autocmd FileType python BracelessEnable +indent
+
 " indentLine
 let g:indentLine_faster = 1
 let g:indentLine_enabled = 0
@@ -88,7 +93,7 @@ let g:indentLine_char = '┆'
 
 " lightline
 let g:lightline = {
-    \ 'colorscheme': 'jellybeans',
+    \ 'colorscheme': 'Tomorrow_Night',
     \ 'component': {'filename': '%f'},
     \ 'separator': { 'left': '', 'right': '' },
     \ 'subseparator': { 'left': '', 'right': '' }
@@ -186,6 +191,10 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 
+if has('nvim')
+    tmap <C-\> <C-\><C-n>
+endif
+
 " }}}
 " General {{{
 
@@ -206,10 +215,14 @@ set expandtab
 " }}}
 " UI {{{
 
-colorscheme molokai
+colorscheme base16-default
+set background=dark
+let base16colorspace=256
+
+" Neovim ignores this
+set t_Co=256
 
 syntax on
-set t_Co=256
 set ttyfast
 set mouse=a
 set number
@@ -266,7 +279,14 @@ augroup END
 
 " }}}
 " Registers {{{
+
+" convert "x" to u'x'
 let @u='s/\v"([^"]*)"/u''\1''/g'
+" convert u'x' to "x"
+let @r='s/\vu''([^'']*)''/"\1"/g'
+" format json
+let @j='!python -m json.tool'
+
 " }}}
 " Autocommands and functions {{{
 augroup reload_vimrc
@@ -276,7 +296,7 @@ augroup END
 
 augroup custom
     autocmd!
-    autocmd BufRead,BufWritePost * Neomake
+    autocmd BufRead,BufWritePost * silent Neomake
     autocmd BufEnter * let &titlestring = hostname() . " - vim - [ " . expand("%:t") . " ]"
 augroup END
 

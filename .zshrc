@@ -58,3 +58,11 @@ if [ -d $GCLOUD_SDK ]; then
     source $GCLOUD_SDK/path.zsh.inc; # updates PATH
     source $GCLOUD_SDK/completion.zsh.inc; # enables shell completion
 fi
+
+# Torch
+. /home/andrew/code/torch/install/bin/torch-activate
+
+# Base16 Shell
+BASE16_SHELL="$HOME/code/base16-shell/base16-default.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
