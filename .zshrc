@@ -35,6 +35,8 @@ alias nvim="echo Use vim."
 alias g="git"
 alias hpu="hg pull && hg update"
 alias hcm="hg commit -m Merge"
+alias vpython="$HOME/code/venv/bin/python"
+alias vpip="$HOME/code/venv/bin/pip"
 
 # Fancy suspend
 fancy-ctrl-z () {
@@ -58,9 +60,6 @@ if [ -d $GCLOUD_SDK ]; then
     source $GCLOUD_SDK/path.zsh.inc; # updates PATH
     source $GCLOUD_SDK/completion.zsh.inc; # enables shell completion
 fi
-
-# Torch
-. /home/andrew/code/torch/install/bin/torch-activate
 
 # Base16 Shell
 BASE16_SHELL="$HOME/code/base16-shell/base16-default.dark.sh"
