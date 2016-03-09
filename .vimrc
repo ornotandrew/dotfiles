@@ -156,8 +156,8 @@ endif
 " }}}
 " Key mappings {{{
 
-let mapleader=","
-nnoremap ; :
+let mapleader=" "
+" nnoremap ; :
 cmap w!! w !sudo tee > /dev/null %
 nmap <Leader>v :tabe $MYVIMRC<CR>
 nmap <Leader><Space> :noh<CR>
@@ -167,6 +167,15 @@ nmap <Leader>w :setlocal wrap!<CR>
 nmap <F5> :tp<CR>
 nmap <F6> :tn<CR>
 nnoremap Y y$
+
+" Disable some maps because if <Leader> is <Space>, then pressing space
+" in insert mode results in vim waiting for another keypress
+augroup DisableMappings
+    autocmd!
+    autocmd VimEnter * :iunmap <Leader>ih
+    autocmd VimEnter * :iunmap <Leader>ihn
+    autocmd VimEnter * :iunmap <Leader>is
+augroup END
 
 " indentLine
 nmap <Leader>i :IndentLinesToggle<CR>

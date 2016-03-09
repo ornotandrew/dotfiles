@@ -1,9 +1,11 @@
+# oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
-
 ZSH_THEME="wraithy"
+plugins=(fancy-ctrl-z zsh-syntax-highlighting)
 
-plugins=(git docker mercurial zsh-syntax-highlighting)
+source $ZSH/oh-my-zsh.sh
 
+# Path
 path+="/usr/local/sbin"
 path+="/usr/local/bin"
 path+="/usr/sbin"
@@ -20,10 +22,6 @@ path+="$HOME/code/venv/bin"
 path+="$HOME/code/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin"
 export PATH
 
-fpath=($ZSH/custom/plugins/zsh-completions/src $fpath)
-
-source $ZSH/oh-my-zsh.sh
-
 # Aliases
 alias please='sudo $(fc -ln -1)'
 alias svim="sudo -E vim"
@@ -35,19 +33,8 @@ alias nvim="echo Use vim."
 alias g="git"
 alias hpu="hg pull && hg update"
 alias hcm="hg commit -m Merge"
-
-# Fancy suspend
-fancy-ctrl-z () {
-  if [[ $#BUFFER -eq 0 ]]; then
-    BUFFER="fg"
-    zle accept-line
-  else
-    zle push-input
-    zle clear-screen
-  fi
-}
-zle -N fancy-ctrl-z
-bindkey '^Z' fancy-ctrl-z
+alias vpython="$HOME/code/venv/bin/python"
+alias vpip="$HOME/code/venv/bin/pip"
 
 # FZF bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
