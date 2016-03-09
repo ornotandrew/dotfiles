@@ -16,13 +16,20 @@ function git_info() {
     echo "${yellow}(${ref#refs/heads/}$GIT_STATUS)$reset "
 }
 
+function hg_info() {
+    ref=$(hg branch 2> /dev/null) || return
+    HG_STATUS=$(hg_prompt_info)
+    [[ -n $HG_STATUS ]] && HG_STATUS="$HG_STATUS"
+    echo "${yellow}($HG_STATUS)$reset "
+}
+
 local user="$green%n$reset"
 local hostname="$green%m$reset"
 local working_dir="$blue%2~$reset"
 local jobs="%1(j.${cyan}%j$reset .)"
 local arrow="%B»%b"
 
-PROMPT='$user@$hostname $working_dir $(git_info)$jobs$arrow '
+PROMPT='$user@$hostname $working_dir $(git_info)$(hg_info)$jobs$arrow '
 RPS1="${return_code}"
 
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%%"
@@ -31,4 +38,6 @@ ZSH_THEME_GIT_PROMPT_MODIFIED="*"
 ZSH_THEME_GIT_PROMPT_RENAMED="~"
 ZSH_THEME_GIT_PROMPT_DELETED="!"
 ZSH_THEME_GIT_PROMPT_UNMERGED="?"
+
+ZSH_THEME_HG_PROMPT_DIRTY=" *"
 

@@ -1,7 +1,7 @@
 # oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="wraithy"
-plugins=(fancy-ctrl-z zsh-syntax-highlighting)
+plugins=(mercurial fancy-ctrl-z zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
