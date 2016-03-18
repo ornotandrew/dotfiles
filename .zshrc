@@ -18,7 +18,7 @@ path+="/usr/lib/jvm/java-8-oracle/bin"
 path+="/usr/lib/jvm/java-8-oracle/db/bin"
 path+="/usr/lib/jvm/java-8-oracle/jre/bin"
 path+="$HOME/code/google_appengine"
-path+="$HOME/code/venv/bin"
+path+="$HOME/code/venv/nomanini/bin"
 path+="$HOME/code/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin"
 export PATH
 
@@ -33,8 +33,8 @@ alias nvim="echo Use vim."
 alias g="git"
 alias hpu="hg pull && hg update"
 alias hcm="hg commit -m Merge"
-alias vpython="$HOME/code/venv/bin/python"
-alias vpip="$HOME/code/venv/bin/pip"
+alias vpython="$HOME/code/venv/nomanini/bin/python"
+alias vpip="$HOME/code/venv/nomanini/bin/pip"
 
 # FZF bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

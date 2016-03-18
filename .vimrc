@@ -35,32 +35,17 @@ NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'tweekmonster/braceless.vim'
 NeoBundle 'vim-scripts/a.vim'
-NeoBundle 'Valloric/YouCompleteMe', {
-	  \ 'build' : {
-	  \     'mac' : './install.sh --clang-completer',
-	  \     'unix' : './install.sh --clang-completer',
-	  \     'windows' : './install.sh --clang-completer',
-	  \     'cygwin' : './install.sh --clang-completer'
-	  \    }
-	  \ }
-NeoBundle 'Shougo/vimproc.vim', {
-	  \ 'build' : {
-	  \     'windows' : 'tools\\update-dll-mingw',
-	  \     'cygwin' : 'make -f make_cygwin.mak',
-	  \     'mac' : 'make',
-	  \     'linux' : 'make',
-	  \     'unix' : 'gmake',
-	  \    },
-	  \ }
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'Valloric/YouCompleteMe', {'build': './install.sh --clang-completer'}
+NeoBundle 'Shougo/vimproc.vim', {'build': 'make'}
+NeoBundle 'jceb/vim-orgmode', {'depends': ['vim-scripts/utl.vim', 'tpope/vim-speeddating']}
 
 " == tpope
 NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-vinegar'
-NeoBundle 'tpope/vim-markdown'
 
 " == FZF
 NeoBundle 'junegunn/fzf'
@@ -80,11 +65,14 @@ NeoBundleCheck            " Check for updates on startup
 " }}}
 " Plugin settings {{{
 
+" Universal Text Linking
+let g:utl_cfg_hdl_scm_http  = 'silent !google-chrome-stable %u'
+
+" netrw
+let g:netrw_list_hide = '.*\.pyc$'
+
 " a.vim
 let g:alternateSearchPath = 'reg:/src/inc/g/,reg:/inc/src/g/'
-
-" Braceless
-autocmd FileType python BracelessEnable +indent
 
 " indentLine
 let g:indentLine_faster = 1
@@ -200,6 +188,12 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 
+" lawrencium
+nmap <Leader>hd :Hg diff<CR>
+nmap <Leader>hs :Hgstatus<CR>
+nmap <Leader>hl :Hglog --limit 20<CR>
+nmap <Leader>hc :Hgcommit<CR>
+
 if has('nvim')
     tmap <C-\> <C-\><C-n>
 endif
@@ -284,6 +278,7 @@ augroup filetypes
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.yaml setlocal sw=2 ts=2
+    autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
 augroup END
 
 " }}}
