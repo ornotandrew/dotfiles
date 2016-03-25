@@ -1,69 +1,48 @@
-" Neovim compatability {{{
+" Plugins {{{
 
 let g:vimdir = '~/.vim'
 if has('nvim')
     let g:vimdir = '~/.config/nvim'
 endif
 
-" }}}
-" NeoBundle {{{
-
-filetype off
-
-" Install NeoBundle if it doesn't exist
-if !filereadable(expand(g:vimdir . '/bundle/neobundle.vim/README.md'))
-  echo "Installing NeoBundle..."
-  echo ""
-  execute 'silent !mkdir -p ' . g:vimdir . '/bundle'
-  execute 'silent !git clone https://github.com/Shougo/neobundle.vim ' . g:vimdir . '/bundle/neobundle.vim/'
+" Bootstrap vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  exec 'silent !curl -fLo ' . g:vimdir . '/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-set nocompatible
-execute 'set runtimepath+=' . g:vimdir . '/bundle/neobundle.vim/'
+call plug#begin(g:vimdir . '/plugged')
 
-call neobundle#begin(expand(g:vimdir . '/bundle/'))
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'SirVer/ultisnips'
+Plug 'Yggdroot/indentLine'
+Plug 'altercation/vim-colors-solarized'
+Plug 'benekastah/neomake'
+Plug 'chriskempson/base16-vim'
+Plug 'ervandew/supertab'
+Plug 'honza/vim-snippets'
+Plug 'itchyny/lightline.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-scripts/a.vim', { 'for': 'cpp' }
+Plug 'vim-scripts/utl.vim' | Plug 'tpope/vim-speeddating' | Plug 'jceb/vim-orgmode'
 
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" Plugins
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'benekastah/neomake'
-NeoBundle 'chriskempson/base16-vim'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'vim-scripts/a.vim'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'Valloric/YouCompleteMe', {'build': './install.sh --clang-completer'}
-NeoBundle 'Shougo/vimproc.vim', {'build': 'make'}
-NeoBundle 'jceb/vim-orgmode', {'depends': ['vim-scripts/utl.vim', 'tpope/vim-speeddating']}
-
-" == tpope
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-vinegar'
-
-" == FZF
-NeoBundle 'junegunn/fzf'
-NeoBundle 'junegunn/fzf.vim'
-
-" Color schemes
-NeoBundle 'tomasr/molokai'
-NeoBundle 'nanotech/jellybeans.vim'
-
-" Syntax
-NeoBundle 'HTML5-Syntax-File'
-
-call neobundle#end()
-filetype plugin indent on " Required
-NeoBundleCheck            " Check for updates on startup
+call plug#end()
 
 " }}}
 " Plugin settings {{{
+
+" Supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
 " Universal Text Linking
 let g:utl_cfg_hdl_scm_http  = 'silent !google-chrome-stable %u'
@@ -95,14 +74,6 @@ let g:UltiSnipsExpandTrigger = "<C-j>"
 let g:UltiSnipsJumpForwardTrigger = "<C-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
 let g:UltiSnipsUsePythonVersion = 2
-
-" YCM Completing
-let g:ycm_key_list_select_completion = ['<tab>', '<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<s-tab>', '<C-p>', '<Up>']
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_show_diagnostics_ui = 0 " Let Neomake do the linting
 
 " Neomake
 let g:neomake_cpp_gcc_maker = {
@@ -145,40 +116,28 @@ endif
 " Key mappings {{{
 
 let mapleader=" "
-" nnoremap ; :
+let localleader="\\"
 cmap w!! w !sudo tee > /dev/null %
-nmap <Leader>v :tabe $MYVIMRC<CR>
-nmap <Leader><Space> :noh<CR>
-nmap <Leader>s :setlocal spell!<CR>
-nmap <Leader>l :setlocal list!<CR>
-nmap <Leader>w :setlocal wrap!<CR>
 nmap <F5> :tp<CR>
 nmap <F6> :tn<CR>
+nmap <Leader><Space> :noh<CR>
+nmap <Leader>l :setlocal list!<CR>
+nmap <Leader>s :setlocal spell!<CR>
+nmap <Leader>v :tabe $MYVIMRC<CR>
+nmap <Leader>w :setlocal wrap!<CR>
 nnoremap Y y$
 
-" Disable some maps because if <Leader> is <Space>, then pressing space
-" in insert mode results in vim waiting for another keypress
-augroup DisableMappings
-    autocmd!
-    autocmd VimEnter * :iunmap <Leader>ih
-    autocmd VimEnter * :iunmap <Leader>ihn
-    autocmd VimEnter * :iunmap <Leader>is
-augroup END
-
-" indentLine
+" Plugins
+nmap <Leader>a :Ag<CR>
+nmap <Leader>b :Buffers<CR>
+nmap <Leader>f :Files<CR>
 nmap <Leader>i :IndentLinesToggle<CR>
 
-" FZF
-nmap <Leader>b :Buffers<CR>
-nmap <Leader>a :Ag<CR>
-nmap <Leader>f :Files<CR>
-
 " Visual movement
-set scrolloff=3
-nmap <Up> g<UP>
-nmap <Down> g<Down>
-imap <Up> <Esc>gka
 imap <Down> <Esc>gja
+imap <Up> <Esc>gka
+nmap <Down> g<Down>
+nmap <Up> g<UP>
 nmap j gj
 nmap k gk
 
@@ -188,32 +147,41 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 
-" lawrencium
-nmap <Leader>hd :Hg diff<CR>
-nmap <Leader>hs :Hgstatus<CR>
-nmap <Leader>hl :Hglog --limit 20<CR>
-nmap <Leader>hc :Hgcommit<CR>
+" Switching tabs
+noremap <M-j> gT
+noremap <M-k> gt
+noremap <M-l> gt
+noremap <M-h> gT
+
+" Convert double-quote strings to unicode
+nmap <Leader>u :'<,'>s/\v"([^"]*)"/u''\1''/g<CR>
 
 if has('nvim')
-    tmap <C-\> <C-\><C-n>
+    tmap <Esc> <C-\><C-n>
 endif
 
 " }}}
 " General {{{
 
+filetype plugin indent on
+set nocompatible
 set backspace=indent,eol,start
 set undolevels=1000
 set spelllang=en_gb
 set clipboard=unnamedplus
 
-" }}}
-" Indentation {{{
-
+" Indent
 set autoindent
 set copyindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+" Search
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
 
 " }}}
 " UI {{{
@@ -222,35 +190,24 @@ colorscheme base16-default
 set background=dark
 let base16colorspace=256
 
-" Neovim ignores this
-set t_Co=256
-
 syntax on
-set ttyfast
-set mouse=a
-set number
-set nowrap
-set linebreak
-set showcmd
-set title
-set wildmenu
-set wildmode=longest,full
-set wildignore=*.o
-set listchars=eol:¬,tab:\¦\ ,trail:~,extends:>,precedes:<
+
 set cursorline
 set hidden
+set linebreak
+set listchars=eol:¬,tab:\¦\ ,trail:~,extends:>,precedes:<
+set mouse=a
 set noshowmode " use lightline instead
-
-" Statusline
-" set laststatus=2
-" set statusline=%f               " file path
-" set statusline+=\ %m            " modified flag
-" set statusline+=%r              " read-only flag
-" set statusline+=%y              " filetype
-" set statusline+=%=              " switch to right side
-" set statusline+=col\:%3v        " column on line
-" set statusline+=\ line\:%4l/%L  " lines in file
-" set statusline+=\               " space before end
+set nowrap
+set number
+set scrolloff=3
+set showcmd
+set t_Co=256 " Neovim ignores this
+set title
+set ttyfast
+set wildignore=*.o,*.pyc
+set wildmenu
+set wildmode=longest,full
 
 " Cursor
 if has('nvim')
@@ -260,17 +217,8 @@ if has('nvim')
 endif
 
 " }}}
-" Search {{{
-
-set incsearch
-set hlsearch
-set ignorecase
-set smartcase
-
-" }}}
 " Filetype specific {{{
 
-" set modelines=1
 augroup filetypes
     autocmd!
     autocmd BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown wrap spell
@@ -280,16 +228,6 @@ augroup filetypes
     autocmd BufNewFile,BufFilePre,BufRead *.yaml setlocal sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
 augroup END
-
-" }}}
-" Registers {{{
-
-" convert "x" to u'x'
-let @u='s/\v"([^"]*)"/u''\1''/g'
-" convert u'x' to "x"
-let @r='s/\vu''([^'']*)''/"\1"/g'
-" format json
-let @j='!python -m json.tool'
 
 " }}}
 " Autocommands and functions {{{

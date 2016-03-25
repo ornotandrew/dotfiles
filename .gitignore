@@ -1,4 +1,4 @@
-.vim/bundle
+.vim/plugged
 .vim/swap/*
 *.pyc
 .vim/init.vim
