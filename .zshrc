@@ -29,7 +29,6 @@ alias install="sudo apt-get install"
 alias remove="sudo apt-get remove"
 alias update="sudo apt-get update"
 alias upgrade="sudo apt-get upgrade"
-alias nvim="echo Use vim."
 alias g="git"
 alias hpu="hg pull && hg update"
 alias hcm="hg commit -m Merge"
@@ -49,4 +48,7 @@ fi
 # Base16 Shell
 BASE16_SHELL="$HOME/code/base16-shell/base16-default.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+# neovim
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 

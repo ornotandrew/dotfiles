@@ -26,6 +26,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'kassio/neoterm'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -46,9 +47,6 @@ let g:deoplete#enable_at_startup = 1
 
 " Universal Text Linking
 let g:utl_cfg_hdl_scm_http  = 'silent !google-chrome-stable %u'
-
-" netrw
-let g:netrw_list_hide = '.*\.pyc$'
 
 " a.vim
 let g:alternateSearchPath = 'reg:/src/inc/g/,reg:/inc/src/g/'
@@ -169,6 +167,7 @@ set backspace=indent,eol,start
 set undolevels=1000
 set spelllang=en_gb
 set clipboard=unnamedplus
+set wildignore=*.o,*.pyc
 
 " Indent
 set autoindent
@@ -205,7 +204,6 @@ set showcmd
 set t_Co=256 " Neovim ignores this
 set title
 set ttyfast
-set wildignore=*.o,*.pyc
 set wildmenu
 set wildmode=longest,full
 
