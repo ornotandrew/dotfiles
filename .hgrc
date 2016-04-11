@@ -7,5 +7,10 @@ merge = nvim -d
 lg = log --graph --limit 10 --template "{label('red bold', node|short)} - {label('magenta', ifeq(branch, 'default', '', '({branch}) '))}{desc} {label('green', '({date|age})')} {label('blue', author|person)}\n"
 
 [extensions]
+progress =
 color =
+remotefilelog = /home/andrew/code/remotefilelog/remotefilelog
 
+[remotefilelog]
+cachepath = /tmp/hgcache
+cachelimit = 3 GB

@@ -34,6 +34,7 @@ alias hpu="hg pull && hg update"
 alias hcm="hg commit -m Merge"
 alias vpython="$HOME/code/venv/nomanini/bin/python"
 alias vpip="$HOME/code/venv/nomanini/bin/pip"
+alias dc="docker-compose"
 
 # FZF bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -52,3 +53,5 @@ BASE16_SHELL="$HOME/code/base16-shell/base16-default.dark.sh"
 # neovim
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
+# docker-compose
+export COMPOSE_HTTP_TIMEOUT=600

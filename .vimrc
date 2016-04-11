@@ -93,6 +93,24 @@ let g:neomake_cpp_gcc_maker = {
     \ ]
     \ }
 
+function! GetModule(path)
+    let l:dirs = split(a:path, '/')
+    echom 'Module: '.dirs[index(dirs, 'src')+1]
+    return dirs[index(dirs, 'src')+1]
+endfunction
+
+function! GetSingle(path)
+    let l:dirs = split(a:path, '/')
+    echom 'Single: '.join(dirs[index(dirs, 'functional')+1:], '/')
+    return join(dirs[index(dirs, 'functional')+1:], '/')
+endfunction
+
+let g:neomake_python_single_maker = {
+    \ 'exe': 'make',
+    \ 'args': [GetModule(expand('%:p')), 'SINGLE='.GetSingle(expand('%:p'))],
+    \ 'errorformat': '%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m',
+    \ }
+
 " FZF
 function! s:fzf_statusline()
     highlight fzf1 ctermfg=161 ctermbg=251
@@ -223,7 +241,7 @@ augroup filetypes
     autocmd BufNewFile,BufFilePre,BufRead Dockerfile.* setlocal filetype=dockerfile
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal sw=4 ts=4
-    autocmd BufNewFile,BufFilePre,BufRead *.yaml setlocal sw=2 ts=2
+    autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
 augroup END
 
