@@ -12,13 +12,13 @@ link()
     if [ -n "$2" ]
     then
         mkdir -p `dirname $2` # make sure the path exists
-        $LINK `realpath -sm $1` `realpath -sm $2` 2>/dev/null \
+        $LINK `realpath -s $1` `realpath -s $2` 2>/dev/null \
             && echo "+ Linked $1 to $2" \
             || echo "- $2 already exists"
 
     # Otherwise, link to the home dir of the current user
     else
-        $LINK `realpath -sm $1` $HOME/$1 2>/dev/null \
+        $LINK `realpath -s $1` $HOME/$1 2>/dev/null \
             && echo "+ Linked $1 to ~" \
             || echo "- $HOME/$1 already exists"
     fi
