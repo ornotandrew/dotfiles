@@ -33,11 +33,16 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/a.vim', { 'for': 'cpp' }
 Plug 'vim-scripts/utl.vim' | Plug 'tpope/vim-speeddating' | Plug 'jceb/vim-orgmode'
+Plug 'wraithy/nomanini.vim'
 
 call plug#end()
 
 " }}}
 " Plugin settings {{{
+
+" nomanini
+let g:nomanini_nose_path = '/home/andrew/code/venv/nomanini/bin/nosetests'
+let g:nomanini_gae_path = '/home/andrew/code/google_appengine'
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -74,6 +79,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
 let g:UltiSnipsUsePythonVersion = 2
 
 " Neomake
+let g:neomake_remove_invalid_entries = 1
 let g:neomake_cpp_gcc_maker = {
     \ 'args': [
     \     '-Wall',
@@ -91,24 +97,6 @@ let g:neomake_cpp_gcc_maker = {
     \     '/usr/local/include/SDL2',
     \     '-Iinclude'
     \ ]
-    \ }
-
-function! GetModule(path)
-    let l:dirs = split(a:path, '/')
-    echom 'Module: '.dirs[index(dirs, 'src')+1]
-    return dirs[index(dirs, 'src')+1]
-endfunction
-
-function! GetSingle(path)
-    let l:dirs = split(a:path, '/')
-    echom 'Single: '.join(dirs[index(dirs, 'functional')+1:], '/')
-    return join(dirs[index(dirs, 'functional')+1:], '/')
-endfunction
-
-let g:neomake_python_single_maker = {
-    \ 'exe': 'make',
-    \ 'args': [GetModule(expand('%:p')), 'SINGLE='.GetSingle(expand('%:p'))],
-    \ 'errorformat': '%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m',
     \ }
 
 " FZF
@@ -238,7 +226,7 @@ endif
 augroup filetypes
     autocmd!
     autocmd BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown wrap spell
-    autocmd BufNewFile,BufFilePre,BufRead Dockerfile.* setlocal filetype=dockerfile
+    autocmd BufNewFile,BufFilePre,BufRead Dockerfile* setlocal filetype=dockerfile sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2

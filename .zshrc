@@ -25,10 +25,10 @@ export PATH
 # Aliases
 alias please='sudo $(fc -ln -1)'
 alias svim="sudo -E vim"
-alias install="sudo apt-get install"
-alias remove="sudo apt-get remove"
-alias update="sudo apt-get update"
-alias upgrade="sudo apt-get upgrade"
+alias install="sudo apt install"
+alias remove="sudo apt remove"
+alias update="sudo apt update"
+alias upgrade="sudo apt upgrade"
 alias g="git"
 alias hpu="hg pull && hg update"
 alias hcm="hg commit -m Merge"
@@ -55,3 +55,6 @@ export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
 # docker-compose
 export COMPOSE_HTTP_TIMEOUT=600
+
+# terminix
+source /etc/profile.d/vte.sh
