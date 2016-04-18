@@ -4,15 +4,16 @@
 
 - clean: ['~', '~/.config']
 
-- link:
-    ~/.vim: .vim
-    ~/.vimrc: .vimrc
-    ~/.config/nvim: .vim
-    ~/.config/nvim/init.vim: .vimrc
-    ~/.gitconfig: .gitconfig
-    ~/.zshrc: .zshrc
-    ~/.hgrc: .hgrc
-    ~/.pylintrc: .pylintrc
-
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
+
+- link:
+    ~/.config/nvim/init.vim: .vimrc
+    ~/.config/nvim: .vim
+    ~/.gitconfig: .gitconfig
+    ~/.hgrc: .hgrc
+    ~/.pylintrc: .pylintrc
+    ~/.vim: .vim
+    ~/.vimrc: .vimrc
+    ~/.zshrc: .zshrc
+
