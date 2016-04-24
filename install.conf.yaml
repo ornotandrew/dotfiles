@@ -16,4 +16,5 @@
     ~/.vim: .vim
     ~/.vimrc: .vimrc
     ~/.zshrc: .zshrc
+    ~/.oh-my-zsh/themes/wraithy.zsh-theme: wraithy.zsh-theme
 

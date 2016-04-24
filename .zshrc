@@ -25,17 +25,10 @@ export PATH
 # Aliases
 alias please='sudo $(fc -ln -1)'
 alias svim="sudo -E vim"
-<<<<<<< HEAD
 alias install="sudo apt install"
 alias remove="sudo apt remove"
 alias update="sudo apt update"
 alias upgrade="sudo apt upgrade"
-=======
-alias install="sudo apt-get install"
-alias remove="sudo apt-get remove"
-alias update="sudo apt-get update"
-alias upgrade="sudo apt-get upgrade"
->>>>>>> 978c2345005e00f3cf10a08abcd63bc635f40de8
 alias g="git"
 alias hpu="hg pull && hg update"
 alias hcm="hg commit -m Merge"
