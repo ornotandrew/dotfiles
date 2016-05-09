@@ -44,6 +44,16 @@ call plug#end()
 " Startify
 let g:startify_custom_header = []
 let g:startify_bookmarks = [{'v': fnamemodify($MYVIMRC, ':~')}, {'z': '~/.zshrc'}]
+let g:startify_list_order = [
+        \ ['   MRU in the current directory'],
+        \ 'dir',
+        \ ['   MRU'],
+        \ 'files',
+        \ ['   Sessions'],
+        \ 'sessions',
+        \ ['   Bookmarks'],
+        \ 'bookmarks',
+        \ ]
 
 " nomanini
 let g:nomanini_nose_path = '/home/andrew/code/venv/nomanini/bin/nosetests'
