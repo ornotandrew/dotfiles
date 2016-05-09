@@ -9,6 +9,7 @@ fi
 # packages
 apt-add-repository -y ppa:neovim-ppa/unstable
 add-apt-repository -y ppa:numix/ppa
+apt update
 apt install -y \
     fonts-hack-ttf \
     neovim \

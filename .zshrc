@@ -2,7 +2,6 @@
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="wraithy"
 plugins=(mercurial fancy-ctrl-z zsh-syntax-highlighting)
-
 source $ZSH/oh-my-zsh.sh
 
 # Path
@@ -35,6 +34,10 @@ alias hcm="hg commit -m Merge"
 alias vpython="$HOME/code/venv/nomanini/bin/python"
 alias vpip="$HOME/code/venv/nomanini/bin/pip"
 alias dc="docker-compose"
+alias kc="kubectl"
+
+# Completion
+zstyle ':completion:*' users andrew root
 
 # FZF bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

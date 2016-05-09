@@ -1,5 +1,6 @@
 .vim/plugged
 .vim/swap/*
+.vim/undo/*
 *.pyc
 .vim/init.vim
 *rplugin*

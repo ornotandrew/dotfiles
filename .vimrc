@@ -33,12 +33,17 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/a.vim', { 'for': 'cpp' }
 Plug 'vim-scripts/utl.vim' | Plug 'tpope/vim-speeddating' | Plug 'jceb/vim-orgmode'
+Plug 'mhinz/vim-startify'
 Plug 'wraithy/nomanini.vim'
 
 call plug#end()
 
 " }}}
 " Plugin settings {{{
+
+" Startify
+let g:startify_custom_header = []
+let g:startify_bookmarks = [{'v': fnamemodify($MYVIMRC, ':~')}, {'z': '~/.zshrc'}]
 
 " nomanini
 let g:nomanini_nose_path = '/home/andrew/code/venv/nomanini/bin/nosetests'
@@ -113,7 +118,7 @@ if has('nvim')
 endif
 
 if executable('ag')
-    let $FZF_DEFAULT_COMMAND='ag -g ""'
+    let $FZF_DEFAULT_COMMAND='ag --ignore=*.pyc -g ""'
 endif
 
 " }}}
@@ -129,6 +134,8 @@ nmap <Leader>l :setlocal list!<CR>
 nmap <Leader>s :setlocal spell!<CR>
 nmap <Leader>v :tabe $MYVIMRC<CR>
 nmap <Leader>w :setlocal wrap!<CR>
+nmap <Leader>z :setlocal foldenable!<CR>
+nmap <Leader>j :'<,'>!python -m json.tool<CR>
 nnoremap Y y$
 
 " Plugins
@@ -136,6 +143,7 @@ nmap <Leader>a :Ag<CR>
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :Files<CR>
 nmap <Leader>i :IndentLinesToggle<CR>
+nmap <F4> :Ttoggle<CR>
 
 " Visual movement
 imap <Down> <Esc>gja
@@ -170,7 +178,9 @@ endif
 filetype plugin indent on
 set nocompatible
 set backspace=indent,eol,start
+set undofile
 set undolevels=1000
+set undoreload=10000
 set spelllang=en_gb
 set clipboard=unnamedplus
 set wildignore=*.o,*.pyc
@@ -231,6 +241,7 @@ augroup filetypes
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
+    autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal foldmethod=syntax
 augroup END
 
 " }}}
@@ -242,6 +253,7 @@ augroup END
 
 augroup custom
     autocmd!
+    autocmd FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
     autocmd BufRead,BufWritePost * silent Neomake
     autocmd BufEnter * let &titlestring = hostname() . " - vim - [ " . expand("%:t") . " ]"
 augroup END
@@ -249,10 +261,10 @@ augroup END
 " }}}
 " Backups {{{
 
-" (the directories need to exist)
-execute 'set backupdir=' . g:vimdir . '/backup//'
+call system('mkdir -p' . g:vimdir . '/swap//')
+call system('mkdir -p' . g:vimdir . '/undo//')
 execute 'set directory=' . g:vimdir . '/swap//'
-execute 'set undodir='   . g:vimdir . '/undo//'
+execute 'set undodir=' . g:vimdir .'/undo//'
 
 " }}}
 " vim:foldmethod=marker:foldlevel=0
