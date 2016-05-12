@@ -31,7 +31,6 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
-Plug 'vim-scripts/a.vim', { 'for': 'cpp' }
 Plug 'vim-scripts/utl.vim' | Plug 'tpope/vim-speeddating' | Plug 'jceb/vim-orgmode'
 Plug 'mhinz/vim-startify'
 Plug 'wraithy/nomanini.vim'
@@ -43,6 +42,7 @@ call plug#end()
 
 " Startify
 let g:startify_custom_header = []
+let g:startify_change_to_dir = 0
 let g:startify_bookmarks = [{'v': fnamemodify($MYVIMRC, ':~')}, {'z': '~/.zshrc'}]
 let g:startify_list_order = [
         \ ['   MRU in the current directory'],
@@ -140,12 +140,13 @@ cmap w!! w !sudo tee > /dev/null %
 nmap <F5> :tp<CR>
 nmap <F6> :tn<CR>
 nmap <Leader><Space> :noh<CR>
+nmap <Leader>j :'<,'>!python -m json.tool<CR>
 nmap <Leader>l :setlocal list!<CR>
 nmap <Leader>s :setlocal spell!<CR>
 nmap <Leader>v :tabe $MYVIMRC<CR>
 nmap <Leader>w :setlocal wrap!<CR>
 nmap <Leader>z :setlocal foldenable!<CR>
-nmap <Leader>j :'<,'>!python -m json.tool<CR>
+nmap <Tab> zA
 nnoremap Y y$
 
 " Plugins
@@ -168,12 +169,6 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
-
-" Switching tabs
-noremap <M-j> gT
-noremap <M-k> gt
-noremap <M-l> gt
-noremap <M-h> gT
 
 " Convert double-quote strings to unicode
 nmap <Leader>u :'<,'>s/\v"([^"]*)"/u''\1''/g<CR>
