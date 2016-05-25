@@ -27,12 +27,12 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'kassio/neoterm'
+Plug 'mhinz/vim-startify'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/utl.vim' | Plug 'tpope/vim-speeddating' | Plug 'jceb/vim-orgmode'
-Plug 'mhinz/vim-startify'
 Plug 'wraithy/nomanini.vim'
 
 call plug#end()
@@ -43,7 +43,7 @@ call plug#end()
 " Startify
 let g:startify_custom_header = []
 let g:startify_change_to_dir = 0
-let g:startify_bookmarks = [{'v': fnamemodify($MYVIMRC, ':~')}, {'z': '~/.zshrc'}]
+let g:startify_bookmarks = [{'t': '~/.tmux.conf'}, {'v': fnamemodify($MYVIMRC, ':~')}, {'z': '~/.zshrc'}]
 let g:startify_list_order = [
         \ ['   MRU in the current directory'],
         \ 'dir',
@@ -67,9 +67,6 @@ let g:deoplete#enable_at_startup = 1
 
 " Universal Text Linking
 let g:utl_cfg_hdl_scm_http  = 'silent !google-chrome-stable %u'
-
-" a.vim
-let g:alternateSearchPath = 'reg:/src/inc/g/,reg:/inc/src/g/'
 
 " indentLine
 let g:indentLine_faster = 1
@@ -128,7 +125,7 @@ if has('nvim')
 endif
 
 if executable('ag')
-    let $FZF_DEFAULT_COMMAND='ag --ignore=*.pyc -g ""'
+    let $FZF_DEFAULT_COMMAND='ag -g ""'
 endif
 
 " }}}

@@ -8,6 +8,7 @@
   - [git submodule update --init --recursive, Installing submodules]
 
 - link:
+    ~/.agignore: .agignore
     ~/.config/nvim/init.vim: .vimrc
     ~/.config/nvim: .vim
     ~/.gitconfig: .gitconfig
