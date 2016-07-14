@@ -8,7 +8,6 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'SirVer/ultisnips'
 Plug 'Yggdroot/indentLine'
 Plug 'altercation/vim-colors-solarized'
@@ -172,19 +171,21 @@ endif
 " }}}
 " Autocommands {{{
 
-autocmd!
-autocmd BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown wrap spell
-autocmd BufNewFile,BufFilePre,BufRead Dockerfile* setlocal filetype=dockerfile sw=2 ts=2
-autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
-autocmd BufNewFile,BufFilePre,BufRead *.py setlocal sw=4 ts=4
-autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2
-autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
-autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal foldmethod=syntax
+augroup custom
+    autocmd!
+    autocmd BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown wrap spell
+    autocmd BufNewFile,BufFilePre,BufRead Dockerfile* setlocal filetype=dockerfile sw=2 ts=2
+    autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
+    autocmd BufNewFile,BufFilePre,BufRead *.py setlocal sw=4 ts=4
+    autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2
+    autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
+    autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal foldmethod=syntax
 
-autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
-autocmd FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
-autocmd BufRead,BufWritePost * silent Neomake
-autocmd BufEnter * let &titlestring = hostname() . " - vim - [ " . expand("%:t") . " ]"
+    autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
+    autocmd FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
+    autocmd BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights() 
+    autocmd BufEnter * let &titlestring = hostname() . " - vim - [ " . expand("%:t") . " ]"
+augroup END
 
 " }}}
 " vim:foldmethod=marker:foldlevel=0
