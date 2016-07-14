@@ -5,7 +5,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-
 Plug 'Shougo/deoplete.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'Yggdroot/indentLine'
@@ -24,29 +23,22 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'wraithy/nomanini.vim'
-
 call plug#end()
 
 " }}}
 " Plugin settings {{{
-
 " nomanini
 let g:nomanini_make_command = 'Neomake!'
-
 " base16
 let base16colorspace=256
-
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" Use deoplete.
+" deoplete
 let g:deoplete#enable_at_startup = 1
-
 " indentLine
 let g:indentLine_faster = 1
 let g:indentLine_enabled = 0
 let g:indentLine_char = '┆'
-
 " lightline
 let g:lightline = {
     \ 'colorscheme': 'Tomorrow_Night',
@@ -54,16 +46,11 @@ let g:lightline = {
     \ 'separator': { 'left': '', 'right': '' },
     \ 'subseparator': { 'left': '', 'right': '' }
     \ }
-
 " UltiSnips
 let g:UltiSnipsExpandTrigger = "<C-j>"
 let g:UltiSnipsJumpForwardTrigger = "<C-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
 let g:UltiSnipsUsePythonVersion = 2
-
-" Neomake
-let g:neomake_remove_invalid_entries = 1
-
 " FZF
 function! s:fzf_statusline()
     highlight fzf1 ctermfg=161 ctermbg=251
@@ -71,12 +58,10 @@ function! s:fzf_statusline()
     highlight fzf3 ctermfg=237 ctermbg=251
     setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
-
 if has('nvim')
     autocmd! User FzfStatusLine call <SID>fzf_statusline()
     let $FZF_DEFAULT_OPTS .= ' --inline-info'
 endif
-
 if executable('ag')
     let $FZF_DEFAULT_COMMAND='ag -g ""'
 endif
@@ -133,10 +118,6 @@ endif
 
 colorscheme base16-default-dark
 
-" set background=dark
-" set copyindent
-" set showcmd
-" set wildmode=longest,full
 set clipboard=unnamedplus
 set cursorline
 set expandtab
@@ -161,11 +142,7 @@ call system('mkdir -p ~/.config/nvim/undo//')
 set directory=~/.config/nvim/swap//
 set undodir=~/.config/nvim/undo//
 
-if has('nvim')
-    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-    " au! InsertEnter * :redraw!
-    " au! InsertLeave * :redraw!
-endif
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " }}}
 " Autocommands {{{
@@ -175,7 +152,7 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown wrap spell
     autocmd BufNewFile,BufFilePre,BufRead Dockerfile* setlocal filetype=dockerfile sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
-    autocmd BufNewFile,BufFilePre,BufRead *.py setlocal sw=4 ts=4
+    autocmd BufNewFile,BufFilePre,BufRead *.py setlocal sw=4 ts=4 fdm=indent
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal foldmethod=syntax
