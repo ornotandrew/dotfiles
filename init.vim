@@ -22,7 +22,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-" Plug 'tpope/vim-vinegar'
+Plug 'othree/html5-syntax.vim'
 Plug 'wraithy/nomanini.vim'
 call plug#end()
 

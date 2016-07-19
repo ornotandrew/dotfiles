@@ -10,3 +10,4 @@ lg = log --graph --limit 10 --template "{label('red bold', node|short)} {label('
 purge =
 progress =
 color =
+mq =
