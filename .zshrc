@@ -1,7 +1,7 @@
 # oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="wraithy"
-plugins=(mercurial fancy-ctrl-z zsh-syntax-highlighting)
+plugins=(mercurial fasd fancy-ctrl-z zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # Path
@@ -31,7 +31,7 @@ alias update="sudo apt update"
 alias upgrade="sudo apt upgrade"
 alias g="git"
 alias hpu="hg pull && hg update"
-alias hgm="hg merge && hg commit -m Merge"
+alias hcm="hg commit -m Merge"
 alias vpython="$HOME/code/venv/nomanini/bin/python"
 alias vpip="$HOME/code/venv/nomanini/bin/pip"
 alias dc="docker-compose"

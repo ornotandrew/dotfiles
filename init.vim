@@ -14,22 +14,24 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
+Plug 'hynek/vim-python-pep8-indent'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
+Plug 'othree/html5-syntax.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'othree/html5-syntax.vim'
 Plug 'wraithy/nomanini.vim'
+Plug 'zchee/deoplete-jedi'
 call plug#end()
 
 " }}}
 " Plugin settings {{{
 " nomanini
-let g:nomanini_make_command = 'Neomake!'
+" let g:nomanini_make_command = 'Neomake!'
 " base16
 let base16colorspace=256
 " Supertab
@@ -73,25 +75,26 @@ endif
 let mapleader=" "
 let localleader="\\"
 cmap w!! w !sudo tee > /dev/null %
+nmap <Esc> :cclose<CR>:lclose<CR>
 nmap <F5> :tp<CR>
 nmap <F6> :tn<CR>
 nmap <Leader><Space> :noh<CR>
 nmap <Leader>j :'<,'>!python -m json.tool<CR>
 nmap <Leader>l :setlocal list!<CR>
+nmap <Leader>q :cwindow<CR>
 nmap <Leader>s :setlocal spell!<CR>
 nmap <Leader>v :tabe $MYVIMRC<CR>
 nmap <Leader>w :setlocal wrap!<CR>
 nmap <Leader>z :setlocal foldenable!<CR>
-nmap <Tab> zA
 nnoremap Y y$
 
 " Plugins
 nmap <Leader>a :Ag<CR>
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :Files<CR>
-nmap <Leader>i :IndentLinesToggle<CR>
 nmap <Leader>h :History<CR>
-nmap <F4> :Ttoggle<CR>
+nmap <Leader>i :IndentLinesToggle<CR>
+nmap <Leader>t :TestSingle<CR>
 
 " Visual movement
 imap <Down> <Esc>gja
@@ -108,7 +111,7 @@ noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 
 " Convert double-quote strings to unicode
-nmap <Leader>u :'<,'>s/\v"([^"]*)"/u''\1''/g<CR>
+let @u = 's/\v"([^"]*)"/u''\1''/g'
 
 if has('nvim')
     tmap <Esc> <C-\><C-n>
@@ -120,6 +123,7 @@ endif
 colorscheme base16-default-dark
 
 set clipboard=unnamedplus
+set completeopt-=preview
 set cursorline
 set expandtab
 set hidden
@@ -129,6 +133,7 @@ set mouse=a
 set noshowmode " use lightline instead
 set nowrap
 set number
+set relativenumber
 set shiftwidth=4
 set smartcase
 set spelllang=en_gb
@@ -153,15 +158,15 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown wrap spell
     autocmd BufNewFile,BufFilePre,BufRead Dockerfile* setlocal filetype=dockerfile sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
-    autocmd BufNewFile,BufFilePre,BufRead *.py setlocal sw=4 ts=4 fdm=indent
+    autocmd BufNewFile,BufFilePre,BufRead *.py setlocal fdm=indent sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
-    autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal foldmethod=syntax
+    autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal fdm=syntax
 
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
     autocmd FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
-    autocmd BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights() 
-    autocmd BufEnter * let &titlestring = hostname() . " - vim - [ " . expand("%:t") . " ]"
+    autocmd BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
+    autocmd FileType dirvish keeppatterns g@.pyc$@d
 augroup END
 
 " }}}
