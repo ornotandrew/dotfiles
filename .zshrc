@@ -34,6 +34,8 @@ alias hpu="hg pull && hg update"
 alias hcm="hg commit -m Merge"
 alias vpython="$HOME/code/venv/nomanini/bin/python"
 alias vpip="$HOME/code/venv/nomanini/bin/pip"
+alias lpython="$HOME/code/venv/loans/bin/python3"
+alias lpip="$HOME/code/venv/loans/bin/pip3"
 alias dc="docker-compose"
 alias kc="kubectl"
 

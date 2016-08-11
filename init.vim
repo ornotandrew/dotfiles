@@ -19,11 +19,11 @@ Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-dirvish'
 Plug 'othree/html5-syntax.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
 Plug 'wraithy/nomanini.vim'
 Plug 'zchee/deoplete-jedi'
 call plug#end()
@@ -68,6 +68,22 @@ endif
 if executable('ag')
     let $FZF_DEFAULT_COMMAND='ag -g ""'
 endif
+" Neomake
+let g:neomake_python_pylint_maker = {
+    \ 'exe': '/home/andrew/code/venv/nomanini-loans/bin/pylint',
+    \ 'args': [
+        \ '--output-format=text',
+        \ '--msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg}"',
+        \ '--reports=no'
+    \ ],
+    \ 'errorformat':
+        \ '%A%f:%l:%c:%t: %m,' .
+        \ '%A%f:%l: %m,' .
+        \ '%A%f:(%l): %m,' .
+        \ '%-Z%p^%.%#,' .
+        \ '%-G%.%#',
+    \ 'postprocess': function('neomake#makers#ft#python#PylintEntryProcess')
+    \ }
 
 " }}}
 " Key mappings {{{
@@ -129,6 +145,7 @@ set expandtab
 set hidden
 set hlsearch
 set ignorecase
+set listchars=eol:¬,tab:\¦\ ,trail:~,extends:>,precedes:<
 set mouse=a
 set noshowmode " use lightline instead
 set nowrap
@@ -149,6 +166,7 @@ set directory=~/.config/nvim/swap//
 set undodir=~/.config/nvim/undo//
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+highlight Comment cterm=italic
 
 " }}}
 " Autocommands {{{
@@ -162,11 +180,11 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal fdm=syntax
+    autocmd FileType gitcommit setlocal spell tw=75
 
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
     autocmd FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
     autocmd BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
-    autocmd FileType dirvish keeppatterns g@.pyc$@d
 augroup END
 
 " }}}
