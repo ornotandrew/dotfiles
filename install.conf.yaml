@@ -17,4 +17,5 @@
     ~/.pylintrc: .pylintrc
     ~/.tmux.conf: .tmux.conf
     ~/.zshrc: .zshrc
+    ~/code/tags.sh: tags.sh
 
