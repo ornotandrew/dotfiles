@@ -19,19 +19,16 @@ Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-dirvish'
 Plug 'othree/html5-syntax.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'wraithy/nomanini.vim'
+Plug 'tpope/vim-vinegar'
 Plug 'zchee/deoplete-jedi'
 call plug#end()
 
 " }}}
 " Plugin settings {{{
-" nomanini
-" let g:nomanini_make_command = 'Neomake!'
 " base16
 let base16colorspace=256
 " Supertab
@@ -68,6 +65,13 @@ endif
 if executable('ag')
     let $FZF_DEFAULT_COMMAND='ag -g ""'
 endif
+" Neomake
+let g:neomake_python_nose_maker = {
+    \ 'exe': 'nosetests',
+    \ 'args': ['--with-machineout'],
+    \ 'errorformat': '%f:%l: fail: %m,%f:%l: error: %m',
+    \ }
+let g:neomake_python_enabled_makers = ['pylint', 'nose']
 
 " }}}
 " Key mappings {{{
@@ -129,6 +133,7 @@ set expandtab
 set hidden
 set hlsearch
 set ignorecase
+set listchars=eol:¬,tab:\¦\ ,trail:~,extends:>,precedes:<
 set mouse=a
 set noshowmode " use lightline instead
 set nowrap
@@ -141,7 +146,11 @@ set tabstop=4
 set undofile
 set undolevels=1000
 set undoreload=10000
-set wildignore=*.o,*.pyc
+
+set wildignore+=*.o
+set wildignore+=*.pyc
+set wildignore+=.hg/
+set wildignore+=__pycache__/
 
 call system('mkdir -p ~/.config/nvim/swap//')
 call system('mkdir -p ~/.config/nvim/undo//')
@@ -162,11 +171,11 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal fdm=syntax
+    autocmd FileType gitcommit setlocal spell tw=75
 
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
     autocmd FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
     autocmd BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
-    autocmd FileType dirvish keeppatterns g@.pyc$@d
 augroup END
 
 " }}}

@@ -18,6 +18,7 @@ apt install -y \
     python-pip \
     python3-pip \
     software-properties-common \
+    silversearcher-ag \
     unity-tweak-tool \
     zsh
 
@@ -28,11 +29,12 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 # neovim
 pip install neovim
 pip3 install neovim
-ln -s /usr/bin/nvim /usr/bin/vim
+update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
 
 # unity dash
 dconf write /com/canonical/unity/dash/scopes "['home.scope', 'applications.scope', 'files.scope']"
 
-# terminix
-cp base16-default-dark.json /usr/share/terminix/schemes/
-
+# venvwrapper
+pip3 install virtualenvwrapper
