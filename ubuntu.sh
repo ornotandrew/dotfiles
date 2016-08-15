@@ -18,6 +18,7 @@ apt install -y \
     python-pip \
     python3-pip \
     software-properties-common \
+    silversearcher-ag \
     unity-tweak-tool \
     zsh
 
