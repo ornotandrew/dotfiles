@@ -1,16 +1,16 @@
 #!/bin/bash
 # Some basic packages and tweaks to make Unity on Ubuntu usable
 
-if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" 1>&2
+if [[ $EUID -eq 0 ]]; then
+   echo "This script must not be run as root" 1>&2
    exit 1
 fi
 
 # packages
-apt-add-repository -y ppa:neovim-ppa/unstable
-add-apt-repository -y ppa:numix/ppa
-apt update
-apt install -y \
+sudo apt-add-repository -y ppa:neovim-ppa/unstable
+sudo add-apt-repository -y ppa:numix/ppa
+sudo apt update
+sudo apt install -y \
     fonts-hack-ttf \
     neovim \
     numix-gtk-theme \
@@ -29,9 +29,9 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 # neovim
 pip install neovim
 pip3 install neovim
-update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
-update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
-update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
 
 # unity dash
 dconf write /com/canonical/unity/dash/scopes "['home.scope', 'applications.scope', 'files.scope']"
