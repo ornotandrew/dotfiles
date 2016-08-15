@@ -24,14 +24,11 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
-Plug 'wraithy/nomanini.vim'
 Plug 'zchee/deoplete-jedi'
 call plug#end()
 
 " }}}
 " Plugin settings {{{
-" nomanini
-" let g:nomanini_make_command = 'Neomake!'
 " base16
 let base16colorspace=256
 " Supertab
@@ -69,21 +66,12 @@ if executable('ag')
     let $FZF_DEFAULT_COMMAND='ag -g ""'
 endif
 " Neomake
-let g:neomake_python_pylint_maker = {
-    \ 'exe': '/home/andrew/code/venv/nomanini-loans/bin/pylint',
-    \ 'args': [
-        \ '--output-format=text',
-        \ '--msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg}"',
-        \ '--reports=no'
-    \ ],
-    \ 'errorformat':
-        \ '%A%f:%l:%c:%t: %m,' .
-        \ '%A%f:%l: %m,' .
-        \ '%A%f:(%l): %m,' .
-        \ '%-Z%p^%.%#,' .
-        \ '%-G%.%#',
-    \ 'postprocess': function('neomake#makers#ft#python#PylintEntryProcess')
+let g:neomake_python_nose_maker = {
+    \ 'exe': 'nosetests',
+    \ 'args': ['--with-machineout'],
+    \ 'errorformat': '%f:%l: fail: %m,%f:%l: error: %m',
     \ }
+let g:neomake_python_enabled_makers = ['pylint', 'nose']
 
 " }}}
 " Key mappings {{{
@@ -158,7 +146,11 @@ set tabstop=4
 set undofile
 set undolevels=1000
 set undoreload=10000
-set wildignore=*.o,*.pyc
+
+set wildignore+=*.o
+set wildignore+=*.pyc
+set wildignore+=.hg/
+set wildignore+=__pycache__/
 
 call system('mkdir -p ~/.config/nvim/swap//')
 call system('mkdir -p ~/.config/nvim/undo//')
@@ -166,7 +158,6 @@ set directory=~/.config/nvim/swap//
 set undodir=~/.config/nvim/undo//
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-highlight Comment cterm=italic
 
 " }}}
 " Autocommands {{{
