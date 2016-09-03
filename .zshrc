@@ -60,3 +60,4 @@ export COMPOSE_HTTP_TIMEOUT=600
 
 # virtualenvwrapper
 export WORKON_HOME=~/code/venv
+export LC_CTYPE=en_ZA.UTF-8
