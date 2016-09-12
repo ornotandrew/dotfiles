@@ -19,6 +19,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'othree/html5-syntax.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
@@ -30,16 +31,24 @@ call plug#end()
 
 " }}}
 " Plugin settings {{{
+augroup custom
+    autocmd!
+augroup END
+
 " base16
 let base16colorspace=256
+
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
 " deoplete
 let g:deoplete#enable_at_startup = 1
+
 " indentLine
 let g:indentLine_faster = 1
 let g:indentLine_enabled = 0
 let g:indentLine_char = '┆'
+
 " lightline
 let g:lightline = {
     \ 'colorscheme': 'Tomorrow_Night',
@@ -47,11 +56,13 @@ let g:lightline = {
     \ 'separator': { 'left': '', 'right': '' },
     \ 'subseparator': { 'left': '', 'right': '' }
     \ }
+
 " UltiSnips
 let g:UltiSnipsExpandTrigger = "<C-j>"
 let g:UltiSnipsJumpForwardTrigger = "<C-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
 let g:UltiSnipsUsePythonVersion = 2
+
 " FZF
 function! s:fzf_statusline()
     highlight fzf1 ctermfg=161 ctermbg=251
@@ -66,6 +77,13 @@ endif
 if executable('ag')
     let $FZF_DEFAULT_COMMAND='ag -g ""'
 endif
+autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
+
+" Neomake
+autocmd custom BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
+
+" Goyo
+autocmd User GoyoEnter nested set nocursorline wrap
 
 " }}}
 " Key mappings {{{
@@ -90,6 +108,7 @@ nnoremap Y y$
 nmap <Leader>a :Ag<CR>
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :Files<CR>
+nmap <Leader>g :Goyo<CR>
 nmap <Leader>h :History<CR>
 nmap <Leader>i :IndentLinesToggle<CR>
 nmap <Leader>t :TestSingle<CR>
@@ -137,6 +156,7 @@ set nowrap
 set number
 set relativenumber
 set shiftwidth=4
+set showbreak=↪
 set smartcase
 set spelllang=en_gb
 set tabstop=4
@@ -155,13 +175,13 @@ set directory=~/.config/nvim/swap//
 set undodir=~/.config/nvim/undo//
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+let $PAGER = ''
 
 " }}}
 " Autocommands {{{
 
 augroup custom
-    autocmd!
-    autocmd BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown wrap spell
+    autocmd BufNewFile,BufFilePre,BufRead *.md,*.markdown setlocal filetype=markdown wrap spell
     autocmd BufNewFile,BufFilePre,BufRead Dockerfile* setlocal filetype=dockerfile sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal fdm=indent sw=4 ts=4
@@ -172,8 +192,6 @@ augroup custom
     autocmd FileType gitcommit setlocal spell tw=75
 
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
-    autocmd FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
-    autocmd BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
 augroup END
 
 " }}}
