@@ -22,6 +22,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'othree/html5-syntax.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'zchee/deoplete-jedi'
@@ -65,13 +66,6 @@ endif
 if executable('ag')
     let $FZF_DEFAULT_COMMAND='ag -g ""'
 endif
-" Neomake
-let g:neomake_python_nose_maker = {
-    \ 'exe': 'nosetests',
-    \ 'args': ['--with-machineout'],
-    \ 'errorformat': '%f:%l: fail: %m,%f:%l: error: %m',
-    \ }
-let g:neomake_python_enabled_makers = ['pylint', 'nose']
 
 " }}}
 " Key mappings {{{
@@ -116,6 +110,9 @@ noremap <C-h> <C-w>h
 
 " Convert double-quote strings to unicode
 let @u = 's/\v"([^"]*)"/u''\1''/g'
+
+" Read in 12 random hex chars
+noremap <silent> <F9> "=system('dd if=/dev/random bs=6 count=1 2>/dev/null \| od -An -tx1 \| tr -d " \\t\n"')<CR>p
 
 if has('nvim')
     tmap <Esc> <C-\><C-n>
@@ -168,9 +165,10 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead Dockerfile* setlocal filetype=dockerfile sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal fdm=indent sw=4 ts=4
-    autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2
+    autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2 fdm=indent
     autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal fdm=syntax
+    autocmd BufNewFile,BufFilePre,BufRead *.json setlocal sw=2 ts=2
     autocmd FileType gitcommit setlocal spell tw=75
 
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC

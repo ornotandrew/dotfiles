@@ -16,4 +16,5 @@
     ~/.oh-my-zsh/themes/wraithy.zsh-theme: wraithy.zsh-theme
     ~/.pylintrc: .pylintrc
     ~/.tmux.conf: .tmux.conf
+    ~/.unittest.cfg: .unittest.cfg
     ~/.zshrc: .zshrc

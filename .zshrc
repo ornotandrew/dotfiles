@@ -1,7 +1,7 @@
 # oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="wraithy"
-plugins=(mercurial virtualenvwrapper fancy-ctrl-z zsh-syntax-highlighting)
+plugins=(docker docker-compose mercurial virtualenvwrapper fancy-ctrl-z zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # Path
@@ -18,13 +18,9 @@ path+="/usr/lib/jvm/java-8-oracle/db/bin"
 path+="/usr/lib/jvm/java-8-oracle/jre/bin"
 path+="$HOME/.local/bin"
 path+="$HOME/code/google_appengine"
-path+="$HOME/code/venv/nomanini/bin"
-path+="$HOME/code/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin"
 export PATH
 
 # Aliases
-alias please='sudo $(fc -ln -1)'
-alias svim="sudo -E vim"
 alias install="sudo apt install"
 alias remove="sudo apt remove"
 alias update="sudo apt update"
