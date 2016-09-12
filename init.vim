@@ -88,7 +88,7 @@ let g:neomake_python_enabled_makers = ['pylint', 'nose']
 autocmd custom BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
 
 " Goyo
-autocmd User GoyoEnter nested set nocursorline
+autocmd User GoyoEnter nested set nocursorline wrap
 
 " }}}
 " Key mappings {{{
@@ -158,6 +158,7 @@ set nowrap
 set number
 set relativenumber
 set shiftwidth=4
+set showbreak=↪
 set smartcase
 set spelllang=en_gb
 set tabstop=4
@@ -182,7 +183,7 @@ let $PAGER = ''
 " Autocommands {{{
 
 augroup custom
-    autocmd BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown wrap spell
+    autocmd BufNewFile,BufFilePre,BufRead *.md,*.markdown setlocal filetype=markdown wrap spell
     autocmd BufNewFile,BufFilePre,BufRead Dockerfile* setlocal filetype=dockerfile sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal fdm=indent sw=4 ts=4
