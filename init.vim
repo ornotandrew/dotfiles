@@ -20,6 +20,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'metakirby5/codi.vim'
 Plug 'othree/html5-syntax.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
@@ -80,6 +81,7 @@ endif
 autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
 " Neomake
+let g:neomake_cpp_enabled_makers = []
 autocmd custom BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
 
 " Goyo
@@ -164,6 +166,7 @@ set undofile
 set undolevels=1000
 set undoreload=10000
 
+set wildignore+=*.min.js
 set wildignore+=*.o
 set wildignore+=*.pyc
 set wildignore+=.hg/
@@ -181,7 +184,7 @@ let $PAGER = ''
 " Autocommands {{{
 
 augroup custom
-    autocmd BufNewFile,BufFilePre,BufRead *.md,*.markdown setlocal filetype=markdown wrap spell
+    autocmd BufNewFile,BufFilePre,BufRead *.md,*.markdown setlocal filetype=markdown wrap spell fdm=indent
     autocmd BufNewFile,BufFilePre,BufRead Dockerfile* setlocal filetype=dockerfile sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal fdm=indent sw=4 ts=4

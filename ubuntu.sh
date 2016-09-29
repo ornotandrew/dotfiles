@@ -9,16 +9,21 @@ fi
 # packages
 sudo apt-add-repository -y ppa:neovim-ppa/unstable
 sudo add-apt-repository -y ppa:numix/ppa
+sudo add-apt-repository -y ppa:noobslab/themes
+sudo add-apt-repository -y ppa:snwh/pulp
 sudo apt update
 sudo apt install -y \
+    flatabulous-theme \
     fonts-hack-ttf \
     neovim \
     numix-gtk-theme \
     numix-icon-theme-circle \
+    paper-cursor-theme \
+    paper-icon-theme \
     python-pip \
     python3-pip \
-    software-properties-common \
     silversearcher-ag \
+    software-properties-common \
     unity-tweak-tool \
     zsh
 
