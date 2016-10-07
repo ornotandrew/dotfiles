@@ -18,6 +18,7 @@ path+="/usr/lib/jvm/java-8-oracle/db/bin"
 path+="/usr/lib/jvm/java-8-oracle/jre/bin"
 path+="$HOME/.local/bin"
 path+="$HOME/code/google_appengine"
+path+="$HOME/code/aglio/node_modules/.bin/"
 export PATH
 
 # Aliases
@@ -47,7 +48,7 @@ fi
 # Base16 Shell
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-base16_twilight
+base16_default-dark
 
 # neovim
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket

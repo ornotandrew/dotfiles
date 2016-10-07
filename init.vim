@@ -20,12 +20,15 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'kylef/apiblueprint.vim'
 Plug 'metakirby5/codi.vim'
+Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5-syntax.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'zchee/deoplete-jedi'
 call plug#end()
@@ -82,6 +85,13 @@ autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
 " Neomake
 let g:neomake_cpp_enabled_makers = []
+let g:neomake_apiblueprint_drafter_maker = {
+    \ 'exe': 'drafter',
+    \ 'args': ['-l', '-u'],
+    \ 'mapexpr': 'expand("%:p") . ": " . v:val',
+    \ 'errorformat': '%f: %t%[%^:]\\+: (%n) %m; line %l\, column %c%.%#'
+    \ }
+let g:neomake_apiblueprint_enabled_makers = ['drafter']
 autocmd custom BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
 
 " Goyo
@@ -93,7 +103,6 @@ autocmd User GoyoEnter nested set nocursorline wrap
 let mapleader=" "
 let localleader="\\"
 cmap w!! w !sudo tee > /dev/null %
-nmap <Esc> :cclose<CR>:lclose<CR>
 nmap <F5> :tp<CR>
 nmap <F6> :tn<CR>
 nmap <Leader><Space> :noh<CR>
