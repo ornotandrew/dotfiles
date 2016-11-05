@@ -31,6 +31,7 @@ alias hpu="hg pull && hg update"
 alias hcm="hg commit -m Merge"
 alias dc="docker-compose"
 alias kc="kubectl"
+alias vol="pactl set-sink-volume @DEFAULT_SINK@"
 
 # Completion
 zstyle ':completion:*' users andrew root
