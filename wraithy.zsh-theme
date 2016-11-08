@@ -27,7 +27,7 @@ local user="$green%n$reset"
 local hostname="$green%m$reset"
 local working_dir="$blue%2~$reset"
 local jobs="%1(j.${cyan}%j$reset .)"
-local arrow="%B»%b"
+local arrow="$white»$reset"
 
 PROMPT='$user@$hostname $working_dir $(git_info)$(hg_info)$jobs$arrow '
 RPS1="${return_code}"
