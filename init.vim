@@ -85,13 +85,12 @@ autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
 " Neomake
 let g:neomake_cpp_enabled_makers = []
-let g:neomake_apiblueprint_drafter_maker = {
-    \ 'exe': 'drafter',
-    \ 'args': ['-l', '-u'],
-    \ 'mapexpr': 'expand("%:p") . ": " . v:val',
-    \ 'errorformat': '%f: %t%[%^:]\\+: (%n) %m; line %l\, column %c%.%#'
-    \ }
-let g:neomake_apiblueprint_enabled_makers = ['drafter']
+" let g:neomake_apiblueprint_drafter_maker = {
+"     \ 'args': ['-l', '-u'],
+"     \ 'mapexpr': 'expand("%:p") . ": " . v:val',
+"     \ 'errorformat': '%f: %t%[%^:]\\+: (%n) %m; line %l\, column %c%.%#'
+"     \ }
+" let g:neomake_apiblueprint_enabled_makers = ['drafter']
 autocmd custom BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
 
 " Goyo
@@ -142,7 +141,7 @@ noremap <C-h> <C-w>h
 let @u = 's/\v"([^"]*)"/u''\1''/g'
 
 " Read in 12 random hex chars
-noremap <silent> <F9> "=system('dd if=/dev/random bs=6 count=1 2>/dev/null \| od -An -tx1 \| tr -d " \\t\n"')<CR>p
+noremap <silent> <F9> "=system('dd if=/dev/random bs=4 count=4 2>/dev/null \| od -An -tx1 \| tr -d " \\t\n"')<CR>p
 
 if has('nvim')
     tmap <Esc> <C-\><C-n>
@@ -157,6 +156,7 @@ set clipboard=unnamedplus
 set completeopt-=preview
 set cursorline
 set expandtab
+set foldmethod=indent
 set hidden
 set hlsearch
 set ignorecase
@@ -202,6 +202,7 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal fdm=syntax
     autocmd BufNewFile,BufFilePre,BufRead *.json setlocal sw=2 ts=2
     autocmd FileType gitcommit setlocal spell tw=75
+    autocmd FileType apiblueprint setlocal spell
 
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
 augroup END
