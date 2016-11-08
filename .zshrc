@@ -17,8 +17,7 @@ path+="/usr/lib/jvm/java-8-oracle/bin"
 path+="/usr/lib/jvm/java-8-oracle/db/bin"
 path+="/usr/lib/jvm/java-8-oracle/jre/bin"
 path+="$HOME/.local/bin"
-path+="$HOME/code/google_appengine"
-path+="$HOME/code/aglio/node_modules/.bin/"
+path+="$HOME/tools/google_appengine"
 export PATH
 
 # Aliases
@@ -39,7 +38,7 @@ zstyle ':completion:*' users andrew root
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Google cloud sdk
-GCLOUD_SDK="$HOME/code/google-cloud-sdk"
+GCLOUD_SDK="$HOME/tools/google-cloud-sdk"
 if [ -d $GCLOUD_SDK ]; then
     source $GCLOUD_SDK/path.zsh.inc; # updates PATH
     source $GCLOUD_SDK/completion.zsh.inc; # enables shell completion
@@ -57,5 +56,5 @@ export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export COMPOSE_HTTP_TIMEOUT=600
 
 # virtualenvwrapper
-export WORKON_HOME=~/code/venv
+export WORKON_HOME=~/venv
 export LC_CTYPE=en_ZA.UTF-8
