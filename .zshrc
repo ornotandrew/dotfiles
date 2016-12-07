@@ -59,3 +59,17 @@ export COMPOSE_HTTP_TIMEOUT=600
 # virtualenvwrapper
 export WORKON_HOME=~/venv
 export LC_CTYPE=en_ZA.UTF-8
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f /home/andrew/tools/google-cloud-sdk/path.zsh.inc ]; then
+  source '/home/andrew/tools/google-cloud-sdk/path.zsh.inc'
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f /home/andrew/tools/google-cloud-sdk/completion.zsh.inc ]; then
+  source '/home/andrew/tools/google-cloud-sdk/completion.zsh.inc'
+fi
+
+
+# Let vim be the MANPAGER
+export MANPAGER="vim -c 'set ft=man' -"
