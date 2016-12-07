@@ -6,7 +6,8 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'Shougo/deoplete.nvim'
-Plug 'SirVer/ultisnips'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'altercation/vim-colors-solarized'
 Plug 'benekastah/neomake'
@@ -61,12 +62,6 @@ let g:lightline = {
     \ 'subseparator': { 'left': '', 'right': '' }
     \ }
 
-" UltiSnips
-let g:UltiSnipsExpandTrigger = "<C-j>"
-let g:UltiSnipsJumpForwardTrigger = "<C-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
-let g:UltiSnipsUsePythonVersion = 2
-
 " FZF
 function! s:fzf_statusline()
     highlight fzf1 ctermfg=161 ctermbg=251
@@ -85,16 +80,21 @@ autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
 " Neomake
 let g:neomake_cpp_enabled_makers = []
-" let g:neomake_apiblueprint_drafter_maker = {
-"     \ 'args': ['-l', '-u'],
-"     \ 'mapexpr': 'expand("%:p") . ": " . v:val',
-"     \ 'errorformat': '%f: %t%[%^:]\\+: (%n) %m; line %l\, column %c%.%#'
-"     \ }
-" let g:neomake_apiblueprint_enabled_makers = ['drafter']
 autocmd custom BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
 
 " Goyo
 autocmd User GoyoEnter nested set nocursorline wrap
+
+
+" Neosnippet
+imap <C-j>     <Plug>(neosnippet_expand_or_jump)
+smap <C-j>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-j>     <Plug>(neosnippet_expand_target)
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+let g:neosnippet#enable_snipmate_compatibility = 1
 
 " }}}
 " Key mappings {{{
@@ -139,6 +139,9 @@ noremap <C-h> <C-w>h
 
 " Convert double-quote strings to unicode
 let @u = 's/\v"([^"]*)"/u''\1''/g'
+
+" Store an iso8601 date for use in examples
+let @d = '2016-01-01T12:00:00+00:00'
 
 " Read in 12 random hex chars
 noremap <silent> <F9> "=system('dd if=/dev/random bs=4 count=4 2>/dev/null \| od -An -tx1 \| tr -d " \\t\n"')<CR>p
