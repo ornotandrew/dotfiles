@@ -163,6 +163,7 @@ set foldmethod=indent
 set hidden
 set hlsearch
 set ignorecase
+set inccommand=split
 set listchars=eol:¬,tab:\¦\ ,trail:~,extends:>,precedes:<
 set mouse=a
 set noshowmode " use lightline instead
