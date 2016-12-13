@@ -23,13 +23,20 @@ function hg_info() {
     echo "${yellow}($HG_STATUS)$reset "
 }
 
+function gcloud_project() {
+    prod="${yellow}⚡$reset "
+    dev=""
+    project=$(gcloud config get-value project 2>/dev/null)
+    [ "$project" = "nomanini-dashboard" ] && echo "$prod" || echo "$dev"
+}
+
 local user="$green%n$reset"
 local hostname="$green%m$reset"
 local working_dir="$blue%2~$reset"
 local jobs="%1(j.${cyan}%j$reset .)"
 local arrow="$white»$reset"
 
-PROMPT='$user@$hostname $working_dir $(git_info)$(hg_info)$jobs$arrow '
+PROMPT='$user@$hostname $working_dir $(git_info)$(hg_info)$(gcloud_project)$jobs$arrow '
 RPS1="${return_code}"
 
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%%"
