@@ -22,7 +22,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'kylef/apiblueprint.vim'
-Plug 'metakirby5/codi.vim'
+Plug 'mxw/vim-jsx'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5-syntax.vim'
 Plug 'tpope/vim-commentary'
@@ -45,6 +45,9 @@ let base16colorspace=256
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" vim-jsx
+let g:jsx_ext_required = 0
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
@@ -155,6 +158,7 @@ endif
 
 colorscheme base16-default-dark
 
+set backupcopy=yes
 set clipboard=unnamedplus
 set completeopt-=preview
 set cursorline
@@ -179,7 +183,6 @@ set undofile
 set undolevels=1000
 set undoreload=10000
 
-set wildignore+=*.min.js
 set wildignore+=*.o
 set wildignore+=*.pyc
 set wildignore+=.hg/
@@ -204,7 +207,7 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2 fdm=indent
     autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal fdm=syntax
-    autocmd BufNewFile,BufFilePre,BufRead *.json setlocal sw=2 ts=2
+    autocmd BufNewFile,BufFilePre,BufRead *.json,*.js,*.html setlocal sw=2 ts=2
     autocmd FileType gitcommit setlocal spell tw=75
     autocmd FileType apiblueprint setlocal spell
 
