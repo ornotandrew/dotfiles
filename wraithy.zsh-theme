@@ -1,42 +1,35 @@
 # Loosely based on lukerandall
 
-local red="%{$fg_bold[red]%}"
-local blue="%{$fg_bold[blue]%}"
-local green="%{$fg_bold[green]%}"
-local yellow="%{$fg[yellow]%}"
-local cyan="%{$fg_bold[cyan]%}"
-local reset="%{$reset_color%}"
-
-local return_code="%(?..${red}%? ↵$reset)"
+local return_code="%(?..%F{red}%? ↵%f)"
 
 function git_info() {
     ref=$(git symbolic-ref HEAD 2> /dev/null) || return
     GIT_STATUS=$(git_prompt_status)
     [[ -n $GIT_STATUS ]] && GIT_STATUS=" $GIT_STATUS"
-    echo "${yellow}(${ref#refs/heads/}$GIT_STATUS)$reset "
+    echo "%F{yellow}(${ref#refs/heads/}$GIT_STATUS)%f "
 }
 
 function hg_info() {
     ref=$(hg branch 2> /dev/null) || return
     HG_STATUS=$(hg_prompt_info)
     [[ -n $HG_STATUS ]] && HG_STATUS="$HG_STATUS"
-    echo "${yellow}($HG_STATUS)$reset "
+    echo "%F{yellow}($HG_STATUS)%f "
 }
 
 function gcloud_project() {
-    prod="${yellow}⚡$reset "
+    prod="%F{yellow}⚡%f "
     dev=""
     project=$(gcloud config get-value project 2>/dev/null)
     [ "$project" = "nomanini-dashboard" ] && echo "$prod" || echo "$dev"
 }
 
-local user="$green%n$reset"
-local hostname="$green%m$reset"
-local working_dir="$blue%2~$reset"
-local jobs="%1(j.${cyan}%j$reset .)"
-local arrow="$white»$reset"
+local user="%F{green}%n%f"
+local hostname="%F{green}%m%f"
+local working_dir="%F{blue}%2~%f"
+local jobs="%1(j.%F{cyan}%j%f .)"
+local arrow="$white❱%f"
 
-PROMPT='$user@$hostname $working_dir $(git_info)$(hg_info)$(gcloud_project)$jobs$arrow '
+PROMPT='$working_dir $(git_info)$(hg_info)$(gcloud_project)$jobs$arrow '
 RPS1="${return_code}"
 
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%%"

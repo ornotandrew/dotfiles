@@ -70,6 +70,5 @@ if [ -f /home/andrew/tools/google-cloud-sdk/completion.zsh.inc ]; then
   source '/home/andrew/tools/google-cloud-sdk/completion.zsh.inc'
 fi
 
-
 # Let vim be the MANPAGER
 export MANPAGER="vim -c 'set ft=man' -"
