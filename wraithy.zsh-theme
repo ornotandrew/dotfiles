@@ -16,11 +16,11 @@ function hg_info() {
     echo "%F{yellow}($HG_STATUS)%f "
 }
 
-function gcloud_project() {
-    prod="%F{yellow}⚡%f "
-    dev=""
-    project=$(gcloud config get-value project 2>/dev/null)
-    [ "$project" = "nomanini-dashboard" ] && echo "$prod" || echo "$dev"
+function cloud_project() {
+    gcloud_project=$(cat ~/.config/gcloud/configurations/config_default | grep 'project.*dev' 2>&1)
+    [ -z "$gcloud_project" ] && echo -n "%F{yellow}戒%f"
+    kube_cluster_dev=$(cat ~/.kube/config | grep 'current-context.*dev' 2>&1)
+    [ -z "$kube_cluster_dev" ] && echo -n "%F{yellow}危%f"
 }
 
 local user="%F{green}%n%f"
@@ -29,7 +29,7 @@ local working_dir="%F{blue}%2~%f"
 local jobs="%1(j.%F{cyan}%j%f .)"
 local arrow="$white❱%f"
 
-PROMPT='$working_dir $(git_info)$(hg_info)$(gcloud_project)$jobs$arrow '
+PROMPT='$working_dir $(git_info)$(hg_info)$(cloud_project)$jobs$arrow '
 RPS1="${return_code}"
 
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%%"
