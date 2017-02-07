@@ -20,3 +20,6 @@
     ~/.tmux.conf: .tmux.conf
     ~/.unittest.cfg: .unittest.cfg
     ~/.zshrc: .zshrc
+    ~/.local/bin/prod: scripts/prod
+    ~/.local/bin/dev: scripts/dev
+    ~/.local/bin/pod: scripts/pod

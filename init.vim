@@ -144,7 +144,7 @@ noremap <C-h> <C-w>h
 let @u = 's/\v"([^"]*)"/u''\1''/g'
 
 " Store an iso8601 date for use in examples
-let @d = '2016-01-01T12:00:00+00:00'
+let @d = '2017-01-01T12:00:00+00:00'
 
 " Read in 12 random hex chars
 noremap <silent> <F9> "=system('dd if=/dev/random bs=4 count=4 2>/dev/null \| od -An -tx1 \| tr -d " \\t\n"')<CR>p
@@ -155,6 +155,9 @@ endif
 
 " }}}
 " Settings {{{
+
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
 
 colorscheme base16-default-dark
 
