@@ -9,7 +9,6 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Yggdroot/indentLine'
-Plug 'altercation/vim-colors-solarized'
 Plug 'benekastah/neomake'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
@@ -21,16 +20,17 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'scrooloose/nerdtree'
 Plug 'kylef/apiblueprint.vim'
 Plug 'mxw/vim-jsx'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5-syntax.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
 Plug 'zchee/deoplete-jedi'
 call plug#end()
 
@@ -42,6 +42,12 @@ augroup END
 
 " base16
 let base16colorspace=256
+
+" NERDTree
+autocmd custom FileType nerdtree nmap <buffer> <expr> - g:NERDTreeMapUpdir
+nmap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeShowHidden = 1
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -88,16 +94,19 @@ autocmd custom BufRead,BufWritePost * silent Neomake | call neomake#signs#Define
 " Goyo
 autocmd User GoyoEnter nested set nocursorline wrap
 
-
 " Neosnippet
 imap <C-j>     <Plug>(neosnippet_expand_or_jump)
 smap <C-j>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-j>     <Plug>(neosnippet_expand_target)
+
 " For conceal markers.
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 let g:neosnippet#enable_snipmate_compatibility = 1
+
+" jsx
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 " }}}
 " Key mappings {{{
@@ -156,9 +165,6 @@ endif
 " }}}
 " Settings {{{
 
-let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
-
 colorscheme base16-default-dark
 
 set backupcopy=yes
@@ -210,7 +216,7 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2 fdm=indent
     autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal fdm=syntax
-    autocmd BufNewFile,BufFilePre,BufRead *.json,*.js,*.html setlocal sw=2 ts=2
+    autocmd BufNewFile,BufFilePre,BufRead *.json,*.js,*.html setlocal sw=2 ts=2 conceallevel=0
     autocmd FileType gitcommit setlocal spell tw=75
     autocmd FileType apiblueprint setlocal spell
 
