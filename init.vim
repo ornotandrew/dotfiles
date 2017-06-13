@@ -22,7 +22,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'kylef/apiblueprint.vim'
 Plug 'majutsushi/tagbar'
-Plug 'mhinz/vim-signify'
+Plug 'airblade/vim-gitgutter'
 Plug 'mxw/vim-jsx'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5-syntax.vim'
@@ -109,9 +109,6 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 
 " jsx
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
-
-" signify
-let g:signify_vcs_list = [ 'git', 'hg' ]
 
 " }}}
 " Key mappings {{{
