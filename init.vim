@@ -20,12 +20,14 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'kylef/apiblueprint.vim'
+Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-signify'
 Plug 'mxw/vim-jsx'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5-syntax.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-speeddating'
@@ -133,7 +135,7 @@ nmap <Leader>f :Files<CR>
 nmap <Leader>g :Goyo<CR>
 nmap <Leader>h :History<CR>
 nmap <Leader>i :IndentLinesToggle<CR>
-nmap <Leader>t :TestSingle<CR>
+nmap <Leader>t :TagbarToggle<CR>
 
 " Visual movement
 imap <Down> <Esc>gja
