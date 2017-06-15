@@ -11,3 +11,7 @@
     b = branch
     c = commit
     s = status
+[merge]
+	tool = vimdiff
+[mergetool]
+	path = nvim
