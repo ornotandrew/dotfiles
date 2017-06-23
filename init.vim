@@ -13,6 +13,7 @@ Plug 'benekastah/neomake'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
 Plug 'ervandew/supertab'
+Plug 'hail2u/vim-css3-syntax'
 Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'itchyny/lightline.vim'
@@ -27,6 +28,7 @@ Plug 'mxw/vim-jsx'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5-syntax.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-speeddating'
@@ -85,6 +87,7 @@ autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
 " Neomake
 let g:neomake_cpp_enabled_makers = []
+let g:neomake_python_maker = { 'exe': '/usr/bin/python3' }
 autocmd custom BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
 
 " Goyo
@@ -160,7 +163,6 @@ endif
 
 " }}}
 " Settings {{{
-
 colorscheme base16-default-dark
 
 set backupcopy=yes
