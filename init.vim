@@ -27,12 +27,12 @@ Plug 'mxw/vim-jsx'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5-syntax.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
 Plug 'zchee/deoplete-jedi'
 call plug#end()
 
@@ -44,12 +44,6 @@ augroup END
 
 " base16
 let base16colorspace=256
-
-" NERDTree
-autocmd custom FileType nerdtree nmap <buffer> <expr> - g:NERDTreeMapUpdir
-nmap <silent> - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeShowHidden = 1
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
