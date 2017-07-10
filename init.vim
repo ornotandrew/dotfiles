@@ -200,7 +200,6 @@ call system('mkdir -p ~/.config/nvim/undo//')
 set directory=~/.config/nvim/swap//
 set undodir=~/.config/nvim/undo//
 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 let $PAGER = ''
 
 " }}}
