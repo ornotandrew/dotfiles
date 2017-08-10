@@ -26,6 +26,7 @@ alias hcm="hg commit -m Merge"
 alias dc="docker-compose"
 alias k="kubectl"
 alias vol="pactl set-sink-volume @DEFAULT_SINK@"
+alias vim="nvim"
 
 # Completion
 zstyle ':completion:*' users andrew root
