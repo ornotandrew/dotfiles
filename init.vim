@@ -9,10 +9,12 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
 Plug 'benekastah/neomake'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
 Plug 'ervandew/supertab'
+Plug 'fatih/vim-go'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent'
@@ -23,7 +25,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'kylef/apiblueprint.vim'
 Plug 'majutsushi/tagbar'
-Plug 'airblade/vim-gitgutter'
 Plug 'mxw/vim-jsx'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5-syntax.vim'
@@ -35,6 +36,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
+Plug 'zchee/deoplete-go'
 Plug 'zchee/deoplete-jedi'
 call plug#end()
 
@@ -106,6 +108,10 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 
 " jsx
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
+" vim-go
+let g:go_fmt_fail_silently = 1
+let g:go_template_autocreate = 0
 
 " }}}
 " Key mappings {{{
