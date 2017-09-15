@@ -89,6 +89,13 @@ autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
 " Neomake
 let g:neomake_cpp_enabled_makers = []
+let g:neomake_go_enabled_makers = ['gometalinter']
+let g:neomake_gometalinter_maker = {
+    \ 'append_file': 0,
+    \ 'args': ['--disable-all', '--enable=errcheck', '--enable=gosimple', '--enable=staticcheck', '--enable=unused', '--vendor', '--exclude=vendor'],
+    \ 'errorformat': '%f:%l:%c:%t%*[^:]: %m',
+    \ 'exe': 'gometalinter'
+    \ }
 let g:neomake_python_maker = { 'exe': '/usr/bin/python3' }
 autocmd custom BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
 
@@ -221,6 +228,7 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal fdm=syntax
     autocmd BufNewFile,BufFilePre,BufRead *.json,*.js,*.html setlocal sw=2 ts=2 conceallevel=0
     autocmd FileType gitcommit setlocal spell tw=75
+    autocmd FileType go setlocal foldmethod=syntax
     autocmd FileType apiblueprint setlocal spell
 
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
