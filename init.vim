@@ -119,6 +119,7 @@ let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 " vim-go
 let g:go_fmt_fail_silently = 1
 let g:go_template_autocreate = 0
+let g:go_fmt_command = "goimports"
 
 " }}}
 " Key mappings {{{
@@ -168,7 +169,7 @@ let @u = 's/\v"([^"]*)"/u''\1''/g'
 let @d = '2017-01-01T12:00:00+00:00'
 
 " Read in 12 random hex chars
-noremap <silent> <F9> "=system('dd if=/dev/random bs=4 count=4 2>/dev/null \| od -An -tx1 \| tr -d " \\t\n"')<CR>p
+noremap <silent> <F9> "=system('uuidgen \| tr -d " \\t\n"')<CR>p
 
 if has('nvim')
     tmap <Esc> <C-\><C-n>
