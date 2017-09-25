@@ -27,6 +27,7 @@ alias dc="docker-compose"
 alias k="kubectl"
 alias vol="pactl set-sink-volume @DEFAULT_SINK@"
 alias vim="nvim"
+alias clip="xclip -sel clip"
 
 # Completion
 zstyle ':completion:*' users andrew root
