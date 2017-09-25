@@ -1,4 +1,2 @@
 #!/bin/bash
-
-gcloud config set project nomanini-dashboard-dev
-gcloud container clusters get-credentials dev --project nomanini-dashboard-dev
+gcloud container clusters get-credentials dev --project nomanini-dashboard

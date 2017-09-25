@@ -17,8 +17,6 @@ function hg_info() {
 }
 
 function cloud_project() {
-    gcloud_project=$(cat ~/.config/gcloud/configurations/config_default | grep 'project.*dev' 2>&1)
-    [ -z "$gcloud_project" ] && echo -n "%F{yellow}戒%f"
     kube_cluster_dev=$(cat ~/.kube/config | grep 'current-context.*dev' 2>&1)
     [ -z "$kube_cluster_dev" ] && echo -n "%F{yellow}危%f"
 }
