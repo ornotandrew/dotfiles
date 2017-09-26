@@ -14,12 +14,11 @@
     ~/.gitconfig: .gitconfig
     ~/.hgrc: .hgrc
     ~/.oh-my-zsh/themes/wraithy.zsh-theme: wraithy.zsh-theme
-    ~/.pip/pip.conf: pip.conf
     ~/.pylintrc: .pylintrc
-    ~/.pypirc: .pypirc
     ~/.tmux.conf: .tmux.conf
     ~/.unittest.cfg: .unittest.cfg
     ~/.zshrc: .zshrc
     ~/.local/bin/prod: scripts/prod
     ~/.local/bin/dev: scripts/dev
     ~/.local/bin/pod: scripts/pod
+    ~/.local/bin/kpatch: scripts/kpatch
