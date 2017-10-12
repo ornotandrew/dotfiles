@@ -18,6 +18,7 @@
     ~/.tmux.conf: .tmux.conf
     ~/.unittest.cfg: .unittest.cfg
     ~/.zshrc: .zshrc
+    ~/.config/alacritty/alacritty.yml: alacritty.yml
     ~/.local/bin/prod: scripts/prod
     ~/.local/bin/dev: scripts/dev
     ~/.local/bin/pod: scripts/pod

@@ -56,8 +56,11 @@ fi
 
 # Let vim be the MANPAGER
 export MANPAGER="vim -c 'set ft=man' -"
-#
+
 # Golang things
 export GOPATH=~/go
 path+=$GOPATH/bin/
+path+=/usr/local/go/bin
 export PATH
+
+export XDG_CONFIG_HOME=~/.config
