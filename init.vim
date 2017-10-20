@@ -36,6 +36,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-repeat'
 Plug 'zchee/deoplete-go'
 Plug 'zchee/deoplete-jedi'
 call plug#end()
