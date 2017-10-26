@@ -122,6 +122,12 @@ let g:go_fmt_fail_silently = 1
 let g:go_template_autocreate = 0
 let g:go_fmt_command = "goimports"
 
+" vim-gitgutter
+let g:gitgutter_sign_added = '·'
+let g:gitgutter_sign_modified = '·'
+let g:gitgutter_sign_removed = '·'
+let g:gitgutter_sign_modified_removed = '·'
+
 " }}}
 " Key mappings {{{
 
