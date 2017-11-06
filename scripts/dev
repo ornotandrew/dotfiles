@@ -1,2 +1,2 @@
 #!/bin/bash
-gcloud container clusters get-credentials dev --project nomanini-dashboard
+kubectl config use-context gke_nomanini-dashboard_us-central1-a_dev
