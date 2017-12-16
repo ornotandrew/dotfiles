@@ -17,8 +17,7 @@ function hg_info() {
 }
 
 function cloud_project() {
-    
-    kube_cluster_dev=$(kubectl config current-context | grep '.*dev' 2>&1)
+    kube_cluster_dev=$(cat ~/.kube/config | grep 'current-context.*dev' 2>&1)
     [ -z "$kube_cluster_dev" ] && echo -n "%F{yellow}危%f"
 }
 
