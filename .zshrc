@@ -65,3 +65,19 @@ path+=$GOROOT/bin/
 export PATH
 
 export XDG_CONFIG_HOME=~/.config
+
+# Scripts for gcloud and shell
+# ============================
+dev() {
+    kubectl config use-context gke_nomanini-dashboard_us-central1-a_dev
+    export GCLOUD_ENV=dev
+}
+
+prod() {
+    kubectl config use-context gke_nomanini-dashboard_us-central1-a_prod
+    export GCLOUD_ENV=dev
+}
+
+kpatch() {
+    kubectl patch deployment $1 -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
+}

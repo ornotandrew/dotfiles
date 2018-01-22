@@ -10,7 +10,8 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
-Plug 'benekastah/neomake'
+" Plug 'benekastah/neomake'
+Plug 'w0rp/ale'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
 Plug 'ervandew/supertab'
@@ -48,8 +49,10 @@ augroup custom
     autocmd!
 augroup END
 
+
 " base16
 let base16colorspace=256
+colorscheme base16-default-dark " the theme clears all highlights, so set this here so we can define custom ones
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -89,17 +92,17 @@ if executable('ag')
 endif
 autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
-" Neomake
-let g:neomake_cpp_enabled_makers = []
-let g:neomake_go_enabled_makers = ['gometalinter']
-let g:neomake_gometalinter_maker = {
-    \ 'append_file': 0,
-    \ 'args': ['--disable-all', '--enable=errcheck', '--enable=gosimple', '--enable=staticcheck', '--enable=unused', '--vendor', '--exclude=vendor'],
-    \ 'errorformat': '%f:%l:%c:%t%*[^:]: %m',
-    \ 'exe': 'gometalinter'
-    \ }
-let g:neomake_python_maker = { 'exe': '/usr/bin/python3' }
-autocmd custom BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
+" ALE
+let g:ale_sign_error = '🗙'
+let g:ale_sign_warning = '!'
+let g:ale_sign_info = 'i'
+
+highlight ALEErrorSign ctermfg=1 ctermbg=18 guifg=#ab4642 guibg=#181818 
+highlight ALEInfoSign ctermfg=4 ctermbg=18 gui=bold guifg=#7cafc2 guibg=#181818 
+highlight ALEWarningSign ctermfg=3 ctermbg=18 guifg=#f7ca88 guibg=#181818 
+
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
 
 " Goyo
 autocmd User GoyoEnter nested set nocursorline wrap
@@ -185,8 +188,6 @@ endif
 
 " }}}
 " Settings {{{
-colorscheme base16-default-dark
-
 set backupcopy=yes
 set clipboard=unnamedplus
 set completeopt-=preview

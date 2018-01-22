@@ -1,2 +1,0 @@
-#!/bin/bash
-kubectl config use-context gke_nomanini-dashboard_us-central1-a_prod
