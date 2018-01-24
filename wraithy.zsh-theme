@@ -4,7 +4,9 @@ local return_code="%(?..%F{red}%? ↵%f)"
 
 function git_info() {
     ref=$(git symbolic-ref --quiet HEAD 2> /dev/null) || return
-    GIT_STATUS=" $(git_prompt_status)"
+    GIT_STATUS="$(git_prompt_status)"
+    # add a space
+    [ "$GIT_STATUS" != "" ] && GIT_STATUS=" $GIT_STATUS"
     echo "%F{yellow}(${ref#refs/heads/}$GIT_STATUS)%f "
 }
 

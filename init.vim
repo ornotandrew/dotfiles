@@ -30,6 +30,7 @@ Plug 'mxw/vim-jsx'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5-syntax.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -103,6 +104,9 @@ highlight ALEWarningSign ctermfg=3 ctermbg=18 guifg=#f7ca88 guibg=#181818
 
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
+
+let g:ale_fixers = { 'javascript': ['eslint'] }
+let g:ale_fix_on_save = 1
 
 " Goyo
 autocmd User GoyoEnter nested set nocursorline wrap
