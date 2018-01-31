@@ -28,6 +28,7 @@ alias k="kubectl"
 alias vol="pactl set-sink-volume @DEFAULT_SINK@"
 alias vim="nvim"
 alias clip="xclip -sel clip"
+alias y="yarn"
 hash -d nngo="/home/andrew/go/src/bitbucket.org/nomanini"
 
 # Completion
