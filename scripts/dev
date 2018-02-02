@@ -1,2 +1,0 @@
-#!/bin/bash
-gcloud container clusters get-credentials dev --project nomanini-dashboard

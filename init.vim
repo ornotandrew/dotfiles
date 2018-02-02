@@ -5,15 +5,14 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
-Plug 'benekastah/neomake'
+Plug 'w0rp/ale'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'fatih/vim-go'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'honza/vim-snippets'
@@ -25,11 +24,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'kylef/apiblueprint.vim'
 Plug 'majutsushi/tagbar'
-Plug 'mxw/vim-jsx'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5-syntax.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -38,8 +34,12 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
-Plug 'zchee/deoplete-go'
-Plug 'zchee/deoplete-jedi'
+Plug 'roxma/nvim-completion-manager'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'HerringtonDarkholme/yats.vim'
 call plug#end()
 
 " }}}
@@ -50,12 +50,10 @@ augroup END
 
 " base16
 let base16colorspace=256
+colorscheme base16-default-dark " the theme clears all highlights, so set this here so we can define custom ones
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" vim-jsx
-let g:jsx_ext_required = 0
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
@@ -89,17 +87,20 @@ if executable('ag')
 endif
 autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
-" Neomake
-let g:neomake_cpp_enabled_makers = []
-let g:neomake_go_enabled_makers = ['gometalinter']
-let g:neomake_gometalinter_maker = {
-    \ 'append_file': 0,
-    \ 'args': ['--disable-all', '--enable=errcheck', '--enable=gosimple', '--enable=staticcheck', '--enable=unused', '--vendor', '--exclude=vendor'],
-    \ 'errorformat': '%f:%l:%c:%t%*[^:]: %m',
-    \ 'exe': 'gometalinter'
-    \ }
-let g:neomake_python_maker = { 'exe': '/usr/bin/python3' }
-autocmd custom BufRead,BufWritePost * silent Neomake | call neomake#signs#DefineHighlights()
+" ALE
+let g:ale_sign_error = '🗙'
+let g:ale_sign_warning = '!'
+let g:ale_sign_info = 'i'
+
+highlight ALEErrorSign ctermfg=1 ctermbg=18 guifg=#ab4642 guibg=#181818 
+highlight ALEInfoSign ctermfg=4 ctermbg=18 gui=bold guifg=#7cafc2 guibg=#181818 
+highlight ALEWarningSign ctermfg=3 ctermbg=18 guifg=#f7ca88 guibg=#181818 
+
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+
+let g:ale_fixers = { 'javascript': ['eslint'] }
+let g:ale_fix_on_save = 1
 
 " Goyo
 autocmd User GoyoEnter nested set nocursorline wrap
@@ -108,11 +109,6 @@ autocmd User GoyoEnter nested set nocursorline wrap
 imap <C-j>     <Plug>(neosnippet_expand_or_jump)
 smap <C-j>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-j>     <Plug>(neosnippet_expand_target)
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " jsx
@@ -128,6 +124,20 @@ let g:gitgutter_sign_added = '·'
 let g:gitgutter_sign_modified = '·'
 let g:gitgutter_sign_removed = '·'
 let g:gitgutter_sign_modified_removed = '·'
+
+" language server
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ }
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+" nvim-completion-manager
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 
 " }}}
 " Key mappings {{{
@@ -185,8 +195,6 @@ endif
 
 " }}}
 " Settings {{{
-colorscheme base16-default-dark
-
 set backupcopy=yes
 set clipboard=unnamedplus
 set completeopt-=preview
