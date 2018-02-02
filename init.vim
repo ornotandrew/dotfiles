@@ -126,6 +126,7 @@ let g:gitgutter_sign_removed = '·'
 let g:gitgutter_sign_modified_removed = '·'
 
 " language server
+" javascript-typescript-stdio comes from npm typescript-language-server
 let g:LanguageClient_serverCommands = {
     \ 'javascript': ['javascript-typescript-stdio'],
     \ 'javascript.jsx': ['javascript-typescript-stdio'],
