@@ -126,13 +126,14 @@ let g:gitgutter_sign_removed = '·'
 let g:gitgutter_sign_modified_removed = '·'
 
 " language server
-" javascript-typescript-stdio comes from npm typescript-language-server
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['javascript-typescript-stdio'],
-    \ }
+let g:LanguageClient_changeThrottle = 0.5
+
+let g:LanguageClient_serverCommands = {}
+let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio'] " sudo npm install -g typescript-language-server
+let g:LanguageClient_serverCommands.python = ['pyls'] " sudo pip3 install python-language-server
+
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " nvim-completion-manager
