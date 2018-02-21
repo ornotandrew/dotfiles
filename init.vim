@@ -130,6 +130,8 @@ let g:LanguageClient_changeThrottle = 0.5
 
 let g:LanguageClient_serverCommands = {}
 let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio'] " sudo npm install -g typescript-language-server
+let g:LanguageClient_serverCommands['javascript.jsx'] = g:LanguageClient_serverCommands.javascript
+let g:LanguageClient_serverCommands.typescript = g:LanguageClient_serverCommands.javascript
 let g:LanguageClient_serverCommands.python = ['pyls'] " sudo pip3 install python-language-server
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
