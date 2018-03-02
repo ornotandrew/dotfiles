@@ -133,6 +133,8 @@ let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
 let g:LanguageClient_serverCommands['javascript.jsx'] = g:LanguageClient_serverCommands.javascript
 let g:LanguageClient_serverCommands.typescript = g:LanguageClient_serverCommands.javascript
 let g:LanguageClient_serverCommands.python = ['pyls'] " sudo pip3 install python-language-server
+let g:LanguageClient_serverCommands.go = ['go-langserver'] " go get -u github.com/sourcegraph/go-langserver
+
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
