@@ -1,3 +1,7 @@
+let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
+let $NVIM_NCM_LOG_LEVEL="DEBUG"
+let $NVIM_NCM_MULTI_THREAD=0
+
 " Plugins {{{
 " Bootstrap vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -12,7 +16,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'w0rp/ale'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
-" Plug 'ervandew/supertab'
 Plug 'fatih/vim-go'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'honza/vim-snippets'
@@ -21,7 +24,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/goyo.vim'
 Plug 'kylef/apiblueprint.vim'
 Plug 'majutsushi/tagbar'
 Plug 'nelstrom/vim-markdown-folding'
@@ -51,12 +53,6 @@ augroup END
 " base16
 let base16colorspace=256
 colorscheme base16-default-dark " the theme clears all highlights, so set this here so we can define custom ones
-
-" Supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
 
 " indentLine
 let g:indentLine_faster = 1
@@ -101,9 +97,6 @@ let g:ale_lint_on_insert_leave = 1
 
 let g:ale_fixers = { 'javascript': ['eslint'] }
 let g:ale_fix_on_save = 1
-
-" Goyo
-autocmd User GoyoEnter nested set nocursorline wrap
 
 " Neosnippet
 imap <C-j>     <Plug>(neosnippet_expand_or_jump)
