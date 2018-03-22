@@ -1,8 +1,17 @@
 # oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="wraithy"
-plugins=(kubectl docker docker-compose mercurial virtualenvwrapper fancy-ctrl-z zmv zsh-syntax-highlighting)
+plugins=(docker docker-compose mercurial fancy-ctrl-z zmv zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
+
+# Lazy load bigger plugins
+source virtualenvwrapper_lazy.sh 2>/dev/null
+function kubectl() {
+    if ! type __start_kubectl >/dev/null 2>&1; then
+        source <(command kubectl completion zsh)
+    fi
+    command kubectl "$@"
+}
 
 # Path
 path+="/usr/local/sbin"
