@@ -10,18 +10,13 @@ function git_info() {
     echo "%F{yellow}(${ref#refs/heads/}$GIT_STATUS)%f "
 }
 
-function cloud_project() {
-    kube_cluster_dev=$(kubectl config current-context | grep '.*dev' 2>&1)
-    [ -z "$kube_cluster_dev" ] && echo -n "%F{yellow}危%f"
-}
-
 local user="%F{green}%n%f"
 local hostname="%F{green}%m%f"
 local working_dir="%F{blue}%2~%f"
 local jobs="%1(j.%F{cyan}%j%f .)"
 local arrow="$white❱%f"
 
-PROMPT='$working_dir $(git_info)$(cloud_project)$jobs$arrow '
+PROMPT='$working_dir $(git_info)$jobs$arrow '
 RPS1="${return_code}"
 
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%%"

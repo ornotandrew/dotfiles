@@ -77,14 +77,31 @@ export XDG_CONFIG_HOME=~/.config
 # ============================
 dev() {
     kubectl config use-context gke_nomanini-dashboard_us-central1-a_dev
-    export GCLOUD_ENV=dev
+    tmux set-env -gu prod_warning
 }
 
 prod() {
     kubectl config use-context gke_nomanini-dashboard_us-central1-a_prod
-    export GCLOUD_ENV=dev
+    tmux set-env -g prod_warning '#[fg=colour232,bg=colour202] PROD '
 }
 
 kpatch() {
     kubectl patch deployment $1 -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 }
+
+# # set type of SECONDS and start to float to increase precision
+# typeset -F SECONDS start 
+
+# # define precmd hook function
+# precmd () {
+#     # save time since start of zsh in start
+#     start=$SECONDS
+# }
+
+# # define zle-line-init function
+# zle-line-init () {
+#      # print time since start was set after prompt
+#      PREDISPLAY="[$(( $SECONDS - $start ))] "
+# }
+# # link the zle-line-init widget to the function of the same name
+# zle -N zle-line-init
