@@ -88,20 +88,3 @@ prod() {
 kpatch() {
     kubectl patch deployment $1 -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 }
-
-# # set type of SECONDS and start to float to increase precision
-# typeset -F SECONDS start 
-
-# # define precmd hook function
-# precmd () {
-#     # save time since start of zsh in start
-#     start=$SECONDS
-# }
-
-# # define zle-line-init function
-# zle-line-init () {
-#      # print time since start was set after prompt
-#      PREDISPLAY="[$(( $SECONDS - $start ))] "
-# }
-# # link the zle-line-init widget to the function of the same name
-# zle -N zle-line-init
