@@ -1,7 +1,3 @@
-let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
-let $NVIM_NCM_LOG_LEVEL="DEBUG"
-let $NVIM_NCM_MULTI_THREAD=0
-
 " Plugins {{{
 " Bootstrap vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -9,11 +5,12 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
+Plug 'Arkham/vim-quickfixdo'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
-Plug 'w0rp/ale'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
 Plug 'fatih/vim-go'
@@ -22,12 +19,15 @@ Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'kylef/apiblueprint.vim'
 Plug 'majutsushi/tagbar'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5-syntax.vim'
+Plug 'pope/vim-fugitive'
+Plug 'roxma/nvim-completion-manager'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -36,8 +36,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
-Plug 'roxma/nvim-completion-manager'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'w0rp/ale'
 
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
@@ -181,6 +180,7 @@ noremap <C-h> <C-w>h
 
 " Convert double-quote strings to unicode
 let @u = 's/\v"([^"]*)"/u''\1''/g'
+let @c = 's#_\(\l\)#\u\1#g'
 
 " Store an iso8601 date for use in examples
 let @d = '2017-01-01T12:00:00+00:00'
