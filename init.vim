@@ -5,6 +5,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
+Plug 'Arkham/vim-quickfixdo'
 Plug 'airblade/vim-gitgutter'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'bronson/vim-visual-star-search'
@@ -20,6 +21,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'kylef/apiblueprint.vim'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5-syntax.vim'
+Plug 'pope/vim-fugitive'
 Plug 'roxma/nvim-completion-manager'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -149,6 +151,7 @@ noremap <C-h> <C-w>h
 
 " Convert camelCase to camel_case
 let @u = 's#\(\<\u\l\+\|\l\+\)\(\u\)#\l\1_\l\2#g'
+let @c = 's#_\(\l\)#\u\1#g'
 
 " Store an iso8601 date for use in examples
 let @d = '2017-01-01T12:00:00+00:00'
