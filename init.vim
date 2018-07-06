@@ -1,7 +1,3 @@
-let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
-let $NVIM_NCM_LOG_LEVEL="DEBUG"
-let $NVIM_NCM_MULTI_THREAD=0
-
 " Plugins {{{
 " Bootstrap vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -9,25 +5,22 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
-Plug 'w0rp/ale'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
-Plug 'fatih/vim-go'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'kylef/apiblueprint.vim'
-Plug 'majutsushi/tagbar'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'othree/html5-syntax.vim'
+Plug 'roxma/nvim-completion-manager'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -36,8 +29,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
-Plug 'roxma/nvim-completion-manager'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'w0rp/ale'
 
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
@@ -54,11 +46,6 @@ augroup END
 let base16colorspace=256
 colorscheme base16-default-dark " the theme clears all highlights, so set this here so we can define custom ones
 
-" indentLine
-let g:indentLine_faster = 1
-let g:indentLine_enabled = 0
-let g:indentLine_char = '┆'
-
 " lightline
 let g:lightline = {
     \ 'colorscheme': 'Tomorrow_Night',
@@ -74,10 +61,8 @@ function! s:fzf_statusline()
     highlight fzf3 ctermfg=237 ctermbg=251
     setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
-if has('nvim')
-    autocmd! User FzfStatusLine call <SID>fzf_statusline()
-    let $FZF_DEFAULT_OPTS .= ' --inline-info'
-endif
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+let $FZF_DEFAULT_OPTS .= ' --inline-info'
 if executable('ag')
     let $FZF_DEFAULT_COMMAND='ag -g ""'
 endif
@@ -98,19 +83,8 @@ let g:ale_lint_on_insert_leave = 1
 let g:ale_fixers = { 'javascript': ['eslint'] }
 let g:ale_fix_on_save = 1
 
-" Neosnippet
-imap <C-j>     <Plug>(neosnippet_expand_or_jump)
-smap <C-j>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-j>     <Plug>(neosnippet_expand_target)
-let g:neosnippet#enable_snipmate_compatibility = 1
-
 " jsx
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
-
-" vim-go
-let g:go_fmt_fail_silently = 1
-let g:go_template_autocreate = 0
-let g:go_fmt_command = "goimports"
 
 " vim-gitgutter
 let g:gitgutter_sign_added = '·'
@@ -120,6 +94,7 @@ let g:gitgutter_sign_modified_removed = '·'
 
 " language server
 let g:LanguageClient_changeThrottle = 0.5
+let g:LanguageClient_diagnosticsList = 'Location'
 
 let g:LanguageClient_serverCommands = {}
 let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio'] " sudo npm install -g typescript-language-server
@@ -127,7 +102,6 @@ let g:LanguageClient_serverCommands['javascript.jsx'] = g:LanguageClient_serverC
 let g:LanguageClient_serverCommands.typescript = g:LanguageClient_serverCommands.javascript
 let g:LanguageClient_serverCommands.python = ['pyls'] " sudo pip3 install python-language-server
 let g:LanguageClient_serverCommands.go = ['go-langserver'] " go get -u github.com/sourcegraph/go-langserver
-
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
@@ -144,10 +118,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 let mapleader=" "
 let localleader="\\"
 cmap w!! w !sudo tee > /dev/null %
-nmap <F5> :tp<CR>
-nmap <F6> :tn<CR>
 nmap <Leader><Space> :noh<CR>
-nmap <Leader>j :'<,'>!python -m json.tool<CR>
 nmap <Leader>l :setlocal list!<CR>
 nmap <Leader>q :cwindow<CR>
 nmap <Leader>s :setlocal spell!<CR>
@@ -160,10 +131,7 @@ nnoremap Y y$
 nmap <Leader>a :Ag<CR>
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :Files<CR>
-nmap <Leader>g :Goyo<CR>
 nmap <Leader>h :History<CR>
-nmap <Leader>i :IndentLinesToggle<CR>
-nmap <Leader>t :TagbarToggle<CR>
 
 " Visual movement
 imap <Down> <Esc>gja
@@ -179,8 +147,8 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 
-" Convert double-quote strings to unicode
-let @u = 's/\v"([^"]*)"/u''\1''/g'
+" Convert camelCase to camel_case
+let @u = 's#\(\<\u\l\+\|\l\+\)\(\u\)#\l\1_\l\2#g'
 
 " Store an iso8601 date for use in examples
 let @d = '2017-01-01T12:00:00+00:00'
@@ -240,12 +208,12 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal fdm=indent sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2 fdm=indent
-    autocmd BufNewFile,BufFilePre,BufRead *.org setlocal sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal fdm=syntax
     autocmd BufNewFile,BufFilePre,BufRead *.json,*.js,*.html setlocal sw=2 ts=2 conceallevel=0
     autocmd FileType gitcommit setlocal spell tw=75
     autocmd FileType go setlocal foldmethod=syntax
     autocmd FileType apiblueprint setlocal spell
+    autocmd FileType graphql setlocal sw=2 ts=2
 
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
 augroup END
