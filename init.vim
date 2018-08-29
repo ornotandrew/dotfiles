@@ -7,23 +7,15 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 Plug 'Arkham/vim-quickfixdo'
 Plug 'airblade/vim-gitgutter'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'honza/vim-snippets'
-Plug 'hynek/vim-python-pep8-indent'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'jparise/vim-graphql'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'kylef/apiblueprint.vim'
-Plug 'nelstrom/vim-markdown-folding'
-Plug 'othree/html5-syntax.vim'
-Plug 'pope/vim-fugitive'
-Plug 'roxma/nvim-completion-manager'
+
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
@@ -31,11 +23,25 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
+
 Plug 'w0rp/ale'
 
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
+" completion
+Plug 'roxma/nvim-yarp' | Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-tmux'
+Plug 'ncm2/ncm2-path'
+
+" language support
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'jparise/vim-graphql'
+Plug 'kylef/apiblueprint.vim'
+Plug 'mxw/vim-jsx'
+Plug 'othree/html5-syntax.vim'
+Plug 'pangloss/vim-javascript'
 call plug#end()
 
 " }}}
@@ -47,6 +53,7 @@ augroup END
 " base16
 let base16colorspace=256
 colorscheme base16-default-dark " the theme clears all highlights, so set this here so we can define custom ones
+hi SpellBad ctermbg=NONE " for some reason this gets set to be a pink color
 
 " lightline
 let g:lightline = {
@@ -85,6 +92,7 @@ let g:ale_lint_on_insert_leave = 1
 let g:ale_linters = { 'javascript': ['eslint'] }
 let g:ale_fixers = { 'javascript': ['eslint'] }
 let g:ale_fix_on_save = 1
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 " jsx
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
@@ -110,7 +118,9 @@ nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
-" nvim-completion-manager
+" ncm2
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
@@ -168,7 +178,6 @@ endif
 " Settings {{{
 set backupcopy=yes
 set clipboard=unnamedplus
-set completeopt-=preview
 set cursorline
 set expandtab
 set foldmethod=indent
