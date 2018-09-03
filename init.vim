@@ -114,11 +114,13 @@ let g:LanguageClient_serverCommands.typescript = g:LanguageClient_serverCommands
 let g:LanguageClient_serverCommands.python = ['pyls'] " sudo pip3 install python-language-server
 let g:LanguageClient_serverCommands.go = ['go-langserver'] " go get -u github.com/sourcegraph/go-langserver
 
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " ncm2
+let g:ncm2#popup_limit = 3
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
