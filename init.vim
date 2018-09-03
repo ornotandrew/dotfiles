@@ -53,7 +53,10 @@ augroup END
 " base16
 let base16colorspace=256
 colorscheme base16-default-dark " the theme clears all highlights, so set this here so we can define custom ones
-hi SpellBad ctermbg=NONE " for some reason this gets set to be a pink color
+" these highlight groups are used by ALE, and having a background is really
+" distracting
+hi SpellBad ctermbg=NONE
+hi SpellCap ctermbg=NONE
 
 " lightline
 let g:lightline = {
