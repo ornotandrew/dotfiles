@@ -5,7 +5,6 @@ plugins=(docker docker-compose mercurial fancy-ctrl-z zmv zsh-syntax-highlightin
 source $ZSH/oh-my-zsh.sh
 
 # Lazy load bigger plugins
-source virtualenvwrapper_lazy.sh 2>/dev/null
 function kubectl() {
     if ! type __start_kubectl >/dev/null 2>&1; then
         source <(command kubectl completion zsh)
@@ -53,7 +52,9 @@ base16_default-dark
 
 # virtualenvwrapper
 export WORKON_HOME=~/venv
+export PROJECT_HOME=~/code
 export LC_CTYPE=en_ZA.UTF-8
+source virtualenvwrapper_lazy.sh 2>/dev/null
 
 # Google cloud sdk
 GCLOUD_SDK="$HOME/tools/google-cloud-sdk"

@@ -181,6 +181,9 @@ endif
 
 " }}}
 " Settings {{{
+let g:python_host_prog='/home/andrew/venv/neovim2/bin/python'
+let g:python3_host_prog='/home/andrew/venv/neovim/bin/python'
+
 set backupcopy=yes
 set clipboard=unnamedplus
 set cursorline
