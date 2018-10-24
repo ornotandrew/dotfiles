@@ -21,6 +21,7 @@ path+="/sbin"
 path+="/bin"
 path+="$HOME/.local/bin"
 path+="$HOME/tools/google-cloud-sdk/bin"
+path+="/snap/bin"
 export PATH
 
 # Aliases
