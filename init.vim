@@ -13,6 +13,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'janko-m/vim-test'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -129,6 +130,10 @@ set completeopt=noinsert,menuone,noselect
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+" vim-test
+let test#strategy = "neovim"
+nnoremap <silent> <F1> :TestNearest<CR>
+let test#javascript#jest#options = '--detectOpenHandles --forceExit'
 
 " }}}
 " Key mappings {{{
