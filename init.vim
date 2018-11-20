@@ -121,7 +121,6 @@ let g:LanguageClient_serverCommands.go = ['go-langserver'] " go get -u github.co
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " ncm2
 let g:ncm2#popup_limit = 3
@@ -133,6 +132,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " vim-test
 let test#strategy = "neovim"
 nnoremap <silent> <F1> :TestNearest<CR>
+nnoremap <silent> <F2> :TestFile<CR>
 let test#javascript#jest#options = '--detectOpenHandles --forceExit'
 
 " }}}
