@@ -174,6 +174,9 @@ noremap <C-h> <C-w>h
 let @u = 's#\(\<\u\l\+\|\l\+\)\(\u\)#\l\1_\l\2#g'
 let @c = 's#_\(\l\)#\u\1#g'
 
+" Move params onto newlines
+let @p = 'vi):s/,\ /,\r/gvi)=f(%i:nohl'
+
 " Store an iso8601 date for use in examples
 let @d = '2017-01-01T12:00:00+00:00'
 
