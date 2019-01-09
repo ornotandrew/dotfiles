@@ -117,6 +117,7 @@ let g:LanguageClient_serverCommands['javascript.jsx'] = g:LanguageClient_serverC
 let g:LanguageClient_serverCommands.typescript = g:LanguageClient_serverCommands.javascript
 let g:LanguageClient_serverCommands.python = ['pyls'] " sudo pip3 install python-language-server
 let g:LanguageClient_serverCommands.go = ['go-langserver'] " go get -u github.com/sourcegraph/go-langserver
+let g:LanguageClient_serverCommands.graphql = ['graphql', 'server', '-m', 'stream'] " https://github.com/graphql/graphql-language-service
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
@@ -134,6 +135,9 @@ let test#strategy = "neovim"
 nnoremap <silent> <F1> :TestNearest<CR>
 nnoremap <silent> <F2> :TestFile<CR>
 let test#javascript#jest#options = '--detectOpenHandles --forceExit'
+
+" vim-javascript
+let g:javascript_plugin_flow = 1
 
 " }}}
 " Key mappings {{{
@@ -179,6 +183,11 @@ let @d = '2017-01-01T12:00:00+00:00'
 
 " Read in 12 random hex chars
 noremap <silent> <F9> "=system('uuidgen \| tr -d " \\t\n"')<CR>p
+
+" Split a JSON object onto individual lines
+let @j ='vi{:s/,\zs\ /\r/gf}hrl%lrvi{=:noh'
+
+
 
 if has('nvim')
     tmap <Esc> <C-\><C-n>
