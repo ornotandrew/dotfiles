@@ -25,6 +25,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 
+Plug 'sjl/gundo.vim'
+
+" Plug 'scrooloose/nerdtree'
+
 Plug 'w0rp/ale'
 
 " completion
@@ -121,7 +125,10 @@ let g:LanguageClient_serverCommands.graphql = ['graphql', 'server', '-m', 'strea
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
+augroup custom
+    autocmd FileType javascript,javascript.jsx,python,go,graphql nnoremap <buffer> <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
+augroup END
+
 
 " ncm2
 let g:ncm2#popup_limit = 3
@@ -185,16 +192,12 @@ let @p = 'vi):s/,\ /,\r/gvi)=f(%i:nohl'
 let @d = '2017-01-01T12:00:00+00:00'
 
 " Read in 12 random hex chars
-noremap <silent> <F9> "=system('uuidgen \| tr -d " \\t\n"')<CR>p
+noremap <silent> <F9> "=system('uuidgen \| tr -d " \\t\n-"')<CR>p
 
 " Split a JSON object onto individual lines
 let @j ='vi{:s/,\zs\ /\r/gf}hrl%lrvi{=:noh'
 
-
-
-if has('nvim')
-    tmap <Esc> <C-\><C-n>
-endif
+tmap <Esc> <C-\><C-n>
 
 " }}}
 " Settings {{{
