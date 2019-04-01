@@ -1,7 +1,7 @@
 # oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="wraithy"
-plugins=(docker docker-compose mercurial fancy-ctrl-z zmv zsh-syntax-highlighting)
+plugins=(docker docker-compose mercurial fancy-ctrl-z zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # Lazy load bigger plugins
