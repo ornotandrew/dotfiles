@@ -126,7 +126,7 @@ let g:LanguageClient_serverCommands.graphql = ['graphql', 'server', '-m', 'strea
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 augroup custom
-    autocmd FileType javascript,javascript.jsx,python,go,graphql nnoremap <buffer> <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
+    autocmd FileType typescript,javascript,javascript.jsx,python,go,graphql nnoremap <buffer> <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
 augroup END
 
 
@@ -254,7 +254,7 @@ augroup custom
     autocmd FileType gitcommit setlocal spell tw=75
     autocmd FileType go setlocal foldmethod=syntax
     autocmd FileType apiblueprint setlocal spell
-    autocmd FileType graphql setlocal sw=2 ts=2
+    autocmd FileType graphql,typescript setlocal sw=2 ts=2
 
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
 augroup END
