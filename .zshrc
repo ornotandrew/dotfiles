@@ -67,6 +67,7 @@ fi
 export MANPAGER="vim -c 'set ft=man' -"
 
 # Golang things
+export GO111MODULE=on
 export GOROOT=~/.go
 export GOPATH=~/go
 path+=$GOPATH/bin/
