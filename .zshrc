@@ -22,6 +22,8 @@ path+="/bin"
 path+="$HOME/.local/bin"
 path+="$HOME/tools/google-cloud-sdk/bin"
 path+="/snap/bin"
+path+="$HOME/.yarn/bin"
+path+="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH
 
 # Aliases
@@ -91,3 +93,8 @@ prod() {
 kpatch() {
     kubectl patch deployment $1 -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 }
+
+# edit command in vim
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^x^x' edit-command-line
