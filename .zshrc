@@ -90,6 +90,12 @@ prod() {
     tmux set-env -g prod_warning '#[fg=colour232,bg=colour202] PROD '
 }
 
+ci() {
+    kubectl config use-context gke_nomanini-dashboard_us-central1-a_ci
+    tmux set-env -g prod_warning '#[fg=colour232,bg=colour191] CI '
+}
+
+
 kpatch() {
     kubectl patch deployment $1 -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 }
