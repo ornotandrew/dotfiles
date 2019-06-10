@@ -17,7 +17,7 @@ local jobs="%1(j.%F{cyan}%j%f .)"
 local arrow="$white❱%f"
 
 PROMPT='$working_dir $(git_info)$jobs$arrow '
-RPS1="${return_code}"
+# RPS1="${return_code}"
 
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%%"
 ZSH_THEME_GIT_PROMPT_ADDED="+"

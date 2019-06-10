@@ -19,3 +19,4 @@
     ~/.unittest.cfg: .unittest.cfg
     ~/.zshrc: .zshrc
     ~/.config/alacritty/alacritty.yml: alacritty.yml
+    ~/.config/karabiner: karabiner
