@@ -1,8 +1,0 @@
-# A xterm-256color based TERMINFO that adds the escape sequences for italic.
-#
-# Usage:
-#           sh > tic tmux-256color-italic.terminfo
-#   .tmux.conf > set -g default-terminal "tmux-256color-italic"
-tmux-256color-italic|tmux with 256 colors and italic,
-        sitm=\ePtmux;\e\E[3m\e\\, ritm=\ePtmux;\e\E[23m\e\\,
-                use=screen-256color,

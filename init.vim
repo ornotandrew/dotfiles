@@ -86,9 +86,10 @@ endif
 autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
 " ALE
-let g:ale_sign_error = '⬤  '
-let g:ale_sign_warning = '⬤  '
-let g:ale_sign_info = '⬤  '
+let g:ale_disable_lsp = 1
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+let g:ale_sign_info = 'ℹ'
 
 
 highlight ALEErrorSign ctermfg=1 ctermbg=18 guifg=#ab4642 guibg=#181818 
@@ -98,11 +99,11 @@ highlight ALEWarningSign ctermfg=3 ctermbg=18 guifg=#f7ca88 guibg=#181818
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 
-let g:ale_linters = { 'javascript': ['eslint'] }
-let g:ale_fixers = {
-            \ 'javascript': ['eslint'],
-            \ 'go': ['gofmt']
-            \ }
+let g:ale_linters = { 'javascript.jsx': ['eslint'] }
+let g:ale_fixers = {}
+let g:ale_fixers.javascript = ['eslint']
+let g:ale_fixers.go = ['gofmt']
+
 let g:ale_fix_on_save = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
@@ -118,6 +119,7 @@ let g:gitgutter_sign_modified_removed = '·'
 " language server
 let g:LanguageClient_changeThrottle = 0.5
 let g:LanguageClient_diagnosticsList = 'Location'
+let g:LanguageClient_useVirtualText = 0
 
 let g:LanguageClient_serverCommands = {}
 let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio'] " sudo npm install -g javascript-typescript-langserver
