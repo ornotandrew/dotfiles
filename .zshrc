@@ -66,7 +66,7 @@ if [ -d $GCLOUD_SDK ]; then
 fi
 
 # Let vim be the MANPAGER
-export MANPAGER="col -b | vim -c 'set ft=man ts=8 nolist nomod noma nonu' -"
+export MANPAGER="col -b | nvim -c 'set ft=man ts=8 nolist nomod noma nonu' -"
 
 # Golang things
 export GO111MODULE=on

@@ -86,9 +86,10 @@ endif
 autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
 " ALE
-let g:ale_sign_error = '🗙'
-let g:ale_sign_warning = '!'
-let g:ale_sign_info = 'i'
+let g:ale_sign_error = '⬤  '
+let g:ale_sign_warning = '⬤  '
+let g:ale_sign_info = '⬤  '
+
 
 highlight ALEErrorSign ctermfg=1 ctermbg=18 guifg=#ab4642 guibg=#181818 
 highlight ALEInfoSign ctermfg=4 ctermbg=18 gui=bold guifg=#7cafc2 guibg=#181818 
@@ -126,7 +127,6 @@ let g:LanguageClient_serverCommands.python = ['pyls'] " sudo pip3 install python
 let g:LanguageClient_serverCommands.go = ['go-langserver'] " go get -u github.com/sourcegraph/go-langserver
 let g:LanguageClient_serverCommands.graphql = ['graphql', 'server', '-m', 'stream'] " https://github.com/graphql/graphql-language-service
 
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 augroup custom
     autocmd FileType typescript,javascript,javascript.jsx,python,go,graphql nnoremap <buffer> <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
@@ -142,8 +142,8 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " vim-test
 let test#strategy = "neovim"
-nnoremap <silent> <F1> :TestNearest<CR>
-nnoremap <silent> <F2> :TestFile<CR>
+nnoremap <silent> <Leader>t :TestNearest<CR>
+nnoremap <silent> <Leader>T :TestFile<CR>
 let test#javascript#jest#options = '--detectOpenHandles --forceExit'
 
 " vim-javascript
@@ -195,7 +195,7 @@ let @p = 'vi):s/,\ /,\r/gvi)=f(%i:nohl'
 let @d = '2017-01-01T12:00:00+00:00'
 
 " Read in 12 random hex chars
-noremap <silent> <F9> "=system('uuidgen \| tr -d " \\t\n-"')<CR>p
+noremap <silent> <Leader>u "=system('uuidgen \| tr -d " \\t\n-"')<CR>p
 
 " Split a JSON object onto individual lines
 let @j ='vi{:s/,\zs\ /\r/gf}hrl%lrvi{=:noh'
