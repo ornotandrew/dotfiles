@@ -56,8 +56,11 @@ base16_default-dark
 # virtualenvwrapper
 export WORKON_HOME=~/venv
 export PROJECT_HOME=~/code
-export LC_CTYPE=en_ZA.UTF-8
 source virtualenvwrapper_lazy.sh 2>/dev/null
+
+# locale
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # Google cloud sdk
 GCLOUD_SDK="$HOME/tools/google-cloud-sdk"
