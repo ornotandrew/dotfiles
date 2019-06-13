@@ -144,8 +144,6 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " vim-test
 let test#strategy = "neovim"
-nnoremap <silent> <Leader>t :TestNearest<CR>
-nnoremap <silent> <Leader>T :TestFile<CR>
 let test#javascript#jest#options = '--detectOpenHandles --forceExit'
 
 " vim-javascript
@@ -154,7 +152,7 @@ let g:javascript_plugin_flow = 1
 " }}}
 " Key mappings {{{
 
-let mapleader=" "
+let mapleader = "\<space>" 
 let localleader="\\"
 cmap w!! w !sudo tee > /dev/null %
 nmap <Leader><Space> :noh<CR>
@@ -171,6 +169,8 @@ nmap <Leader>a :Ag<CR>
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>f :Files<CR>
 nmap <Leader>h :History<CR>
+nnoremap <silent> <Leader>t :TestNearest<CR>
+nnoremap <silent> <Leader>T :TestFile<CR>
 
 " Visual movement
 imap <Down> <Esc>gja

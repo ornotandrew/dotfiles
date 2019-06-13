@@ -41,6 +41,7 @@ alias vim="nvim"
 alias clip="xclip -sel clip"
 alias y="yarn"
 hash -d nngo="/home/andrew/go/src/bitbucket.org/nomanini"
+hash -d mc="/Users/andrew/Library/Application Support/minecraft"
 
 # Completion
 zstyle ':completion:*' users andrew root
