@@ -66,6 +66,16 @@
         },
         {
           "type": "basic",
+          "from": { "key_code": "left", "modifiers": { "mandatory": ["left_control"] } },
+          "to": [ { "key_code": "left", "modifiers": ["fn"] } ]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "right", "modifiers": { "mandatory": ["left_control"] } },
+          "to": [ { "key_code": "right", "modifiers": ["fn"] } ]
+        },
+        {
+          "type": "basic",
           "from": {
             "key_code": "fn",
             "modifiers": { "optional": [ "any" ] }

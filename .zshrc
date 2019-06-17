@@ -23,7 +23,8 @@ path+="$HOME/.local/bin"
 path+="$HOME/tools/google-cloud-sdk/bin"
 path+="/snap/bin"
 path+="$HOME/.yarn/bin"
-path+="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+path+="$HOME/.config/yarn/global/node_modules/.bin"
+path+="/usr/local/opt/mysql-client/bin"
 export PATH
 
 # Aliases
@@ -38,9 +39,9 @@ alias dc="docker-compose"
 alias k="kubectl"
 alias vol="pactl set-sink-volume @DEFAULT_SINK@"
 alias vim="nvim"
-alias clip="xclip -sel clip"
+alias clip="pbcopy"
 alias y="yarn"
-hash -d nngo="/home/andrew/go/src/bitbucket.org/nomanini"
+hash -d nngo="/Users/andrew/go/src/bitbucket.org/nomanini"
 hash -d mc="/Users/andrew/Library/Application Support/minecraft"
 
 # Completion
