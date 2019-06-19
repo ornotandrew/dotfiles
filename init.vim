@@ -71,20 +71,6 @@ let g:lightline = {
     \ 'subseparator': { 'left': '', 'right': '' }
     \ }
 
-let g:lightline.mode_map = {
-    \ 'n' : 'N',
-    \ 'i' : 'I',
-    \ 'R' : 'R',
-    \ 'v' : 'V',
-    \ 'V' : 'VL',
-    \ "\<C-v>": 'VB',
-    \ 'c' : 'C',
-    \ 's' : 'S',
-    \ 'S' : 'SL',
-    \ "\<C-s>": 'SB',
-    \ 't': 'T',
-    \ }
-
 " FZF
 function! s:fzf_statusline()
     highlight fzf1 ctermfg=161 ctermbg=251
@@ -104,7 +90,6 @@ let g:ale_disable_lsp = 1
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
 let g:ale_sign_info = 'ℹ'
-
 
 highlight ALEErrorSign ctermfg=1 ctermbg=18 guifg=#ab4642 guibg=#181818 
 highlight ALEInfoSign ctermfg=4 ctermbg=18 gui=bold guifg=#7cafc2 guibg=#181818 
