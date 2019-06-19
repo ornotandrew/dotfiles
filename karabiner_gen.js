@@ -32,7 +32,7 @@ const letterKeys = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
 const fnToCtrl = {
   description: 'Remap fn to left_control when pressed with a letter key or space',
-  manipulators: [...letterKeys, 'space'].map(fnAsCtrlWith)
+  manipulators: [...letterKeys, 'spacebar'].map(fnAsCtrlWith)
 }
 
 const config = {
