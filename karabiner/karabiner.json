@@ -75,7 +75,7 @@
                         ]
                     },
                     {
-                        "description": "Remap fn to left_control when pressed with a letter key or space",
+                        "description": "Remap fn to left_control when pressed with a letter key, space, or enter",
                         "manipulators": [
                             {
                                 "from": {
@@ -664,6 +664,28 @@
                                 "to": [
                                     {
                                         "key_code": "spacebar",
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "return_or_enter",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "return_or_enter",
                                         "modifiers": [
                                             "left_control"
                                         ]
