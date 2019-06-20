@@ -6,17 +6,17 @@ const capsToEsc = {
     {
       type: 'basic',
       from: { key_code: 'caps_lock', modifiers: { 'optional': [ 'any' ] } },
-      to: [ { 'key_code': 'escape' } ]
+      to: [ { key_code: 'escape' } ]
     },
     {
       type: 'basic',
-      from: { key_code: 'left_shift', modifiers: { 'mandatory': [ 'right_shift' ], 'optional': [ 'caps_lock' ] } },
-      to: [ { 'key_code': 'caps_lock' } ]
+      from: { key_code: 'left_shift', modifiers: { mandatory: [ 'right_shift' ], optional: [ 'caps_lock' ] } },
+      to: [ { key_code: 'caps_lock' } ]
     },
     {
       type: 'basic',
-      from: { key_code: 'right_shift', modifiers: { 'mandatory': [ 'left_shift' ], 'optional': [ 'caps_lock' ] } },
-      to: [ { 'key_code': 'caps_lock' } ]
+      from: { key_code: 'right_shift', modifiers: { mandatory: [ 'left_shift' ], optional: [ 'caps_lock' ] } },
+      to: [ { key_code: 'caps_lock' } ]
     }
   ]
 }
@@ -24,7 +24,7 @@ const capsToEsc = {
 
 const fnAsCtrlWith = key => ({
   type: 'basic',
-  from: { key_code: key, modifiers: { mandatory: ['fn'] } },
+  from: { key_code: key, modifiers: { mandatory: ['fn'], optional: ['any'] } },
   to: [ { key_code: key, modifiers: ['left_control'] } ]
 })
 
