@@ -41,8 +41,7 @@ alias vol="pactl set-sink-volume @DEFAULT_SINK@"
 alias vim="nvim"
 alias clip="pbcopy"
 alias y="yarn"
-hash -d nngo="/Users/andrew/go/src/bitbucket.org/nomanini"
-hash -d mc="/Users/andrew/Library/Application Support/minecraft"
+hash -d nngo="/Users/andrew/go/src/nomanini.com/nomanini"
 
 # Completion
 zstyle ':completion:*' users andrew root

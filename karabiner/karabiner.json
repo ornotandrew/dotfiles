@@ -75,7 +75,7 @@
                         ]
                     },
                     {
-                        "description": "Remap fn to left_control when pressed with a letter key, space, or enter",
+                        "description": "Remap fn to left_control when pressed with keys that do something in combination with left_control",
                         "manipulators": [
                             {
                                 "from": {
@@ -686,6 +686,50 @@
                                 "to": [
                                     {
                                         "key_code": "return_or_enter",
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "close_bracket",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "close_bracket",
+                                        "modifiers": [
+                                            "left_control"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "open_bracket",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "fn"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "open_bracket",
                                         "modifiers": [
                                             "left_control"
                                         ]
