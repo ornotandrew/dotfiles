@@ -38,9 +38,12 @@ alias hcm="hg commit -m Merge"
 alias dc="docker-compose"
 alias k="kubectl"
 alias vol="pactl set-sink-volume @DEFAULT_SINK@"
-alias vim="nvim"
 alias clip="pbcopy"
 alias y="yarn"
+alias sudo="sudo " # expand aliases when using sudo
+alias -g vim="nvim"
+alias ctags="`brew --prefix`/bin/ctags"
+
 hash -d nngo="/Users/andrew/go/src/nomanini.com/nomanini"
 
 # Completion
@@ -73,8 +76,8 @@ fi
 export MANPAGER="col -b | nvim -c 'set ft=man ts=8 nolist nomod noma nonu' -"
 
 # Golang things
-export GO111MODULE=on
-export GOROOT=~/.go
+export GO111MODULE=off
+export GOROOT=/usr/local/go
 export GOPATH=~/go
 path+=$GOPATH/bin/
 path+=$GOROOT/bin/

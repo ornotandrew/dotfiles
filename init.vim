@@ -98,10 +98,13 @@ highlight ALEWarningSign ctermfg=3 ctermbg=18 guifg=#f7ca88 guibg=#181818
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 
-let g:ale_linters = { 'javascript.jsx': ['eslint'] }
+let g:ale_linters = {}
+let g:ale_linters['javascript.jsx'] = ['eslint']
+let g:ale_linters.graphql = ['eslint']
 let g:ale_fixers = {}
 let g:ale_fixers.javascript = ['eslint']
 let g:ale_fixers.go = ['gofmt']
+let g:ale_fixers.sql = ['sqlfmt']
 
 let g:ale_fix_on_save = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
@@ -196,7 +199,7 @@ let @p = 'vi):s/,\ /,\r/gvi)=f(%i:nohl'
 let @d = '2017-01-01T12:00:00+00:00'
 
 " Read in 12 random hex chars
-noremap <silent> <Leader>u "=system('uuidgen \| tr -d " \\t\n-"')<CR>p
+noremap <silent> <Leader>u "=system('uuidgen \| tr -d " \\t\n-" \| tr "[:upper:]" "[:lower:]"')<CR>p
 
 " Split a JSON object onto individual lines
 let @j ='vi{:s/,\zs\ /\r/gf}hrl%lrvi{=:noh'
@@ -248,7 +251,7 @@ let $PAGER = ''
 " Autocommands {{{
 
 augroup custom
-    autocmd BufNewFile,BufFilePre,BufRead *.md,*.markdown setlocal filetype=markdown wrap spell fdm=indent
+    autocmd BufNewFile,BufFilePre,BufRead *.md,*.markdown setlocal filetype=markdown wrap fdm=indent
     autocmd BufNewFile,BufFilePre,BufRead Dockerfile* setlocal filetype=dockerfile sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal fdm=indent sw=4 ts=4
