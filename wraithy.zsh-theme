@@ -1,10 +1,17 @@
 # Loosely based on lukerandall
+
+# git clone https://github.com/romkatv/gitstatus.git ~/.gitstatus
+source ~/.gitstatus/gitstatus.prompt.zsh
+
 function git_info() {
-    ref=$(git symbolic-ref --quiet HEAD 2> /dev/null) || return
-    GIT_STATUS="$(git_prompt_status)"
-    # add a space
-    [ "$GIT_STATUS" != "" ] && GIT_STATUS=" $GIT_STATUS"
-    echo "%F{yellow}(${ref#refs/heads/}$GIT_STATUS)%f "
+    [[ "$VCS_STATUS_RESULT" == ok-sync ]] || return
+    local branch_or_commit=${VCS_STATUS_LOCAL_BRANCH:-"@${VCS_STATUS_COMMIT}"}
+    local file_status=""
+    [[ "$VCS_STATUS_HAS_STAGED"    == 1 ]] && file_status="${file_status}+"
+    [[ "$VCS_STATUS_HAS_UNSTAGED"  == 1 ]] && file_status="${file_status}*"
+    [[ "$VCS_STATUS_HAS_UNTRACKED" == 1 ]] && file_status="${file_status}%%"
+    [[ -n "$file_status" ]] && file_status=" ${file_status}"
+    echo "%F{yellow}(${branch_or_commit}${file_status})%f "
 }
 
 local user="%F{green}%n%f"
@@ -14,11 +21,3 @@ local jobs="%1(j.%F{cyan}%j%f .)"
 local arrow="%F{white}❱%f"
 
 PROMPT='$working_dir $(git_info)$jobs$arrow '
-# RPS1="${return_code}"
-
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%%"
-ZSH_THEME_GIT_PROMPT_ADDED="+"
-ZSH_THEME_GIT_PROMPT_MODIFIED="*"
-ZSH_THEME_GIT_PROMPT_RENAMED="~"
-ZSH_THEME_GIT_PROMPT_DELETED="!"
-ZSH_THEME_GIT_PROMPT_UNMERGED="?"
