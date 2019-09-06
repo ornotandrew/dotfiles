@@ -1,0 +1,8 @@
+{
+  "diagnostic.virtualText": false,
+  "diagnostic.virtualTextPrefix": "➤ ",
+  "diagnostic.errorSign": "✖",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.infoSign": "ℹ",
+  "diagnostic.hintSign": "?"
+}

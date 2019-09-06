@@ -26,8 +26,12 @@ Plug 'tpope/vim-vinegar'
 
 Plug 'sjl/gundo.vim'
 
+" completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " language support
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'jparise/vim-graphql'
@@ -47,16 +51,58 @@ augroup END
 " base16
 let base16colorspace=256
 colorscheme base16-default-dark " the theme clears all highlights, so set this here so we can define custom ones
-" these highlight groups are used by ALE, and having a background is really distracting
+" having a background is really distracting
 hi SpellBad ctermbg=NONE
 hi SpellCap ctermbg=NONE
+
+" Coc
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" gutter colors
+hi CocErrorSign ctermfg=1 ctermbg=18 guifg=#ab4642 guibg=#181818
+hi CocWarningSign ctermfg=3 ctermbg=18 guifg=#f7ca88 guibg=#181818
+hi CocInfoSign ctermfg=4 ctermbg=18 gui=bold guifg=#7cafc2 guibg=#181818
+hi CocHintSign ctermfg=2 ctermbg=18 gui=bold guifg=#a0b475 guibg=#181818
+
+" virtual text colors
+hi CocErrorVirtualText ctermfg=8 ctermbg=NONE guifg=#585858 guibg=NONE
+hi default link CocWarningVirtualText CocErrorVirtualText
+hi default link CocInfoVirtualText CocErrorVirtualText
+hi default link CocHintVirtualText CocErrorVirtualText
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+nnoremap <silent> <C-]> :call CocActionAsync('jumpDefinition')<CR>
 
 " lightline
 let g:lightline = {
     \ 'colorscheme': 'Tomorrow_Night',
     \ 'component': {'filename': '%f'},
     \ 'separator': { 'left': '', 'right': '' },
-    \ 'subseparator': { 'left': '', 'right': '' }
+    \ 'subseparator': { 'left': '', 'right': '' },
     \ }
 
 " FZF
@@ -184,6 +230,7 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2 fdm=indent
     autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal fdm=syntax
     autocmd BufNewFile,BufFilePre,BufRead *.json,*.js,*.html setlocal sw=2 ts=2 conceallevel=0 fdm=syntax
+    autocmd FileType json syntax match Comment +\/\/.\+$+ " enables jsonc syntax
     autocmd BufNewFile,BufFilePre,BufRead .babelrc setlocal ft=json
     autocmd FileType gitcommit setlocal spell tw=75
     autocmd FileType go setlocal foldmethod=syntax

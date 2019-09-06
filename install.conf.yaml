@@ -11,6 +11,7 @@
 - link:
     ~/.agignore: .agignore
     ~/.config/nvim/init.vim: init.vim
+    ~/.config/nvim/coc-settings.json: coc-settings.json
     ~/.gitconfig: .gitconfig
     ~/.hgrc: .hgrc
     ~/.oh-my-zsh/themes/wraithy.zsh-theme: wraithy.zsh-theme
