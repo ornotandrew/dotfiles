@@ -6,7 +6,6 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'Arkham/vim-quickfixdo'
-Plug 'airblade/vim-gitgutter'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
@@ -17,7 +16,6 @@ Plug 'janko-m/vim-test'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-speeddating'
@@ -26,8 +24,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 
 Plug 'sjl/gundo.vim'
-
-" Plug 'scrooloose/nerdtree'
 
 Plug 'w0rp/ale'
 
@@ -46,7 +42,7 @@ Plug 'jparise/vim-graphql'
 Plug 'kylef/apiblueprint.vim'
 Plug 'mxw/vim-jsx'
 Plug 'othree/html5-syntax.vim'
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 call plug#end()
 
 " }}}
@@ -58,8 +54,7 @@ augroup END
 " base16
 let base16colorspace=256
 colorscheme base16-default-dark " the theme clears all highlights, so set this here so we can define custom ones
-" these highlight groups are used by ALE, and having a background is really
-" distracting
+" these highlight groups are used by ALE, and having a background is really distracting
 hi SpellBad ctermbg=NONE
 hi SpellCap ctermbg=NONE
 
@@ -109,15 +104,6 @@ let g:ale_fixers.sql = ['sqlfmt']
 let g:ale_fix_on_save = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-" jsx
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
-
-" vim-gitgutter
-let g:gitgutter_sign_added = '·'
-let g:gitgutter_sign_modified = '·'
-let g:gitgutter_sign_removed = '·'
-let g:gitgutter_sign_modified_removed = '·'
-
 " language server
 let g:LanguageClient_changeThrottle = 0.5
 let g:LanguageClient_diagnosticsList = 'Location'
@@ -136,7 +122,6 @@ augroup custom
     autocmd FileType typescript,javascript,javascript.jsx,python,go,graphql nnoremap <buffer> <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
 augroup END
 
-
 " ncm2
 let g:ncm2#popup_limit = 3
 autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -147,9 +132,6 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " vim-test
 let test#strategy = "neovim"
 let test#javascript#jest#options = '--detectOpenHandles --forceExit'
-
-" vim-javascript
-let g:javascript_plugin_flow = 1
 
 " }}}
 " Key mappings {{{
