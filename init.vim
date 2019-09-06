@@ -5,6 +5,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
+
 Plug 'Arkham/vim-quickfixdo'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chriskempson/base16-vim'
@@ -25,16 +26,7 @@ Plug 'tpope/vim-vinegar'
 
 Plug 'sjl/gundo.vim'
 
-Plug 'w0rp/ale'
-
-" completion
-Plug 'roxma/nvim-yarp' | Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-tmux'
-Plug 'ncm2/ncm2-path'
-
 " language support
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'hynek/vim-python-pep8-indent'
@@ -43,6 +35,7 @@ Plug 'kylef/apiblueprint.vim'
 Plug 'mxw/vim-jsx'
 Plug 'othree/html5-syntax.vim'
 " Plug 'pangloss/vim-javascript'
+
 call plug#end()
 
 " }}}
@@ -79,55 +72,6 @@ if executable('ag')
     let $FZF_DEFAULT_COMMAND='ag -g ""'
 endif
 autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
-
-" ALE
-let g:ale_disable_lsp = 1
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
-let g:ale_sign_info = 'ℹ'
-
-highlight ALEErrorSign ctermfg=1 ctermbg=18 guifg=#ab4642 guibg=#181818 
-highlight ALEInfoSign ctermfg=4 ctermbg=18 gui=bold guifg=#7cafc2 guibg=#181818 
-highlight ALEWarningSign ctermfg=3 ctermbg=18 guifg=#f7ca88 guibg=#181818 
-
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
-
-let g:ale_linters = {}
-let g:ale_linters['javascript.jsx'] = ['eslint']
-let g:ale_linters.graphql = ['eslint']
-let g:ale_fixers = {}
-let g:ale_fixers.javascript = ['eslint']
-let g:ale_fixers.go = ['gofmt']
-let g:ale_fixers.sql = ['sqlfmt']
-
-let g:ale_fix_on_save = 1
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-" language server
-let g:LanguageClient_changeThrottle = 0.5
-let g:LanguageClient_diagnosticsList = 'Location'
-let g:LanguageClient_useVirtualText = 0
-
-let g:LanguageClient_serverCommands = {}
-let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio'] " sudo npm install -g javascript-typescript-langserver
-let g:LanguageClient_serverCommands['javascript.jsx'] = g:LanguageClient_serverCommands.javascript
-let g:LanguageClient_serverCommands.typescript = g:LanguageClient_serverCommands.javascript
-let g:LanguageClient_serverCommands.python = ['pyls'] " sudo pip3 install python-language-server
-let g:LanguageClient_serverCommands.go = ['go-langserver'] " go get -u github.com/sourcegraph/go-langserver
-let g:LanguageClient_serverCommands.graphql = ['graphql', 'server', '-m', 'stream'] " https://github.com/graphql/graphql-language-service
-
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-augroup custom
-    autocmd FileType typescript,javascript,javascript.jsx,python,go,graphql nnoremap <buffer> <silent> <C-]> :call LanguageClient_textDocument_definition()<CR>
-augroup END
-
-" ncm2
-let g:ncm2#popup_limit = 3
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " vim-test
 let test#strategy = "neovim"
