@@ -51,13 +51,14 @@ augroup END
 " base16
 let base16colorspace=256
 colorscheme base16-default-dark " the theme clears all highlights, so set this here so we can define custom ones
-" having a background is really distracting
+" having a bright red background is really distracting
 hi SpellBad ctermbg=NONE
 hi SpellCap ctermbg=NONE
+" use the contextual background instead of always being black
+hi Normal ctermbg=NONE
 
-" Coc
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" Coc.nvim
+" map <tab> to trigger completion and navigate to the next item
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -69,16 +70,8 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" use K to show documentation in preview window
+nnoremap <silent> K :call CocAction('doHover')<CR>
 
 " gutter colors
 hi CocErrorSign ctermfg=1 ctermbg=18 guifg=#ab4642 guibg=#181818
@@ -86,16 +79,15 @@ hi CocWarningSign ctermfg=3 ctermbg=18 guifg=#f7ca88 guibg=#181818
 hi CocInfoSign ctermfg=4 ctermbg=18 gui=bold guifg=#7cafc2 guibg=#181818
 hi CocHintSign ctermfg=2 ctermbg=18 gui=bold guifg=#a0b475 guibg=#181818
 
-" virtual text colors
-hi CocErrorVirtualText ctermfg=8 ctermbg=NONE guifg=#585858 guibg=NONE
-hi default link CocWarningVirtualText CocErrorVirtualText
-hi default link CocInfoVirtualText CocErrorVirtualText
-hi default link CocHintVirtualText CocErrorVirtualText
+nnoremap <silent> <C-]> :call <SID>jump_to_definition()<CR>
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-nnoremap <silent> <C-]> :call CocActionAsync('jumpDefinition')<CR>
+function! s:jump_to_definition()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'tag '.expand('<cword>')
+  else
+    call CocActionAsync('jumpDefinition')
+  endif
+endfunction
 
 " lightline
 let g:lightline = {
@@ -141,6 +133,7 @@ nnoremap Y y$
 " Plugins
 nmap <Leader>a :Ag<CR>
 nmap <Leader>b :Buffers<CR>
+nmap <Leader>c :CocList marketplace<CR>
 nmap <Leader>f :Files<CR>
 nmap <Leader>h :History<CR>
 nnoremap <silent> <Leader>t :TestNearest<CR>
