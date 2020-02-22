@@ -13,6 +13,7 @@
     ~/.config/nvim/init.vim: init.vim
     ~/.config/nvim/coc-settings.json: coc-settings.json
     ~/.gitconfig: .gitconfig
+    ~/.gitconfig-work: .gitconfig-work
     ~/.hgrc: .hgrc
     ~/.oh-my-zsh/themes/wraithy.zsh-theme: wraithy.zsh-theme
     ~/.pylintrc: .pylintrc

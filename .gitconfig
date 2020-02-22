@@ -1,6 +1,8 @@
 [user]
-	email = andrew@nomanini.com
+	email = wraith.andrew@gmail.com
 	name = Andrew van Rooyen
+[includeIf "gitdir:~/code/"]
+  path = ~/.gitconfig-work
 [push]
 	default = simple
 [core]
@@ -20,3 +22,5 @@
 	insteadOf = https://github.com/
 [url "git@bitbucket.org:"]
 	insteadOf = https://bitbucket.org/
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com/

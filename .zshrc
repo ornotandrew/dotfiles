@@ -13,18 +13,18 @@ function kubectl() {
 }
 
 # Path
-path+="/usr/local/sbin"
-path+="/usr/local/bin"
-path+="/usr/sbin"
-path+="/usr/bin"
-path+="/sbin"
-path+="/bin"
 path+="$HOME/.local/bin"
 path+="$HOME/tools/google-cloud-sdk/bin"
 path+="/snap/bin"
 path+="$HOME/.yarn/bin"
 path+="$HOME/.config/yarn/global/node_modules/.bin"
 path+="/usr/local/opt/mysql-client/bin"
+path+="/usr/local/sbin"
+path+="/usr/local/bin"
+path+="/usr/sbin"
+path+="/usr/bin"
+path+="/sbin"
+path+="/bin"
 export PATH
 
 # Aliases
@@ -43,8 +43,6 @@ alias y="yarn"
 alias sudo="sudo " # expand aliases when using sudo
 alias -g vim="nvim"
 alias ctags="`brew --prefix`/bin/ctags"
-
-hash -d nngo="/Users/andrew/go/src/nomanini.com/nomanini"
 
 # Completion
 zstyle ':completion:*' users andrew root
@@ -74,14 +72,6 @@ fi
 
 # Let vim be the MANPAGER
 export MANPAGER="col -b | nvim -c 'set ft=man ts=8 nolist nomod noma nonu' -"
-
-# Golang things
-export GO111MODULE=off
-export GOROOT=/usr/local/go
-export GOPATH=~/go
-path+=$GOPATH/bin/
-path+=$GOROOT/bin/
-export PATH
 
 export XDG_CONFIG_HOME=~/.config
 

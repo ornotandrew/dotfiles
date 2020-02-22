@@ -5,7 +5,7 @@ source ~/.gitstatus/gitstatus.prompt.zsh
 
 function git_info() {
     [[ "$VCS_STATUS_RESULT" == ok-sync ]] || return
-    local branch_or_commit=${VCS_STATUS_LOCAL_BRANCH:-"@${VCS_STATUS_COMMIT}"}
+    local branch_or_commit=${VCS_STATUS_LOCAL_BRANCH:-"@${VCS_STATUS_COMMIT:0:12}"}
     local file_status=""
     [[ "$VCS_STATUS_HAS_STAGED"    == 1 ]] && file_status="${file_status}+"
     [[ "$VCS_STATUS_HAS_UNSTAGED"  == 1 ]] && file_status="${file_status}*"

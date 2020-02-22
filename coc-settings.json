@@ -4,5 +4,16 @@
   "diagnostic.errorSign": "✖",
   "diagnostic.warningSign": "⚠",
   "diagnostic.infoSign": "ℹ",
-  "diagnostic.hintSign": "?"
+  "diagnostic.hintSign": "?",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "python"
+  ],
+  "eslint.filetypes": [
+    "javascript",
+    "typescript",
+    "javascript",
+    "jsx"
+  ],
+  "eslint.autoFixOnSave": true,
+  "python.jediEnabled": false
 }

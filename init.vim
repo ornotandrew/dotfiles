@@ -14,6 +14,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'janko-m/vim-test'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -54,6 +55,8 @@ colorscheme base16-default-dark " the theme clears all highlights, so set this h
 " having a bright red background is really distracting
 hi SpellBad ctermbg=NONE
 hi SpellCap ctermbg=NONE
+hi Error ctermbg=NONE ctermfg=NONE
+
 " use the contextual background instead of always being black
 hi Normal ctermbg=NONE
 
@@ -72,6 +75,7 @@ endfunction
 
 " use K to show documentation in preview window
 nnoremap <silent> K :call CocAction('doHover')<CR>
+nnoremap <leader>c <Plug>(coc-codeaction)
 
 " gutter colors
 hi CocErrorSign ctermfg=1 ctermbg=18 guifg=#ab4642 guibg=#181818
@@ -111,9 +115,14 @@ if executable('ag')
 endif
 autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
+" vim-graphql
+let g:graphql_javascript_tags = ['gql', 'gqlMoney', 'gqlPushNotifications', 'gqlGlobal']
+
 " vim-test
 let test#strategy = "neovim"
-let test#javascript#jest#options = '--detectOpenHandles --forceExit'
+" let test#javascript#jest#options = '--detectOpenHandles --forceExit'
+let test#python#runner = 'pytest'
+let test#python#pytest#options = '-vv'
 
 " }}}
 " Key mappings {{{
@@ -133,7 +142,8 @@ nnoremap Y y$
 " Plugins
 nmap <Leader>a :Ag<CR>
 nmap <Leader>b :Buffers<CR>
-nmap <Leader>c :CocList marketplace<CR>
+nmap <Leader>c :CocAction<CR>
+nmap <leader>q <Plug>(coc-format)
 nmap <Leader>f :Files<CR>
 nmap <Leader>h :History<CR>
 nnoremap <silent> <Leader>t :TestNearest<CR>
@@ -152,6 +162,12 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
+" netrw overwrites <C-l>, and we want to avoid splitting config into vim/after
+" as far as possible, so just use an autocmd to steal the mapping back
+augroup custom
+    autocmd filetype netrw nnoremap <buffer> <C-l> <C-w>l
+augroup END
+
 
 " Convert camelCase to camel_case
 let @u = 's#\(\<\u\l\+\|\l\+\)\(\u\)#\l\1_\l\2#g'
@@ -216,13 +232,13 @@ let $PAGER = ''
 " Autocommands {{{
 
 augroup custom
-    autocmd BufNewFile,BufFilePre,BufRead *.md,*.markdown setlocal filetype=markdown wrap fdm=indent
+    autocmd BufNewFile,BufFilePre,BufRead *.md,*.markdown setlocal filetype=markdown wrap fdm=indent spell
     autocmd BufNewFile,BufFilePre,BufRead Dockerfile* setlocal filetype=dockerfile sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal fdm=indent sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2 fdm=indent
     autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal fdm=syntax
-    autocmd BufNewFile,BufFilePre,BufRead *.json,*.js,*.html setlocal sw=2 ts=2 conceallevel=0 fdm=syntax
+    autocmd BufNewFile,BufFilePre,BufRead *.json,*.js,*.ts,*.html setlocal sw=2 ts=2 conceallevel=0 fdm=syntax
     autocmd FileType json syntax match Comment +\/\/.\+$+ " enables jsonc syntax
     autocmd BufNewFile,BufFilePre,BufRead .babelrc setlocal ft=json
     autocmd FileType gitcommit setlocal spell tw=75
