@@ -37,8 +37,9 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'jparise/vim-graphql'
 Plug 'kylef/apiblueprint.vim'
-Plug 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
 Plug 'othree/html5-syntax.vim'
+Plug 'fatih/vim-go'
 " Plug 'pangloss/vim-javascript'
 
 call plug#end()
@@ -123,6 +124,17 @@ let test#strategy = "neovim"
 " let test#javascript#jest#options = '--detectOpenHandles --forceExit'
 let test#python#runner = 'pytest'
 let test#python#pytest#options = '-vv'
+
+" vim-go
+" use coc-go for this stuff instead
+let g:go_code_completion_enabled = 0 
+let g:go_doc_keywordprg_enabled = 0
+let g:go_def_mapping_enabled = 0
+let g:go_gopls_enabled = 0
+let g:go_template_autocreate = 0
+let g:go_echo_go_info = 0
+let g:go_highlight_diagnostic_errors = 0
+let g:go_highlight_diagnostic_warnings = 0
 
 " }}}
 " Key mappings {{{
@@ -239,8 +251,10 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2 fdm=indent
     autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal fdm=syntax
     autocmd BufNewFile,BufFilePre,BufRead *.json,*.js,*.ts,*.html setlocal sw=2 ts=2 conceallevel=0 fdm=syntax
+    autocmd BufNewFile,BufFilePre,BufRead *.ts setlocal filetype=typescript
     autocmd FileType json syntax match Comment +\/\/.\+$+ " enables jsonc syntax
     autocmd BufNewFile,BufFilePre,BufRead .babelrc setlocal ft=json
+    autocmd FileType git setlocal fdm=syntax
     autocmd FileType gitcommit setlocal spell tw=75
     autocmd FileType go setlocal foldmethod=syntax
     autocmd FileType apiblueprint setlocal spell

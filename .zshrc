@@ -58,7 +58,8 @@ base16_default-dark
 # virtualenvwrapper
 export WORKON_HOME=~/venv
 export PROJECT_HOME=~/code
-source virtualenvwrapper_lazy.sh 2>/dev/null
+export VIRTUALENVWRAPPER_PYTHON=`which python3`
+source /usr/local/bin/virtualenvwrapper_lazy.sh 2>/dev/null
 
 # locale
 export LANG=en_US.UTF-8
