@@ -110,9 +110,8 @@ function! s:fzf_statusline()
     setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
-let $FZF_DEFAULT_OPTS .= ' --inline-info'
-if executable('ag')
-    let $FZF_DEFAULT_COMMAND='ag -g ""'
+if executable('rg')
+    let $FZF_DEFAULT_COMMAND='rg --files'
 endif
 autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
@@ -152,7 +151,7 @@ nmap <Leader>z :setlocal foldenable!<CR>
 nnoremap Y y$
 
 " Plugins
-nmap <Leader>a :Ag<CR>
+nmap <Leader>r :Rg<CR>
 nmap <Leader>b :Buffers<CR>
 nmap <Leader>c :CocAction<CR>
 nmap <leader>q <Plug>(coc-format)
