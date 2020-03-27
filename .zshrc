@@ -28,16 +28,8 @@ path+="/bin"
 export PATH
 
 # Aliases
-alias install="sudo apt install"
-alias remove="sudo apt remove"
-alias update="sudo apt update"
-alias upgrade="sudo apt upgrade"
-alias g="git"
-alias hpu="hg pull && hg update"
-alias hcm="hg commit -m Merge"
 alias dc="docker-compose"
 alias k="kubectl"
-alias vol="pactl set-sink-volume @DEFAULT_SINK@"
 alias clip="pbcopy"
 alias y="yarn"
 alias sudo="sudo " # expand aliases when using sudo
@@ -78,22 +70,6 @@ export XDG_CONFIG_HOME=~/.config
 
 # Scripts for gcloud and shell
 # ============================
-dev() {
-    kubectl config use-context gke_nomanini-dashboard_us-central1-a_dev
-    tmux set-env -gu prod_warning
-}
-
-prod() {
-    kubectl config use-context gke_nomanini-dashboard_us-central1-a_prod
-    tmux set-env -g prod_warning '#[fg=colour232,bg=colour202] PROD '
-}
-
-ci() {
-    kubectl config use-context gke_nomanini-dashboard_us-central1-a_ci
-    tmux set-env -g prod_warning '#[fg=colour232,bg=colour191] CI '
-}
-
-
 kpatch() {
     kubectl patch deployment $1 -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 }
