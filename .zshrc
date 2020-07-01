@@ -28,13 +28,13 @@ path+="/bin"
 export PATH
 
 # Aliases
+alias ls='LC_COLLATE=C ls -h --group-directories-first --color=auto'
 alias dc="docker-compose"
 alias k="kubectl"
-alias clip="pbcopy"
+alias clip="xclip -sel c"
 alias y="yarn"
 alias sudo="sudo " # expand aliases when using sudo
 alias -g vim="nvim"
-alias ctags="`brew --prefix`/bin/ctags"
 
 # Completion
 zstyle ':completion:*' users andrew root
@@ -64,7 +64,7 @@ if [ -d $GCLOUD_SDK ]; then
 fi
 
 # Let vim be the MANPAGER
-export MANPAGER="col -b | nvim -c 'set ft=man ts=8 nolist nomod noma nonu' -"
+export MANPAGER="nvim -c 'set ft=man ts=8 nolist nomod noma nonu' -"
 
 export XDG_CONFIG_HOME=~/.config
 
@@ -75,6 +75,17 @@ kpatch() {
 }
 
 # edit command in vim
+export VISUAL=nvim
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^x^x' edit-command-line
+
+# nvm
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" # This loads nvm
+
+# dotnet
+# export DOTNET_ROOT=/opt/dotnet
+# path+="$DOTNET_ROOT"
+path+="/opt/mssql-tools/bin"
+export PATH

@@ -14,7 +14,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'janko-m/vim-test'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'chrisbra/Colorizer'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -27,7 +27,7 @@ Plug 'tpope/vim-vinegar'
 
 Plug 'sjl/gundo.vim'
 
-" completion
+" lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " language support
@@ -37,10 +37,9 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'jparise/vim-graphql'
 Plug 'kylef/apiblueprint.vim'
-" Plug 'mxw/vim-jsx'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'othree/html5-syntax.vim'
 Plug 'fatih/vim-go'
-" Plug 'pangloss/vim-javascript'
 
 call plug#end()
 
@@ -244,7 +243,7 @@ let $PAGER = ''
 
 augroup custom
     autocmd BufNewFile,BufFilePre,BufRead *.md,*.markdown setlocal filetype=markdown wrap fdm=indent spell
-    autocmd BufNewFile,BufFilePre,BufRead Dockerfile* setlocal filetype=dockerfile sw=2 ts=2
+    autocmd BufNewFile,BufFilePre,BufRead Dockerfile*,*.dockerfile setlocal filetype=dockerfile sw=2 ts=2
     autocmd BufNewFile,BufFilePre,BufRead *.tex setlocal wrap spell
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal fdm=indent sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2 fdm=indent

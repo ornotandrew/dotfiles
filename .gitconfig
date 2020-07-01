@@ -15,7 +15,7 @@
     co = checkout
     s = status
 [merge]
-	tool = vimdiff
+	tool = nvim -d
 [mergetool]
 	path = nvim
 [url "git@github.com:"]
@@ -24,3 +24,7 @@
 	insteadOf = https://bitbucket.org/
 [url "git@gitlab.com:"]
 	insteadOf = https://gitlab.com/
+[diff]
+	tool = nvim -d
+[mergetool "nvim"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
