@@ -26,6 +26,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 
 Plug 'sjl/gundo.vim'
+Plug 'junegunn/goyo.vim'
 
 " lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -40,6 +41,7 @@ Plug 'kylef/apiblueprint.vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'othree/html5-syntax.vim'
 Plug 'fatih/vim-go'
+Plug 'ap/vim-css-color'
 
 call plug#end()
 
@@ -152,12 +154,14 @@ nnoremap Y y$
 " Plugins
 nmap <Leader>r :Rg<CR>
 nmap <Leader>b :Buffers<CR>
-nmap <Leader>c :CocAction<CR>
+nmap <silent> <Leader>? <Plug>(coc-references)
+nmap <Leader>a :CocAction<CR>
 nmap <leader>q <Plug>(coc-format)
 nmap <Leader>f :Files<CR>
 nmap <Leader>h :History<CR>
 nnoremap <silent> <Leader>t :TestNearest<CR>
 nnoremap <silent> <Leader>T :TestFile<CR>
+nmap <Leader>m :CocList marketplace<CR>
 
 " Visual movement
 imap <Down> <Esc>gja
@@ -248,7 +252,7 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead *.py setlocal fdm=indent sw=4 ts=4
     autocmd BufNewFile,BufFilePre,BufRead *.yml,*.yaml setlocal sw=2 ts=2 fdm=indent
     autocmd BufNewFile,BufFilePre,BufRead *.cpp,*.h setlocal fdm=syntax
-    autocmd BufNewFile,BufFilePre,BufRead *.json,*.js,*.ts,*.html setlocal sw=2 ts=2 conceallevel=0 fdm=syntax
+    autocmd BufNewFile,BufFilePre,BufRead *.json,*.js,*.ts,*.html,*.scss setlocal sw=2 ts=2 conceallevel=0 fdm=syntax
     autocmd BufNewFile,BufFilePre,BufRead *.ts setlocal filetype=typescript
     autocmd FileType json syntax match Comment +\/\/.\+$+ " enables jsonc syntax
     autocmd BufNewFile,BufFilePre,BufRead .babelrc setlocal ft=json

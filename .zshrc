@@ -28,13 +28,15 @@ path+="/bin"
 export PATH
 
 # Aliases
-alias ls='LC_COLLATE=C ls -h --group-directories-first --color=auto'
+alias ls='LC_COLLATE=C gls -h --group-directories-first --color=auto'
 alias dc="docker-compose"
 alias k="kubectl"
+alias tf="terraform"
 alias clip="xclip -sel c"
 alias y="yarn"
 alias sudo="sudo " # expand aliases when using sudo
 alias -g vim="nvim"
+alias sba="source env/bin/activate && [ -f env/vars.sh ] && source env/vars.sh"
 
 # Completion
 zstyle ':completion:*' users andrew root
@@ -47,11 +49,10 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 base16_default-dark
 
-# virtualenvwrapper
-export WORKON_HOME=~/venv
-export PROJECT_HOME=~/code
-export VIRTUALENVWRAPPER_PYTHON=`which python3`
-source /usr/local/bin/virtualenvwrapper_lazy.sh 2>/dev/null
+# pyenv
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
 
 # locale
 export LANG=en_US.UTF-8
@@ -74,6 +75,10 @@ kpatch() {
     kubectl patch deployment $1 -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 }
 
+pjq() {
+    sed 's/'\''/"/g' | sed 's/None/null/g' | jq
+}
+
 # edit command in vim
 export VISUAL=nvim
 autoload -U edit-command-line
@@ -89,3 +94,6 @@ export NVM_DIR="$HOME/.config/nvm"
 # path+="$DOTNET_ROOT"
 path+="/opt/mssql-tools/bin"
 export PATH
+
+
+export HISTORY_IGNORE="*--password*"

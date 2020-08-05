@@ -15,5 +15,17 @@
     "jsx"
   ],
   "eslint.autoFixOnSave": true,
-  "python.jediEnabled": false
+  "python.jediEnabled": false,
+	"languageserver": {
+		"terraform": {
+			"command": "terraform-ls",
+			"args": ["serve"],
+			"filetypes": [
+				"terraform",
+				"tf"
+			],
+			"initializationOptions": {},
+			"settings": {}
+		}
+	}
 }

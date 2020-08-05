@@ -4,7 +4,7 @@
 [includeIf "gitdir:~/code/"]
   path = ~/.gitconfig-work
 [push]
-	default = simple
+	default = current
 [core]
     editor = nvim
 [alias]
@@ -28,3 +28,5 @@
 	tool = nvim -d
 [mergetool "nvim"]
 	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[pull]
+	rebase = false
