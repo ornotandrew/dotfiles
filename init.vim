@@ -206,6 +206,9 @@ tmap <Esc> <C-\><C-n>
 let g:python_host_prog='/Users/andrew/venv/neovim2/bin/python'
 let g:python3_host_prog='/Users/andrew/venv/neovim/bin/python'
 
+let g:netrw_liststyle=3
+
+set re=0
 set backupcopy=yes
 set clipboard=unnamedplus
 set cursorline
@@ -226,7 +229,7 @@ set showbreak=↪
 set smartcase
 set spelllang=en_gb
 set tabstop=4
-set undofile
+" set undofile
 set undolevels=1000
 set undoreload=10000
 

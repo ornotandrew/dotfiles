@@ -32,7 +32,7 @@ alias ls='LC_COLLATE=C gls -h --group-directories-first --color=auto'
 alias dc="docker-compose"
 alias k="kubectl"
 alias tf="terraform"
-alias clip="xclip -sel c"
+alias clip="pbcopy"
 alias y="yarn"
 alias sudo="sudo " # expand aliases when using sudo
 alias -g vim="nvim"
@@ -43,6 +43,7 @@ zstyle ':completion:*' users andrew root
 
 # FZF bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_TMUX_OPTS='-d 40%'
 
 # Base16 Shell
 BASE16_SHELL=$HOME/.config/base16-shell/

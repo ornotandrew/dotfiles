@@ -16,7 +16,8 @@
   ],
   "eslint.autoFixOnSave": true,
   "python.jediEnabled": false,
-	"languageserver": {
+  "python.linting.pylintEnabled": true,
+  "languageserver": {
 		"terraform": {
 			"command": "terraform-ls",
 			"args": ["serve"],

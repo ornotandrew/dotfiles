@@ -17,6 +17,7 @@
     ~/.hgrc: .hgrc
     ~/.oh-my-zsh/themes/wraithy.zsh-theme: wraithy.zsh-theme
     ~/.pylintrc: .pylintrc
+    ~/.config/pycodestyle: pycodestyle
     ~/.tmux.conf: .tmux.conf
     ~/.unittest.cfg: .unittest.cfg
     ~/.zshrc: .zshrc
