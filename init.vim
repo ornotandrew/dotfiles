@@ -6,15 +6,17 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'chriskempson/base16-vim'
+
 Plug 'Arkham/vim-quickfixdo'
 Plug 'bronson/vim-visual-star-search'
-Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
-Plug 'jiangmiao/auto-pairs'
+Plug 'chrisbra/Colorizer'
+Plug 'terryma/vim-expand-region' " TODO: is this useful?
+" Plug 'justinmk/vim-sneak'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'janko-m/vim-test'
-Plug 'chrisbra/Colorizer'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -39,9 +41,9 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'jparise/vim-graphql'
 Plug 'kylef/apiblueprint.vim'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'othree/html5-syntax.vim'
-Plug 'fatih/vim-go'
+Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
+Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
@@ -55,14 +57,40 @@ augroup END
 let base16colorspace=256
 colorscheme base16-default-dark " the theme clears all highlights, so set this here so we can define custom ones
 " having a bright red background is really distracting
-hi SpellBad ctermbg=NONE
-hi SpellCap ctermbg=NONE
-hi Error ctermbg=NONE ctermfg=NONE
-
+highlight SpellBad ctermbg=NONE
+highlight SpellCap ctermbg=NONE
+highlight Error ctermbg=NONE ctermfg=NONE
 " use the contextual background instead of always being black
-hi Normal ctermbg=NONE
+highlight Normal ctermbg=NONE
+" make search highlights blend in, while still being visible at a glance
+highlight Search ctermfg=1 ctermbg=NONE cterm=bold,underline
+highlight! link IncSearch Search
 
 " Coc.nvim
+let g:coc_global_extensions = [
+    \ 'coc-tsserver',
+    \ 'coc-tabnine',
+    \ 'coc-pairs',
+    \ 'coc-marketplace',
+    \ 'coc-jedi',
+    \ 'coc-eslint',
+    \ 'coc-emoji',
+    \ 'coc-cssmodules',
+    \ 'coc-angular',
+    \ 'coc-yaml',
+    \ 'coc-pairs',
+    \ 'coc-python',
+    \ 'coc-pyls',
+    \ 'coc-markdownlint',
+    \ 'coc-json',
+    \ 'coc-css'
+    \ ]
+
+
+" :h coc#on_enter()
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 " map <tab> to trigger completion and navigate to the next item
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -75,15 +103,11 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" use K to show documentation in preview window
-nnoremap <silent> K :call CocAction('doHover')<CR>
-nnoremap <leader>c <Plug>(coc-codeaction)
-
 " gutter colors
-hi CocErrorSign ctermfg=1 ctermbg=18 guifg=#ab4642 guibg=#181818
-hi CocWarningSign ctermfg=3 ctermbg=18 guifg=#f7ca88 guibg=#181818
-hi CocInfoSign ctermfg=4 ctermbg=18 gui=bold guifg=#7cafc2 guibg=#181818
-hi CocHintSign ctermfg=2 ctermbg=18 gui=bold guifg=#a0b475 guibg=#181818
+highlight CocErrorSign ctermfg=1 ctermbg=18 guifg=#ab4642 guibg=#181818
+highlight CocWarningSign ctermfg=3 ctermbg=18 guifg=#f7ca88 guibg=#181818
+highlight CocInfoSign ctermfg=4 ctermbg=18 gui=bold guifg=#7cafc2 guibg=#181818
+highlight CocHintSign ctermfg=2 ctermbg=18 gui=bold guifg=#a0b475 guibg=#181818
 
 nnoremap <silent> <C-]> :call <SID>jump_to_definition()<CR>
 
@@ -116,25 +140,16 @@ if executable('rg')
 endif
 autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
 
+let g:fzf_layout = { 'down': '40%' }
+
 " vim-graphql
 let g:graphql_javascript_tags = ['gql', 'gqlMoney', 'gqlPushNotifications', 'gqlGlobal']
 
-" vim-test
-let test#strategy = "neovim"
-" let test#javascript#jest#options = '--detectOpenHandles --forceExit'
-let test#python#runner = 'pytest'
-let test#python#pytest#options = '-vv'
+" vim-terraform
+let g:terraform_align=1
+let g:terraform_fold_sections=1
+let g:terraform_fmt_on_save=1
 
-" vim-go
-" use coc-go for this stuff instead
-let g:go_code_completion_enabled = 0 
-let g:go_doc_keywordprg_enabled = 0
-let g:go_def_mapping_enabled = 0
-let g:go_gopls_enabled = 0
-let g:go_template_autocreate = 0
-let g:go_echo_go_info = 0
-let g:go_highlight_diagnostic_errors = 0
-let g:go_highlight_diagnostic_warnings = 0
 
 " }}}
 " Key mappings {{{
@@ -154,14 +169,16 @@ nnoremap Y y$
 " Plugins
 nmap <Leader>r :Rg<CR>
 nmap <Leader>b :Buffers<CR>
-nmap <silent> <Leader>? <Plug>(coc-references)
-nmap <Leader>a :CocAction<CR>
-nmap <leader>q <Plug>(coc-format)
 nmap <Leader>f :Files<CR>
 nmap <Leader>h :History<CR>
-nnoremap <silent> <Leader>t :TestNearest<CR>
-nnoremap <silent> <Leader>T :TestFile<CR>
+
+nmap <Leader>? <Plug>(coc-references)
+nmap <Leader>n <Plug>(coc-rename)
+nmap <Leader>a :CocAction<CR>
+nmap <leader>q <Plug>(coc-format)
 nmap <Leader>m :CocList marketplace<CR>
+nnoremap <silent> K :call CocAction('doHover')<CR>
+nnoremap <leader>c <Plug>(coc-codeaction)
 
 " Visual movement
 imap <Down> <Esc>gja
@@ -182,22 +199,8 @@ augroup custom
     autocmd filetype netrw nnoremap <buffer> <C-l> <C-w>l
 augroup END
 
-
-" Convert camelCase to camel_case
-let @u = 's#\(\<\u\l\+\|\l\+\)\(\u\)#\l\1_\l\2#g'
-let @c = 's#_\(\l\)#\u\1#g'
-
-" Move params onto newlines
-let @p = 'vi):s/,\ /,\r/gvi)=f(%i:nohl'
-
-" Store an iso8601 date for use in examples
-let @d = '2017-01-01T12:00:00+00:00'
-
 " Read in 12 random hex chars
 noremap <silent> <Leader>u "=system('uuidgen \| tr -d " \\t\n-" \| tr "[:upper:]" "[:lower:]"')<CR>p
-
-" Split a JSON object onto individual lines
-let @j ='vi{:s/,\zs\ /\r/gf}hrl%lrvi{=:noh'
 
 tmap <Esc> <C-\><C-n>
 
@@ -232,6 +235,7 @@ set tabstop=4
 " set undofile
 set undolevels=1000
 set undoreload=10000
+set updatetime=2000 " the default is 4 seconds - I prefer half that
 
 set wildignore+=*.o
 set wildignore+=*.pyc
@@ -260,10 +264,15 @@ augroup custom
     autocmd FileType json syntax match Comment +\/\/.\+$+ " enables jsonc syntax
     autocmd BufNewFile,BufFilePre,BufRead .babelrc setlocal ft=json
     autocmd FileType git setlocal fdm=syntax
-    autocmd FileType gitcommit setlocal spell tw=75
+    autocmd FileType gitcommit setlocal spell
     autocmd FileType go setlocal foldmethod=syntax
     autocmd FileType apiblueprint setlocal spell
-    autocmd FileType graphql,typescript setlocal sw=2 ts=2
+    autocmd FileType graphql,typescript,tf setlocal sw=2 ts=2
+    " allow h and l to open/close directories so that I don't have to leave the home row
+    autocmd FileType netrw nmap <buffer> h <Plug>NetrwLocalBrowseCheck
+    autocmd FileType netrw nmap <buffer> l <Plug>NetrwLocalBrowseCheck
+    autocmd FileType netrw nmap <buffer> <left> <Plug>NetrwLocalBrowseCheck
+    autocmd FileType netrw nmap <buffer> <right> <Plug>NetrwLocalBrowseCheck
 
     autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
 augroup END

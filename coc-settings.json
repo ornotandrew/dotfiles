@@ -5,6 +5,9 @@
   "diagnostic.warningSign": "⚠",
   "diagnostic.infoSign": "ℹ",
   "diagnostic.hintSign": "?",
+  "coc.preferences.useQuickfixForLocations": true,
+  "coc.preferences.extensionUpdateCheck": "weekly",
+  "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "python"
   ],
@@ -14,6 +17,7 @@
     "javascript",
     "jsx"
   ],
+  "javascript.suggestionActions.enabled": false,
   "eslint.autoFixOnSave": true,
   "python.jediEnabled": false,
   "python.linting.pylintEnabled": true,

@@ -80,6 +80,10 @@ pjq() {
     sed 's/'\''/"/g' | sed 's/None/null/g' | jq
 }
 
+urldecode() {
+  echo -e "$(sed 's/+/ /g;s/%\(..\)/\\x\1/g;')"
+}
+
 # edit command in vim
 export VISUAL=nvim
 autoload -U edit-command-line
@@ -89,6 +93,7 @@ bindkey '^x^x' edit-command-line
 # nvm
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" # This loads nvm
+export NODE_PATH="$(npm config get prefix)/lib/node_modules"
 
 # dotnet
 # export DOTNET_ROOT=/opt/dotnet
@@ -96,5 +101,10 @@ export NVM_DIR="$HOME/.config/nvm"
 path+="/opt/mssql-tools/bin"
 export PATH
 
+# aws cli
+autoload bashcompinit && bashcompinit
+complete -C '/usr/local/bin/aws_completer' aws
 
+# Blacklist certain things from getting into the history file
+setopt histignorespace
 export HISTORY_IGNORE="*--password*"
