@@ -9,3 +9,9 @@
 *.sug
 tags
 karabiner/automatic_backups/
+nvim/plugged
+nvim/swap
+nvim/undo
+nvim/spell
+nvim/.DS_Store
+nvim/.netrwhist

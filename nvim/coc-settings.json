@@ -21,6 +21,9 @@
   "eslint.autoFixOnSave": true,
   "python.jediEnabled": false,
   "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": ["--load-plugins pylint_django"],
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length", "120"],
   "languageserver": {
 		"terraform": {
 			"command": "terraform-ls",

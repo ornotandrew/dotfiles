@@ -10,8 +10,7 @@
 
 - link:
     ~/.agignore: .agignore
-    ~/.config/nvim/init.vim: init.vim
-    ~/.config/nvim/coc-settings.json: coc-settings.json
+    ~/.config/nvim: nvim
     ~/.gitconfig: .gitconfig
     ~/.gitconfig-work: .gitconfig-work
     ~/.hgrc: .hgrc
