@@ -1,16 +1,12 @@
 # oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="wraithy"
-plugins=(docker docker-compose mercurial fancy-ctrl-z zsh-syntax-highlighting)
-source $ZSH/oh-my-zsh.sh
 
-# Lazy load bigger plugins
-function kubectl() {
-    if ! type __start_kubectl >/dev/null 2>&1; then
-        source <(command kubectl completion zsh)
-    fi
-    command kubectl "$@"
-}
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim', 'nvim')
+export NVM_LAZY_LOAD="true"
+plugins=(zsh-nvm fancy-ctrl-z zsh-syntax-highlighting)
+
+source $ZSH/oh-my-zsh.sh
 
 # Path
 path+="$HOME/.local/bin"
@@ -40,6 +36,7 @@ alias sba="source env/bin/activate && [ -f env/vars.sh ] && source env/vars.sh"
 
 # Completion
 zstyle ':completion:*' users andrew root
+autoload bashcompinit && bashcompinit
 
 # FZF bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -72,6 +69,13 @@ export XDG_CONFIG_HOME=~/.config
 
 # Scripts for gcloud and shell
 # ============================
+function kubectl() {
+    if ! type __start_kubectl >/dev/null 2>&1; then
+        source <(command kubectl completion zsh)
+    fi
+    command kubectl "$@"
+}
+
 kpatch() {
     kubectl patch deployment $1 -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 }
@@ -92,18 +96,12 @@ bindkey '^x^x' edit-command-line
 
 # nvm
 export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" # This loads nvm
-export NODE_PATH="$(npm config get prefix)/lib/node_modules"
 
 # dotnet
 # export DOTNET_ROOT=/opt/dotnet
 # path+="$DOTNET_ROOT"
 path+="/opt/mssql-tools/bin"
 export PATH
-
-# aws cli
-autoload bashcompinit && bashcompinit
-complete -C '/usr/local/bin/aws_completer' aws
 
 # Blacklist certain things from getting into the history file
 setopt histignorespace

@@ -28,7 +28,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'sjl/gundo.vim'
 Plug 'junegunn/goyo.vim'
@@ -88,7 +88,8 @@ let g:coc_global_extensions = [
             \ 'coc-python',
             \ 'coc-markdownlint',
             \ 'coc-json',
-            \ 'coc-css'
+            \ 'coc-css',
+            \ 'coc-html'
             \ ]
 
 
