@@ -96,6 +96,8 @@ bindkey '^x^x' edit-command-line
 
 # nvm
 export NVM_DIR="$HOME/.config/nvm"
+# TODO: make this happen when nvm is lazy loaded
+export NODE_PATH="/Users/andrew/.config/nvm/versions/node/v14.13.1/lib/node_modules"
 
 # dotnet
 # export DOTNET_ROOT=/opt/dotnet

@@ -1,11 +1,11 @@
+set termguicolors
+
 set clipboard=unnamedplus
 
 set cursorline
 set noshowmode " use lightline instead
 set listchars=eol:¬,tab:\¦\ ,trail:~,extends:>,precedes:<
 set mouse=a
-
-set foldmethod=indent
 
 set backupcopy=yes
 set expandtab
@@ -27,6 +27,9 @@ set showbreak=↪
 set ignorecase
 set smartcase
 set spelllang=en_gb
+set scrolloff=8
+
+set foldmethod=syntax
 
 " set undofile
 set undolevels=1000

@@ -1,1 +1,2 @@
-setlocal sw=2 ts=2 fdm=indent
+setlocal sw=2 ts=2
+setlocal fdm=indent

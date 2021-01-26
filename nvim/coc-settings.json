@@ -15,10 +15,13 @@
     "javascript",
     "typescript",
     "javascript",
-    "jsx"
+    "jsx",
+    "typescriptreact"
   ],
   "javascript.suggestionActions.enabled": false,
   "eslint.autoFixOnSave": true,
+  "tsserver.enableJavascript": true,
+  "tsserver.npm": "/Users/andrew/.config/nvm/versions/node/v14.13.1/bin/npm",
   "python.jediEnabled": false,
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": ["--load-plugins pylint_django"],

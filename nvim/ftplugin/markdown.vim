@@ -1,1 +1,2 @@
-setlocal wrap fdm=indent spell
+setlocal wrap
+setlocal spell

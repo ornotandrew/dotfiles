@@ -13,9 +13,6 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'itchyny/lightline.vim'
 Plug 'chrisbra/Colorizer'
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -24,17 +21,24 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
 " buffer/file management
-Plug 'tpope/vim-vinegar'
 Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons' " for nerdtree
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'kyazdani42/nvim-web-devicons' " for telescope
 
 Plug 'sjl/gundo.vim'
 Plug 'junegunn/goyo.vim'
 
 " lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
 
 " language support
 Plug 'HerringtonDarkholme/yats.vim'
@@ -47,6 +51,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
 Plug 'hashivim/vim-terraform'
+" Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 call plug#end()
 
@@ -70,7 +75,7 @@ highlight Error ctermbg=NONE ctermfg=NONE
 " use the contextual background instead of always being black
 highlight Normal ctermbg=NONE
 " make search highlights blend in, while still being visible at a glance
-highlight Search ctermfg=1 ctermbg=NONE cterm=bold,underline
+highlight Search ctermfg=NONE ctermbg=NONE cterm=bold,underline
 highlight! link IncSearch Search
 " }}}
 " neoclide/coc.nvim {{{
@@ -143,19 +148,6 @@ let g:lightline = {
             \ 'subseparator': { 'left': '', 'right': '' },
             \ }
 " }}}
-" junegunn/fzf {{{
-if executable('rg')
-    let $FZF_DEFAULT_COMMAND='rg --files'
-endif
-autocmd custom FileType fzf tnoremap <nowait><buffer> <esc> <c-g>
-
-let g:fzf_layout = { 'down': '40%' }
-
-nmap <Leader>r :Rg<CR>
-nmap <Leader>b :Buffers<CR>
-nmap <Leader>f :Files<CR>
-nmap <Leader>h :History<CR>
-" }}}
 " hashivim/vim-terraform {{{
 let g:terraform_align=1
 let g:terraform_fold_sections=1
@@ -173,11 +165,59 @@ augroup custom
     autocmd User NERDTreeInit call s:attempt_select_last_file()
 augroup END
 
+let g:NERDTreeShowHidden=1
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeMapUpdir="-"
 let g:NERDTreeMapActivateNode="l"
 let g:NERDTreeMapCloseDir="h"
 let g:NERDTreeIgnore=["*.pyc", "__pycache__"]
+let g:NERDTreeCustomOpenArgs={'file': {'reuse': '', 'where': 'p'}, 'dir': {}}
+
+" emulate vim-vinegar
+nnoremap - :silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
+let NERDTreeCreatePrefix='silent keepalt keepjumps'
+" }}}
+" nvim-treesitter/nvim-treesitter {{{
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+    disable = {},
+    custom_captures = {
+      ["keyword.operator"] = "Keyword",
+    },
+  },
+}
+EOF
+" }}}
+" kyazdani42/nvim-web-devicons {{{
+lua << EOF
+require'nvim-web-devicons'.setup {
+  default = true;
+}
+EOF
+" }}}
+" nvim-telescope/telescope.nvim {{{
+lua << EOF
+require'telescope'.setup {
+  defaults = {
+    color_devicons = true,
+    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+
+  }
+}
+EOF
+
+nnoremap <leader>f <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>r <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>h <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
+nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_commits()<cr>
+nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_status()<cr>
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0

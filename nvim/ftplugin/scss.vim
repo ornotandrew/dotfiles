@@ -1,1 +1,3 @@
-setlocal sw=2 ts=2 conceallevel=0 fdm=syntax
+setlocal sw=2 ts=2
+setlocal conceallevel=0
+setlocal fdm=syntax
