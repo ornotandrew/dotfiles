@@ -4,7 +4,7 @@ ZSH_THEME="wraithy"
 
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim', 'nvim')
 export NVM_LAZY_LOAD="true"
-plugins=(zsh-nvm fancy-ctrl-z zsh-syntax-highlighting)
+plugins=(zsh-nvm fancy-ctrl-z zsh-syntax-highlighting gitfast)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -34,6 +34,9 @@ alias sudo="sudo " # expand aliases when using sudo
 alias -g vim="nvim"
 alias sba="source env/bin/activate && [ -f env/vars.sh ] && source env/vars.sh"
 
+# Hashes/working dir shortcuts
+hash -d scripts=~/code/yield-scripts
+
 # Completion
 zstyle ':completion:*' users andrew root
 autoload bashcompinit && bashcompinit
@@ -62,8 +65,9 @@ if [ -d $GCLOUD_SDK ]; then
     source $GCLOUD_SDK/completion.zsh.inc; # enables shell completion
 fi
 
-# Let vim be the MANPAGER
+# Let vim be the MANPAGER and EDITOR
 export MANPAGER="nvim -c 'set ft=man ts=8 nolist nomod noma nonu' -"
+export EDITOR="nvim"
 
 export XDG_CONFIG_HOME=~/.config
 
@@ -88,6 +92,10 @@ urldecode() {
   echo -e "$(sed 's/+/ /g;s/%\(..\)/\\x\1/g;')"
 }
 
+gch() {
+  git checkout "$(git branch --all | sed 's/remotes\/origin\///' | sort -u | fzf | tr -d '[:space:]')"
+}
+
 # edit command in vim
 export VISUAL=nvim
 autoload -U edit-command-line
@@ -98,12 +106,20 @@ bindkey '^x^x' edit-command-line
 export NVM_DIR="$HOME/.config/nvm"
 # TODO: make this happen when nvm is lazy loaded
 export NODE_PATH="/Users/andrew/.config/nvm/versions/node/v14.13.1/lib/node_modules"
+path+="/Users/andrew/.config/nvm/versions/node/v14.13.1/bin/"
+export PATH
+
 
 # dotnet
 # export DOTNET_ROOT=/opt/dotnet
 # path+="$DOTNET_ROOT"
 path+="/opt/mssql-tools/bin"
 export PATH
+
+# OpenBlas
+export LDFLAGS="-L/usr/local/opt/openblas/lib"
+export CPPFLAGS="-I/usr/local/opt/openblas/include"
+export PKG_CONFIG_PATH="/usr/local/opt/openblas/lib/pkgconfig"
 
 # Blacklist certain things from getting into the history file
 setopt histignorespace

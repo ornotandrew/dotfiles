@@ -31,7 +31,7 @@ set scrolloff=8
 
 set foldmethod=syntax
 
-" set undofile
+set undofile
 set undolevels=1000
 set undoreload=10000
 set updatetime=2000 " the default is 4 seconds - I prefer half that

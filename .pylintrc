@@ -5,7 +5,10 @@
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
-init-hook="import sys,os; libs=['google_appengine'+p for p in ['','/lib','lib/yaml/lib/yaml','lib/webapp2-2.5.1']]+['nomanini-backend/src/api/lib']; sys.path+=[os.path.expanduser('~')+'/code/'+l for l in libs];"
+init-hook=
+    try: import pylint_venv
+    except ImportError: pass
+    else: pylint_venv.inithook()
 
 # Profiled execution.
 profile=no

@@ -9,6 +9,8 @@
     editor = nvim
 [alias]
 	lg = !git --no-pager log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	w = worktree
+    go = "!f() { git worktree add -b $1 $1 develop; }; f"
     a = add
     b = branch
     c = commit
