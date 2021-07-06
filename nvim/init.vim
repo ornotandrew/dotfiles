@@ -12,6 +12,7 @@ Plug 'Arkham/vim-quickfixdo'
 Plug 'bronson/vim-visual-star-search'
 Plug 'itchyny/lightline.vim'
 Plug 'chrisbra/Colorizer'
+Plug 'rickhowe/diffchar.vim'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'

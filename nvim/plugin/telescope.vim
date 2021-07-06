@@ -23,7 +23,8 @@ EOF
 nnoremap <leader>f <cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer=false, width=120 }))<cr>
 nnoremap <leader>F <cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ shorten_path=true, previewer=false, width=120 }))<cr>
 nnoremap <leader>d <cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer=false, width=120, cwd='~/.config/nvim/' }))<cr>
-nnoremap <leader>r <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>r <cmd>lua require('telescope.builtin').grep_string({ search = '' })<cr>
+nnoremap <leader>R <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>h <cmd>lua require('telescope.builtin').help_tags(require('telescope.themes').get_dropdown({ width=120 }))<cr>
 nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>

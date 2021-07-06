@@ -4,24 +4,9 @@ ZSH_THEME="wraithy"
 
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim', 'nvim')
 export NVM_LAZY_LOAD="true"
-plugins=(zsh-nvm fancy-ctrl-z zsh-syntax-highlighting gitfast)
+plugins=(zsh-nvm fancy-ctrl-z zsh-syntax-highlighting gitfast zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
-
-# Path
-path+="$HOME/.local/bin"
-path+="$HOME/tools/google-cloud-sdk/bin"
-path+="/snap/bin"
-path+="$HOME/.yarn/bin"
-path+="$HOME/.config/yarn/global/node_modules/.bin"
-path+="/usr/local/opt/mysql-client/bin"
-path+="/usr/local/sbin"
-path+="/usr/local/bin"
-path+="/usr/sbin"
-path+="/usr/bin"
-path+="/sbin"
-path+="/bin"
-export PATH
 
 # Aliases
 alias ls='LC_COLLATE=C gls -h --group-directories-first --color=auto'
@@ -29,10 +14,8 @@ alias dc="docker-compose"
 alias k="kubectl"
 alias tf="terraform"
 alias clip="pbcopy"
-alias y="yarn"
 alias sudo="sudo " # expand aliases when using sudo
 alias -g vim="nvim"
-alias sba="source env/bin/activate && [ -f env/vars.sh ] && source env/vars.sh"
 
 # Hashes/working dir shortcuts
 hash -d scripts=~/code/yield-scripts
@@ -59,27 +42,15 @@ fi
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Google cloud sdk
-GCLOUD_SDK="$HOME/tools/google-cloud-sdk"
-if [ -d $GCLOUD_SDK ]; then
-    source $GCLOUD_SDK/completion.zsh.inc; # enables shell completion
-fi
-
-# Let vim be the MANPAGER and EDITOR
+# Let vim be in charge of shell-things
 export MANPAGER="nvim -c 'set ft=man ts=8 nolist nomod noma nonu' -"
 export EDITOR="nvim"
+export VISUAL=nvim
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^x^x' edit-command-line
 
-export XDG_CONFIG_HOME=~/.config
-
-# Scripts for gcloud and shell
-# ============================
-function kubectl() {
-    if ! type __start_kubectl >/dev/null 2>&1; then
-        source <(command kubectl completion zsh)
-    fi
-    command kubectl "$@"
-}
-
+# Scripts
 kpatch() {
     kubectl patch deployment $1 -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 }
@@ -96,25 +67,17 @@ gch() {
   git checkout "$(git branch --all | sed 's/remotes\/origin\///' | sort -u | fzf | tr -d '[:space:]')"
 }
 
-# edit command in vim
-export VISUAL=nvim
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey '^x^x' edit-command-line
+sba() {
+    source env/bin/activate
+    [ -f env/vars.sh ] && source env/vars.sh
+}
 
 # nvm
 export NVM_DIR="$HOME/.config/nvm"
 # TODO: make this happen when nvm is lazy loaded
 export NODE_PATH="/Users/andrew/.config/nvm/versions/node/v14.13.1/lib/node_modules"
 path+="/Users/andrew/.config/nvm/versions/node/v14.13.1/bin/"
-export PATH
 
-
-# dotnet
-# export DOTNET_ROOT=/opt/dotnet
-# path+="$DOTNET_ROOT"
-path+="/opt/mssql-tools/bin"
-export PATH
 
 # OpenBlas
 export LDFLAGS="-L/usr/local/opt/openblas/lib"
@@ -124,3 +87,6 @@ export PKG_CONFIG_PATH="/usr/local/opt/openblas/lib/pkgconfig"
 # Blacklist certain things from getting into the history file
 setopt histignorespace
 export HISTORY_IGNORE="*--password*"
+
+# Make sure any script-local changes to path are exported
+export PATH
