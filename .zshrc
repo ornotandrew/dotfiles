@@ -79,10 +79,16 @@ export NODE_PATH="/Users/andrew/.config/nvm/versions/node/v14.13.1/lib/node_modu
 path+="/Users/andrew/.config/nvm/versions/node/v14.13.1/bin/"
 
 
+## System libs
+
 # OpenBlas
-export LDFLAGS="-L/usr/local/opt/openblas/lib"
-export CPPFLAGS="-I/usr/local/opt/openblas/include"
+export LDFLAGS="$LDFLAGS -L/usr/local/opt/openblas/lib"
+export CPPFLAGS="$CPPFLAGS -I/usr/local/opt/openblas/include"
 export PKG_CONFIG_PATH="/usr/local/opt/openblas/lib/pkgconfig"
+
+# Zlib
+export LDFLAGS="$LDFLAGS -L/usr/local/opt/zlib/lib"
+export CPPFLAGS="$CPPFLAGS -I/usr/local/opt/zlib/include"
 
 # Blacklist certain things from getting into the history file
 setopt histignorespace

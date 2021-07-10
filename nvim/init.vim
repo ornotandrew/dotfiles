@@ -69,7 +69,7 @@ augroup END
 let mapleader = "\<space>" 
 let localleader="\\"
 
-colorscheme base16-default-dark " the theme clears all highlights, so set this here so we can define custom ones later on
+colorscheme base16-default-dark " the theme clears all highlights, we set this here so we can define custom ones later on
 
 
 " vim:foldmethod=marker:foldlevel=0
