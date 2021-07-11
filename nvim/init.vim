@@ -8,11 +8,10 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'chriskempson/base16-vim'
 
-Plug 'Arkham/vim-quickfixdo'
 Plug 'bronson/vim-visual-star-search'
 Plug 'itchyny/lightline.vim'
-Plug 'chrisbra/Colorizer'
 Plug 'rickhowe/diffchar.vim'
+Plug 'chrisbra/Colorizer'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -35,7 +34,6 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 Plug 'sjl/gundo.vim'
-Plug 'junegunn/goyo.vim'
 
 " lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
