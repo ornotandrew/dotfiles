@@ -32,6 +32,7 @@
   "python.linting.mypyCategorySeverity.error": "Information",
   "python.formatting.provider": "black",
   "python.formatting.blackArgs": ["--line-length", "120"],
+  "lua.enable": true,
   "languageserver": {
 		"terraform": {
 			"command": "terraform-ls",
