@@ -96,3 +96,5 @@ export HISTORY_IGNORE="*--password*"
 
 # Make sure any script-local changes to path are exported
 export PATH
+
+alias luamake=/Users/andrew/github/lua-language-server/3rd/luamake/luamake

@@ -35,8 +35,14 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
 Plug 'sjl/gundo.vim'
 
+Plug 'windwp/nvim-autopairs'
+
+" completion
+Plug 'hrsh7th/nvim-compe'
+Plug 'andersevenrud/compe-tmux'
+
 " lsp
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
 
 " treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -53,7 +59,6 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
 Plug 'hashivim/vim-terraform'
-" Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 call plug#end()
 

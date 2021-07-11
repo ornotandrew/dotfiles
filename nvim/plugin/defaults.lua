@@ -7,6 +7,7 @@ vim.opt.mouse = 'a'
 vim.opt.hidden = true
 vim.opt.inccommand = 'split' -- show the effects of a substitute command in a separate window
 vim.opt.spelllang = 'en_gb'
+vim.o.completeopt = "menuone,noselect" -- required by nvim-compe
 
 vim.g.python_host_prog = '/Users/andrew/venv/neovim2/bin/python'
 vim.g.python3_host_prog = '/Users/andrew/venv/neovim/bin/python'
@@ -36,7 +37,7 @@ vim.opt.backupcopy = 'yes'
 vim.opt.undofile = true
 vim.opt.undolevels = 1000
 vim.opt.undoreload = 10000
-vim.opt.updatetime = 2000 -- the default is 4 seconds - I prefer half that
+vim.opt.updatetime = 500 -- the default is 4 seconds
 
 -- Ensure these dirs exist before trying to use them
 util.ensure_directory_exists('~/.config/nvim/swap//')
