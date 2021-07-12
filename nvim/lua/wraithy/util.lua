@@ -1,7 +1,9 @@
 local M = {}
 
 function M.ensure_directory_exists(dir)
-  os.execute('mkdir -p ' .. dir)
+  local full_path = vim.fn.expand(dir)
+  os.execute('mkdir -p ' .. full_path)
+  return full_path
 end
 
 function M.set_spaces_per_tab(n)

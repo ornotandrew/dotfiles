@@ -1,11 +1,39 @@
-local sumneko_root_path = '/Users/andrew/github/lua-language-server/'
+local sumneko_root_path = '/Users/andrew/github/lua-language-server'
 local sumneko_binary = sumneko_root_path.."/bin/macOS/lua-language-server"
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
+local black = require('wraithy.efm.black')
+local isort = require('wraithy.efm.isort')
+local pylint = require('wraithy.efm.pylint')
+
 local servers = {
+  efm = {
+    init_options = {documentFormatting = true},
+    filetypes = {"python"},
+    settings = {
+      rootMarkers = {".git/"},
+      languages = {
+        -- lua = {luafmt},
+        -- python = {black, isort, flake8, mypy},
+        python = {black, isort},
+        -- typescript = {prettier, eslint},
+        -- javascript = {prettier, eslint},
+        -- typescriptreact = {prettier, eslint},
+        -- javascriptreact = {prettier, eslint},
+        -- yaml = {prettier},
+        -- json = {prettier},
+        -- html = {prettier},
+        -- scss = {prettier},
+        -- css = {prettier},
+        -- markdown = {prettier},
+        -- sh = {shellcheck},
+        -- tf = {terraform}
+      }
+    }
+  },
   pyright = {
     settings = {
       python = {
@@ -69,7 +97,16 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<leader>g', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('i', '<c-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
+
+  -- Format on save
+  vim.api.nvim_command('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
+
+  -- Show diagnostics on hover
+  vim.api.nvim_command('autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({ focusable = false })')
+  -- TODO: this kicks me out of insert mode - why?
+  -- vim.api.nvim_command('autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()')
 end
 
 local lspconfig = require('lspconfig')
@@ -90,10 +127,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 		signs = true,
 	}
 )
-
--- Instead, show diagnostics on hover
-vim.api.nvim_command('autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()')
-vim.api.nvim_command('autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()')
 
 -- Highlight colors
 local fg_colors = {

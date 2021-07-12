@@ -10,7 +10,8 @@ vim.opt.spelllang = 'en_gb'
 vim.o.completeopt = "menuone,noselect" -- required by nvim-compe
 
 vim.g.python_host_prog = '/Users/andrew/venv/neovim2/bin/python'
-vim.g.python3_host_prog = '/Users/andrew/venv/neovim/bin/python'
+vim.g.nvim_venv = '/Users/andrew/venv/neovim'
+vim.g.python3_host_prog = vim.g.nvim_venv..'/bin/python'
 -- }}}
 -- Editor look & feel {{{
 vim.opt.cursorline = true
@@ -40,9 +41,7 @@ vim.opt.undoreload = 10000
 vim.opt.updatetime = 500 -- the default is 4 seconds
 
 -- Ensure these dirs exist before trying to use them
-util.ensure_directory_exists('~/.config/nvim/swap//')
-util.ensure_directory_exists('~/.config/nvim/undo//')
-vim.opt.directory = '~/.config/nvim/swap//'
-vim.opt.undodir = '~/.config/nvim/undo//'
+vim.opt.directory = util.ensure_directory_exists('~/.config/nvim/swap//')
+vim.opt.undodir = util.ensure_directory_exists('~/.config/nvim/undo//')
 --- }}}
 -- vim: foldmethod=marker
