@@ -2,7 +2,6 @@
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="wraithy"
 
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim', 'nvim')
 export NVM_LAZY_LOAD="true"
 plugins=(zsh-nvm fancy-ctrl-z zsh-syntax-highlighting gitfast zsh-autosuggestions)
 
@@ -23,6 +22,8 @@ hash -d scripts=~/code/yield-scripts
 # Completion
 zstyle ':completion:*' users andrew root
 autoload bashcompinit && bashcompinit
+
+export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 # FZF bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -21,9 +21,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
 " buffer/file management
-Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons' " for nerdtree
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'kristijanhusak/defx-icons'
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -74,5 +73,6 @@ let localleader="\\"
 
 colorscheme base16-default-dark " the theme clears all highlights, we set this here so we can define custom ones later on
 
+lua require("wraithy.lsp")
 
 " vim:foldmethod=marker:foldlevel=0
