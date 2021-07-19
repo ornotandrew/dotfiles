@@ -58,6 +58,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
 Plug 'hashivim/vim-terraform'
+Plug 'nvim-treesitter/nvim-treesitter-angular'
 
 call plug#end()
 

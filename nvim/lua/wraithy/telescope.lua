@@ -1,4 +1,3 @@
-local actions = require('telescope.actions')
 local builtin = require('telescope.builtin')
 local themes = require('telescope.themes')
 
@@ -16,7 +15,7 @@ local function find_files(extra_options)
 end
 
 M.find_files = find_files()
-M.find_files_shorten_path = find_files({ shorten_path = true })
+M.find_files_shorten_path = find_files({ path_display = { 'shorten' } })
 M.find_config_files = find_files({ cwd='~/.config/nvim/' })
 M.grep_string_fuzzy = function () builtin.grep_string(themes.get_dropdown({ search = '' })) end
 M.grep_string_exact = builtin.live_grep

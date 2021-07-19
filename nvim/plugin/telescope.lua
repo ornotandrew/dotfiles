@@ -1,6 +1,4 @@
 local actions = require('telescope.actions')
-local builtin = require('telescope.builtin')
-local themes = require('telescope.themes')
 
 require('telescope').setup({
   defaults = {
@@ -8,7 +6,7 @@ require('telescope').setup({
     file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
     grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-    
+
     mappings = {
       n = {
         ["<C-q>"] = actions.send_to_qflist,
@@ -25,7 +23,7 @@ local function set_leader_map(key, fn_name)
   vim.api.nvim_set_keymap(
     'n',
     '<leader>'..key,
-    string.format('<cmd>lua require("wraithy/telescope")["%s"]()<CR>', fn_name),
+    string.format('<cmd>lua require("wraithy.telescope")["%s"]()<CR>', fn_name),
     {noremap = true}
   )
 end

@@ -1,10 +1,11 @@
 local util = require("wraithy.util")
 
 local servers = {
+  angularls = require("wraithy.lsp.angularls"),
   efm = require("wraithy.lsp.efm"),
   pyright = require("wraithy.lsp.pyright"),
-  sumneko_lua = require("wraithy.lsp.sumneko_lua"),
   rust_analyzer = {},
+  sumneko_lua = require("wraithy.lsp.sumneko_lua"),
   tsserver = require("wraithy.lsp.tsserver"),
 }
 
@@ -47,7 +48,7 @@ local on_attach = function(client, bufnr)
   -- Show diagnostics on hover
   vim.api.nvim_command('autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({ border="'..floating_window_border..'", focusable = false })')
   -- TODO: this kicks me out of insert mode - why?
-  -- vim.api.nvim_command('autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()')
+ -- vim.api.nvim_command('autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()')
 end
 
 -- Call setup. Language servers are initialized here in order to support global

@@ -1,4 +1,4 @@
-local util = require('wraithy/util')
+local util = require('wraithy.util')
 
 -- General {{{
 vim.opt.termguicolors = true
