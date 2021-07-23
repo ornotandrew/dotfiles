@@ -7,6 +7,7 @@ local servers = {
   rust_analyzer = {},
   sumneko_lua = require("wraithy.lsp.sumneko_lua"),
   tsserver = require("wraithy.lsp.tsserver"),
+  jsonls = require("wraithy.lsp.jsonls"),
 }
 
 local floating_window_border = 'rounded'

@@ -74,6 +74,8 @@ let localleader="\\"
 
 colorscheme base16-default-dark " the theme clears all highlights, we set this here so we can define custom ones later on
 
+
+let loaded_netrwPlugin = 1
 lua require("wraithy.lsp")
 
 " vim:foldmethod=marker:foldlevel=0

@@ -7,7 +7,7 @@ nmap <Leader>v :tabe $MYVIMRC<CR>
 nmap <Leader>w :setlocal wrap!<CR>
 nmap <Leader>z :setlocal foldenable!<CR>
 nmap <Leader>; :vsp<CR>
-nmap gx :!open <c-r><c-a>
+nmap <silent> gx :execute 'silent! !open ' . shellescape(expand('<cWORD>'), 1)<cr>
 nnoremap Y y$
 
 " Visual movement

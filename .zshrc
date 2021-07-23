@@ -15,6 +15,7 @@ alias tf="terraform"
 alias clip="pbcopy"
 alias sudo="sudo " # expand aliases when using sudo
 alias -g vim="nvim"
+alias notify='terminal-notifier -title "Terminal" -subtitle "A program has finished running." -message "Please check your terminal for the output"'
 
 # Hashes/working dir shortcuts
 hash -d scripts=~/code/yield-scripts

@@ -73,6 +73,26 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Remap page-up to Cmd + Shift + Space (for Slack huddle mute toggle)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "page_up"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "spacebar",
+                                        "modifiers": [
+                                            "left_shift",
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },

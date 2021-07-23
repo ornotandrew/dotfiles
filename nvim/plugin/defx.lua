@@ -27,4 +27,23 @@ function _G.defx_buf_settings()
   map_key('cd', "defx#do_action('change_vim_cwd')")
 end
 
-vim.api.nvim_command('autocmd FileType defx call v:lua.defx_buf_settings()')
+
+-- override netrw when opening directories via :e, :vsp etc
+function _G.defx_hijack()
+    local path = vim.fn.expand("<amatch>")
+
+    if vim.fn.isdirectory(path) == 0 then return end
+    if path == "" then return end
+    if string.format("%d", vim.fn.bufnr("%")) ~= vim.fn.expand("<abuf>") then return end
+    if vim.bo.filetype == "defx" then return end
+
+    vim.api.nvim_command("Defx -new `expand('%:p:h')`")
+end
+
+vim.api.nvim_exec([[
+augroup defx_config
+  autocmd!
+  autocmd FileType defx call v:lua.defx_buf_settings()
+  autocmd BufEnter * call v:lua.defx_hijack()
+augroup END
+]], false)
