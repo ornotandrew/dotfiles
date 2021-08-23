@@ -1,4 +1,5 @@
 local util = require("wraithy.util")
+local lsp_signature = require("lsp_signature")
 
 local servers = {
   angularls = require("wraithy.lsp.angularls"),
@@ -8,6 +9,8 @@ local servers = {
   sumneko_lua = require("wraithy.lsp.sumneko_lua"),
   tsserver = require("wraithy.lsp.tsserver"),
   jsonls = require("wraithy.lsp.jsonls"),
+  -- sqls = require("wraithy.lsp.sqls"),
+  yamlls = require("wraithy.lsp.yamlls")
 }
 
 local floating_window_border = 'rounded'
@@ -31,10 +34,12 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', '<c-]>', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', '<leader>n', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', '<leader>a', '<cmd>lua require("wraithy.telescope").lsp_code_actions()<CR>', opts)
+  -- TODO: why do I need this extra <Esc>? I'm getting a blank list of results without it.
+  buf_set_keymap('v', '<leader>a', '<cmd>lua require("wraithy.telescope").lsp_range_code_actions()<CR><Esc>', opts)
   buf_set_keymap('n', '<leader>?', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', '<leader>i', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
@@ -42,14 +47,14 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   buf_set_keymap('i', '<c-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
-
   -- Format on save
   vim.api.nvim_command('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
 
   -- Show diagnostics on hover
   vim.api.nvim_command('autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({ border="'..floating_window_border..'", focusable = false })')
-  -- TODO: this kicks me out of insert mode - why?
- -- vim.api.nvim_command('autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()')
+
+  -- Show function signature in insert mode
+  lsp_signature.on_attach({ floating_window = false })
 end
 
 -- Call setup. Language servers are initialized here in order to support global

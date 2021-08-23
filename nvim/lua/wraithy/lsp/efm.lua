@@ -10,14 +10,15 @@ local languages = {
   python = {black, isort, pylint},
   javascript = {eslint},
   typescript = {eslint},
+  typescriptreact = {eslint},
   tf = {terraform}
 }
 
 return {
-    init_options = {documentFormatting = true},
-    filetypes = util.keys(languages),
-    settings = {
-      rootMarkers = {".git/"},
-      languages = languages
-    }
+  init_options = {documentFormatting = true},
+  filetypes = util.keys(languages),
+  settings = {
+    rootMarkers = {".git/"},
+    languages = languages
   }
+}

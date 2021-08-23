@@ -32,12 +32,6 @@
 	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [pull]
 	rebase = false
-[pager]
-    # brew install git-delta
-    diff = delta
-    log = delta
-    reflog = delta
-    show = delta
 [interactive]
     diffFilter = delta --color-only
 [delta]

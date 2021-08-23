@@ -42,6 +42,8 @@ Plug 'andersevenrud/compe-tmux'
 
 " lsp
 Plug 'neovim/nvim-lspconfig'
+Plug 'ray-x/lsp_signature.nvim'
+
 
 " treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -75,7 +77,7 @@ let localleader="\\"
 colorscheme base16-default-dark " the theme clears all highlights, we set this here so we can define custom ones later on
 
 
-let loaded_netrwPlugin = 1
+let loaded_netrwPlugin = 1 " don't load netrw
 lua require("wraithy.lsp")
 
 " vim:foldmethod=marker:foldlevel=0

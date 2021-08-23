@@ -20,6 +20,8 @@
     ~/.tmux.conf: .tmux.conf
     ~/.unittest.cfg: .unittest.cfg
     ~/.zshrc: .zshrc
+    ~/.config/zsh: zsh
     ~/.config/alacritty/alacritty.yml: alacritty.yml
     ~/.config/karabiner: karabiner
     ~/.config/mpv: mpv
+    ~/.config/yabai: yabai
