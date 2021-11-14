@@ -2,7 +2,7 @@ local util = require("wraithy.util")
 local lsp_signature = require("lsp_signature")
 
 local servers = {
-  angularls = require("wraithy.lsp.angularls"),
+  -- angularls = require("wraithy.lsp.angularls"),
   efm = require("wraithy.lsp.efm"),
   pyright = require("wraithy.lsp.pyright"),
   rust_analyzer = {},
@@ -10,7 +10,9 @@ local servers = {
   tsserver = require("wraithy.lsp.tsserver"),
   jsonls = require("wraithy.lsp.jsonls"),
   -- sqls = require("wraithy.lsp.sqls"),
-  yamlls = require("wraithy.lsp.yamlls")
+  yamlls = require("wraithy.lsp.yamlls"),
+  gopls = {},
+  cssls = require("wraithy.lsp.cssls"),
 }
 
 local floating_window_border = 'rounded'
@@ -48,7 +50,12 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('i', '<c-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
   -- Format on save
-  vim.api.nvim_command('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
+  if client.resolved_capabilities.document_formatting then
+    vim.api.nvim_command [[augroup Format]]
+    vim.api.nvim_command [[autocmd! * <buffer>]]
+    vim.api.nvim_command [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
+    vim.api.nvim_command [[augroup END]]
+  end
 
   -- Show diagnostics on hover
   vim.api.nvim_command('autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({ border="'..floating_window_border..'", focusable = false })')
@@ -75,6 +82,20 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
   vim.lsp.handlers.signature_help, { border = floating_window_border }
 )
+
+vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
+    if err ~= nil or result == nil then
+        return
+    end
+    if not vim.api.nvim_buf_get_option(bufnr, "modified") then
+        local view = vim.fn.winsaveview()
+        vim.lsp.util.apply_text_edits(result, bufnr)
+        vim.fn.winrestview(view)
+        if bufnr == vim.api.nvim_get_current_buf() then
+            vim.api.nvim_command("noautocmd :update")
+        end
+    end
+end
 
 -- Visual elements (signs and highlight colors)
 local fg_colors = { Error = '#ab4642', Warning = '#f7ca88', Information = '#7cafc2', Hint = '#7cafc2' }

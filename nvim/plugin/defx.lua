@@ -1,5 +1,5 @@
 -- emulate vim-vinegar
-vim.api.nvim_set_keymap('n', '-', "<cmd>Defx `escape(expand('%:p:h'), ' :')` -search=`expand('%:p')` -new<CR>", { silent = true })
+vim.api.nvim_set_keymap('n', '-', "<cmd>Defx `escape(expand('%:p:h'), ' :')` -search=`expand('%:p')` -show-ignored-files -new<CR>", { silent = true })
 
 vim.fn['defx#custom#option']('_', { columns = 'mark:indent:icons:space:filename:size' })
 

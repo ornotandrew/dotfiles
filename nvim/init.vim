@@ -66,11 +66,6 @@ call plug#end()
 
 " }}}
 
-augroup custom
-    autocmd!
-    autocmd BufWritePost $MYVIMRC nested source $MYVIMRC
-augroup END
-
 let mapleader = "\<space>" 
 let localleader="\\"
 

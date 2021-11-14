@@ -18,6 +18,7 @@
     ~/.pylintrc: .pylintrc
     ~/.config/pycodestyle: pycodestyle
     ~/.tmux.conf: .tmux.conf
+    ~/.config/tmux: tmux
     ~/.unittest.cfg: .unittest.cfg
     ~/.zshrc: .zshrc
     ~/.config/zsh: zsh
