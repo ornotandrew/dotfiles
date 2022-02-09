@@ -1,5 +1,6 @@
 local util = require("wraithy.util")
 local lsp_signature = require("lsp_signature")
+local floating_window_border = require("wraithy.lsp.handlers")
 
 local servers = {
   -- angularls = require("wraithy.lsp.angularls"),
@@ -13,9 +14,8 @@ local servers = {
   yamlls = require("wraithy.lsp.yamlls"),
   gopls = {},
   cssls = require("wraithy.lsp.cssls"),
+  -- jedi_language_server = {},
 }
-
-local floating_window_border = 'rounded'
 
 -- Use on_attach to set up mappings/autocommands etc once LSP has attached to a buffer
 local on_attach = function(client, bufnr)
@@ -73,29 +73,6 @@ for name, opts in pairs(servers) do
   }))
 end
 
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-	vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false, underline = true, signs = true }
-)
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = floating_window_border })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help, { border = floating_window_border }
-)
-
-vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
-    if err ~= nil or result == nil then
-        return
-    end
-    if not vim.api.nvim_buf_get_option(bufnr, "modified") then
-        local view = vim.fn.winsaveview()
-        vim.lsp.util.apply_text_edits(result, bufnr)
-        vim.fn.winrestview(view)
-        if bufnr == vim.api.nvim_get_current_buf() then
-            vim.api.nvim_command("noautocmd :update")
-        end
-    end
-end
 
 -- Visual elements (signs and highlight colors)
 local fg_colors = { Error = '#ab4642', Warning = '#f7ca88', Information = '#7cafc2', Hint = '#7cafc2' }

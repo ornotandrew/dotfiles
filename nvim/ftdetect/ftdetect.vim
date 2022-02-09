@@ -5,4 +5,5 @@ augroup custom
     autocmd BufNewFile,BufFilePre,BufRead .babelrc setlocal filetype=json
     autocmd BufNewFile,BufRead *.prisma setlocal filetype=graphql
     autocmd BufNewFile,BufRead .sqlfluff setlocal filetype=dosini
+    autocmd BufNewFile,BufRead .env.* setlocal filetype=sh
 augroup END

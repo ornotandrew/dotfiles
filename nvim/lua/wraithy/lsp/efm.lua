@@ -9,12 +9,15 @@ local prettier = require('wraithy.efm.prettier')
 local stylelint = require('wraithy.efm.stylelint')
 local sqlfluff = require('wraithy.efm.sqlfluff')
 
+local js = {eslint, prettier}
+
 local languages = {
   python = {black, isort, pylint},
-  javascript = {eslint},
-  typescript = {eslint},
-  typescriptreact = {eslint},
-  css = {stylelint},
+  javascript = js,
+  javascriptreact = js,
+  typescript = js,
+  typescriptreact = js,
+  -- css = {stylelint},
   tf = {terraform},
   -- sql = {sqlfluff}
 }

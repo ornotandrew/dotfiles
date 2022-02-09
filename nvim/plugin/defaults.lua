@@ -7,7 +7,8 @@ vim.opt.mouse = 'a'
 vim.opt.hidden = true
 vim.opt.inccommand = 'split' -- show the effects of a substitute command in a separate window
 vim.opt.spelllang = 'en_gb'
-vim.o.completeopt = "menuone,noselect" -- required by nvim-compe
+vim.opt.completeopt = "menuone,noselect" -- required by nvim-compe
+vim.opt.spell = false
 
 vim.g.python_host_prog = '/Users/andrew/venv/neovim2/bin/python'
 vim.g.nvim_venv = '/Users/andrew/venv/neovim'
