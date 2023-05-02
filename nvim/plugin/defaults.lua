@@ -7,8 +7,9 @@ vim.opt.mouse = 'a'
 vim.opt.hidden = true
 vim.opt.inccommand = 'split' -- show the effects of a substitute command in a separate window
 vim.opt.spelllang = 'en_gb'
-vim.opt.completeopt = "menuone,noselect" -- required by nvim-compe
+vim.opt.completeopt = "menu,menuone,noselect" -- required by nvim-cmp
 vim.opt.spell = false
+vim.opt.formatprg = 'par -w 80'
 
 vim.g.python_host_prog = '/Users/andrew/venv/neovim2/bin/python'
 vim.g.nvim_venv = '/Users/andrew/venv/neovim'
@@ -23,6 +24,7 @@ vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
 vim.opt.wrap = false
 vim.opt.showbreak = '↪'
+vim.opt.showtabline = 1
 -- }}}
 -- Search {{{
 vim.opt.hlsearch = true

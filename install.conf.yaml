@@ -26,3 +26,4 @@
     ~/.config/karabiner: karabiner
     ~/.config/mpv: mpv
     ~/.config/yabai: yabai
+    ~/.local/bin/tmux-kube-status: tmux_kube_status.sh

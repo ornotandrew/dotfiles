@@ -6,3 +6,6 @@ function _G.generate_uuid()
 end
 
 vim.api.nvim_set_keymap('n', '<Leader>u', ':call v:lua.generate_uuid()<CR>', {noremap=true})
+
+-- Copy the path of the current file to the clipboard
+vim.api.nvim_set_keymap('n', '<Leader>p', ":let @*=expand('%')<CR>", {noremap=true, silent=true})

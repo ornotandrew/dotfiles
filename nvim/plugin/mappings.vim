@@ -2,13 +2,11 @@
 nmap <Leader><Space> :noh<CR>
 nmap <Leader>l :setlocal list!<CR>
 nmap <Leader>q :cwindow<CR>
-nmap <Leader>s :setlocal spell!<CR>
-nmap <Leader>v :tabe $MYVIMRC<CR>
 nmap <Leader>w :setlocal wrap!<CR>
 nmap <Leader>z :setlocal foldenable!<CR>
-nmap <Leader>; :vsp<CR>
 nmap <silent> gx :execute 'silent! !open ' . shellescape(expand('<cWORD>'), 1)<cr>
 nnoremap Y y$
+nmap <silent> <Leader>] :vsp<CR><C-]>
 
 " Visual movement
 imap <Down> <Esc>gja

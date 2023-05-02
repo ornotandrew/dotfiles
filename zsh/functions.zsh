@@ -20,22 +20,61 @@ source-env () {
     set +o allexport
 }
 
-sba() {
-    [ -d env/ ] && source env/bin/activate
-    [ -d .venv/ ] && source .venv/bin/activate
+kenv () {
+    HELP_MSG='Usage
 
-    [ -f env/vars.sh ] && source env/vars.sh
-    [ -f .venv/vars.sh ] && source .venv/vars.sh
-    [ -f .env ] && source-env .env
+    kenv list - Show possible environments
+    kenv <environment> - Switch to the given environment'
+    LIST_MSG='local
+test
+prod'
+
+    if [ -z "$1" ]
+    then
+        echo $HELP_MSG;
+    fi
+
+    case $1 in
+        "list")
+            echo $LIST_MSG
+            ;;
+        "local")
+            kubectl config use-context docker-desktop
+            ;;
+        "staging")
+            kubectl config use-context main-cluster-stag-aks
+            ;;
+        "prod")
+            kubectl config use-context main-cluster-prod-aks
+            ;;
+    esac
+
+    tmux refresh-client -S
 }
 
-ecr-login() {
-    aws ecr get-login-password | docker login --username AWS --password-stdin 209241478618.dkr.ecr.us-east-1.amazonaws.com
+clean-js-files() {
+    find ${1:-.} -name '*.ts' | sed 's/.ts$/.js/' | xargs rm -f
 }
 
-# for advent-of-code 2021
-aoc () {
-    OUT=$(cat input.txt | cargo run -q --bin part_${1})
-    echo $OUT | clip
-    echo $OUT
+allow-sudo-touchid() {
+    sudo sed -i '' -e '/^#/a\'$'\n''auth       sufficient     pam_tid.so' /etc/pam.d/sudo
+    # needs https://github.com/fabianishere/pam_reattach if using tmux
+    # I've only gotten this to work by installing from source
+    sudo sed -i '' -e '/^#/a\'$'\n''auth     optional     pam_reattach.so' /etc/pam.d/sudo
+}
+
+# port-forward
+pf() {
+    SEARCH=$1
+    PORT=$2
+    shift 2
+
+    POD=$(kubectl get pods --no-headers -o custom-columns=":metadata.name" $@ | grep $SEARCH | head -n1)
+    echo "Found pod: ${POD}"
+    kubectl port-forward $POD $PORT $@
+}
+
+git-set-upstream() {
+    BRANCH=$(git branch --show-current)
+    git branch --set-upstream-to=origin/$BRANCH $BRANCH
 }

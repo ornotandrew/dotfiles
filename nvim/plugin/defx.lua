@@ -16,8 +16,8 @@ function _G.defx_buf_settings()
   map_key('o', "defx#do_action('open_tree', 'toggle')")
   map_key('O', "defx#do_action('open_tree', 'recursive')")
   map_key('%', "defx#do_action('new_file')")
-  map_key('d', "defx#do_action('remove')")
   map_key('r', "defx#do_action('rename')")
+  map_key('d', "defx#do_action('remove')")
   map_key('yy', "defx#do_action('yank_path')")
   map_key('.', "defx#do_action('toggle_ignored_files')")
   map_key('-', "defx#do_action('cd', ['..'])")
@@ -25,6 +25,8 @@ function _G.defx_buf_settings()
   map_key('<tab>', "defx#do_action('toggle_select')")
   map_key('*', "defx#do_action('toggle_select_all')")
   map_key('cd', "defx#do_action('change_vim_cwd')")
+
+  -- TODO: get bulk-delete working
 end
 
 

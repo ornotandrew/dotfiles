@@ -6,4 +6,6 @@ augroup custom
     autocmd BufNewFile,BufRead *.prisma setlocal filetype=graphql
     autocmd BufNewFile,BufRead .sqlfluff setlocal filetype=dosini
     autocmd BufNewFile,BufRead .env.* setlocal filetype=sh
+    autocmd BufNewFile,BufRead Tiltfile setlocal filetype=python
+    autocmd BufNewFile,BufRead *.snap setlocal filetype=javascript
 augroup END

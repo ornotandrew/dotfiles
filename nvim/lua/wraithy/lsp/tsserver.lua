@@ -1,3 +1,5 @@
+local util = require 'lspconfig/util'
+
 local function filter(arr, fn)
   if type(arr) ~= "table" then
     return arr
@@ -18,7 +20,17 @@ local function filterReactDTS(value)
 end
 
 return {
-  override_resolved_capabilities = {
+  cmd = { "typescript-language-server", "--stdio" },
+  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+  init_options = {
+    hostInfo = "neovim",
+    preferences = {
+      importModuleSpecifierPreference = "non-relative",
+      quotePreference = "single"
+    }
+  },
+  root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+  override_server_capabilities = {
     document_formatting = false
   },
   handlers = {

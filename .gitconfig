@@ -1,5 +1,5 @@
 [user]
-	email = wraith.andrew@gmail.com
+	email = andrew@andrewvr.dev
 	name = Andrew van Rooyen
 [includeIf "gitdir:~/code/"]
   path = ~/.gitconfig-work
@@ -16,10 +16,15 @@
     c = commit
     co = checkout
     s = status
+    set-upstream = \
+       !git branch \
+           --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
 [merge]
-	tool = nvim -d
+  tool = nvim
 [mergetool]
-	path = nvim
+  prompt = false
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [url "git@bitbucket.org:"]
@@ -38,3 +43,8 @@
     line-numbers = true
     side-by-side = true
     syntax-theme = base16-256
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

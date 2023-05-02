@@ -1,4 +1,4 @@
 return {
-  formatCommand = 'prettierd ${INPUT}',
+  formatCommand = 'prettierd "${INPUT}"',
   formatStdin = true,
 }

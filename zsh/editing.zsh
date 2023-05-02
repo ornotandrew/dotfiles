@@ -24,7 +24,7 @@
 
 set -o emacs
 
-export MANPAGER="nvim -c 'set ft=man ts=8 nolist nomod noma nonu' -"
+export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
 export EDITOR="nvim"
 export VISUAL=nvim
 autoload -U edit-command-line

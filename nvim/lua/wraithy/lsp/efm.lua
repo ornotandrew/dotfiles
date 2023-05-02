@@ -6,27 +6,25 @@ local pylint = require('wraithy.efm.pylint')
 local terraform = require('wraithy.efm.terraform')
 local eslint = require('wraithy.efm.eslint')
 local prettier = require('wraithy.efm.prettier')
-local stylelint = require('wraithy.efm.stylelint')
-local sqlfluff = require('wraithy.efm.sqlfluff')
 
-local js = {eslint, prettier}
+-- local js = { eslint, prettier }
+local js = { prettier }
 
 local languages = {
-  python = {black, isort, pylint},
+  python = { black, isort, pylint },
   javascript = js,
   javascriptreact = js,
   typescript = js,
   typescriptreact = js,
-  -- css = {stylelint},
-  tf = {terraform},
-  -- sql = {sqlfluff}
+  tf = { terraform },
+  graphql = { prettier },
 }
 
 return {
-  init_options = {documentFormatting = true},
+  init_options = { documentFormatting = true },
   filetypes = util.keys(languages),
   settings = {
-    rootMarkers = {".git/"},
+    rootMarkers = { ".git/" },
     languages = languages
   }
 }
