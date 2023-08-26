@@ -1,4 +1,5 @@
 alias ls='LC_COLLATE=C gls -h --group-directories-first --color=auto'
+alias ll='ls -l'
 alias dc="docker-compose"
 alias k="kubectl"
 alias tf="terraform"

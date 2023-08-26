@@ -47,7 +47,7 @@ require('packer').startup(function(use)
 
   -- telescope
   use 'nvim-telescope/telescope.nvim'
-  use 'kyazdani42/nvim-web-devicons'
+  use 'nvim-tree/nvim-web-devicons'
   use 'nvim-telescope/telescope-fzy-native.nvim'
   use 'nvim-telescope/telescope-ui-select.nvim'
 
@@ -73,9 +73,10 @@ require('packer').startup(function(use)
   -- treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
-    commit = '48a3da710369688df80beb2847dabbbd02e2180e',
-    lock = true,
-    run = ':TSUpdate',
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end,
   }
   use 'nvim-treesitter/playground'
   use 'nvim-treesitter/nvim-treesitter-context'
@@ -90,7 +91,6 @@ require('packer').startup(function(use)
   use 'othree/html5.vim'
   use 'ap/vim-css-color'
   use 'hashivim/vim-terraform'
-  use 'cappyzawa/starlark.vim'
   use 'mechatroner/rainbow_csv'
 
   if packer_bootstrap then

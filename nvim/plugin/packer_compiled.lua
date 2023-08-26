@@ -180,10 +180,15 @@ _G.packer_plugins = {
     path = "/Users/andrew/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-treesitter-context"] = {
+    loaded = true,
+    path = "/Users/andrew/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-context"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/Users/andrew/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
-    url = "https://github.com/kyazdani42/nvim-web-devicons"
+    url = "https://github.com/nvim-tree/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -209,11 +214,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/andrew/.local/share/nvim/site/pack/packer/start/rainbow_csv",
     url = "https://github.com/mechatroner/rainbow_csv"
-  },
-  ["starlark.vim"] = {
-    loaded = true,
-    path = "/Users/andrew/.local/share/nvim/site/pack/packer/start/starlark.vim",
-    url = "https://github.com/cappyzawa/starlark.vim"
   },
   ["telescope-fzy-native.nvim"] = {
     loaded = true,
