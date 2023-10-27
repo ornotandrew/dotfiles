@@ -1,11 +1,11 @@
 local util = require("wraithy.util")
 
-local black = require('wraithy.efm.black')
-local isort = require('wraithy.efm.isort')
-local pylint = require('wraithy.efm.pylint')
-local terraform = require('wraithy.efm.terraform')
-local eslint = require('wraithy.efm.eslint')
-local prettier = require('wraithy.efm.prettier')
+local black = require('lsp.efm.black')
+local isort = require('lsp.efm.isort')
+local pylint = require('lsp.efm.pylint')
+local terraform = require('lsp.efm.terraform')
+local eslint = require('lsp.efm.eslint')
+local prettier = require('lsp.efm.prettier')
 
 -- local js = { eslint, prettier }
 local js = { prettier }

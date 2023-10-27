@@ -78,3 +78,8 @@ git-set-upstream() {
     BRANCH=$(git branch --show-current)
     git branch --set-upstream-to=origin/$BRANCH $BRANCH
 }
+
+uuid-from-stitch-id() {
+    STITCH_ID=$1
+    echo $1 | base64 -D | cut -d '/' -f2
+}

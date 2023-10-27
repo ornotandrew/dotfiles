@@ -1,19 +1,20 @@
-require("wraithy.lsp.handlers")
+require("lsp.handlers")
 local util = require("wraithy.util")
+local lsp_util = require("lsp.util")
 
 local servers = {
-  efm = require("wraithy.lsp.efm"),
-  pyright = require("wraithy.lsp.pyright"),
+  efm = require("lsp.efm"),
+  pyright = require("lsp.pyright"),
   eslint = {},
   rust_analyzer = {},
-  lua_ls = {},
-  tsserver = require("wraithy.lsp.tsserver"),
+  lua_ls = require("lsp.lua_ls"),
+  tsserver = require("lsp.tsserver"),
   jsonls = {},
-  yamlls = require("wraithy.lsp.yamlls"),
+  yamlls = require("lsp.yamlls"),
   gopls = {},
-  graphql = {},
-  cssls = require("wraithy.lsp.cssls"),
-  omnisharp = require("wraithy.lsp.omnisharp"),
+  graphql = require("lsp.graphql"),
+  cssls = require("lsp.cssls"),
+  omnisharp = require("lsp.omnisharp"),
 }
 
 -- Use on_attach to set up mappings/autocommands etc once LSP has attached to a buffer
@@ -24,32 +25,32 @@ local on_attach = function(client, bufnr)
     client.config.override_server_capabilities or {}
   )
 
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  local function buf_set_keymap(mode, key, fn)
+    vim.keymap.set(mode, key, fn, { buffer = bufnr, remap = false, silent = true })
+  end
 
   --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-  -- Mappings.
-  local opts = { noremap = true, silent = true }
-
+  -- Mappings
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', '<c-]>', ':lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<leader>n', ':lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '<leader>?', ':lua require("wraithy.telescope").lsp_references()<CR>', opts)
-  buf_set_keymap('n', '[d', ':lua require("wraithy.lsp.functions").goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', ':lua require("wraithy.lsp.functions").goto_next()<CR>', opts)
-  buf_set_keymap('n', '<leader>q', ':lua vim.lsp.buf.formatting()<CR>', opts)
-  buf_set_keymap('i', '<C-k>', '<C-o>:lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<c-]>', vim.lsp.buf.definition)
+  buf_set_keymap('n', 'K', vim.lsp.buf.hover)
+  buf_set_keymap('n', '<leader>n', vim.lsp.buf.rename)
+  buf_set_keymap('n', '<leader>a', vim.lsp.buf.code_action)
+  buf_set_keymap('n', '<leader>?', require("wraithy.telescope_util").lsp_references)
+  buf_set_keymap('n', '[d', lsp_util.goto_prev)
+  buf_set_keymap('n', ']d', lsp_util.goto_next)
+  buf_set_keymap('n', '<leader>q', function()
+    vim.lsp.buf.format({ async = true })
+  end)
+  buf_set_keymap('i', '<C-k>', vim.lsp.buf.signature_help)
 
   -- Format on save
-  require('lsp-format').on_attach(client)
+  require('lsp-format').on_attach(client, bufnr)
 
   -- Show diagnostics on hover
-  vim.api.nvim_command('autocmd CursorHold * lua require("wraithy.lsp.functions").open_float()')
+  vim.api.nvim_create_autocmd('CursorHold', { callback = lsp_util.open_float })
 end
 
 -- Call setup. Language servers are initialized here in order to support global
