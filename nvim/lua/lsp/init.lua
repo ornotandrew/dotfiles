@@ -5,6 +5,7 @@ local lsp_util = require("lsp.util")
 local servers = {
   efm = require("lsp.efm"),
   pyright = require("lsp.pyright"),
+  terraformls = {},
   eslint = {},
   rust_analyzer = {},
   lua_ls = require("lsp.lua_ls"),
@@ -15,6 +16,7 @@ local servers = {
   graphql = require("lsp.graphql"),
   cssls = require("lsp.cssls"),
   omnisharp = require("lsp.omnisharp"),
+  html = {},
 }
 
 -- Use on_attach to set up mappings/autocommands etc once LSP has attached to a buffer
@@ -71,13 +73,19 @@ vim.diagnostic.config({
   underline = true,
   update_in_insert = false,
   severity_sort = false,
-  virtual_text = false,
+  virtual_text = true,
   float = {
     source = "if_many",
   },
 })
 
-local fg_colors = { Error = '#ab4642', Warn = '#f7ca88', Info = '#7cafc2', Hint = '#7cafc2' }
+local colors = require("wraithy.colors")
+local fg_colors = {
+  Error = colors.base08,
+  Warn = colors.base0A,
+  Info = colors.base0D,
+  Hint = colors.base0D
+}
 local signcolumn_bg_color = '#282828'
 
 for level, fg in pairs(fg_colors) do
@@ -85,7 +93,12 @@ for level, fg in pairs(fg_colors) do
   vim.api.nvim_command('highlight DiagnosticSign' .. level .. ' guifg=' .. fg .. ' guibg=' .. signcolumn_bg_color)
 end
 
-local signs = { Error = '✖', Warn = '⚠', Info = 'ℹ', Hint = '?' }
+local signs = {
+  Error = '✖',
+  Warn = '⚠',
+  Info = 'ℹ',
+  Hint = '?'
+}
 for level, sign in pairs(signs) do
   local hl = "DiagnosticSign" .. level
   vim.fn.sign_define(hl, { text = sign, texthl = hl, numhl = hl })

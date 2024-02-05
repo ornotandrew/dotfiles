@@ -21,7 +21,10 @@ return {
         ensure_installed = {
           "bash",
           "c",
+          "c_sharp",
           "diff",
+          "go",
+          "graphql",
           "html",
           "javascript",
           "jsdoc",
@@ -30,11 +33,14 @@ return {
           "lua",
           "luadoc",
           "luap",
+          "mermaid",
           "markdown",
           "markdown_inline",
           "python",
+          "prisma",
           "query",
           "regex",
+          "terraform",
           "toml",
           "tsx",
           "typescript",
@@ -52,6 +58,9 @@ return {
           },
         },
       })
+      vim.o.foldmethod = 'expr'
+      vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+      vim.o.foldenable = false -- Disable folding at startup.
     end,
   },
   'nvim-treesitter/playground',

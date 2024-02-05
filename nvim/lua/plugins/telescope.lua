@@ -21,7 +21,6 @@ return {
           file_previewer = require('telescope.previewers').vim_buffer_cat.new,
           grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
           qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
-
           mappings = {
             n = {
               ["<C-q>"] = actions.send_to_qflist,
@@ -45,12 +44,6 @@ return {
       util.set_leader_map('R', builtin.grep_string)
       util.set_leader_map('r', builtin.live_grep)
       util.set_leader_map('b', builtin.buffers)
-      util.set_leader_map('h', function()
-        builtin.help_tags(themes.get_dropdown({ layout_config = { width = 120 } }))
-      end)
-      util.set_leader_map('g', function()
-        builtin.git_status(themes.get_dropdown({ layout_config = { width = 120 } }))
-      end)
       util.set_leader_map('s', util.find_files({ cwd = '~/code/stitch/src/shared/' }))
     end
   },

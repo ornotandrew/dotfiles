@@ -9,6 +9,9 @@ case $CURRENT_CONTEXT in
     "main-cluster-prod-aks")
         ENV="prod"
         ;;
+    "main-cluster-prep-aks")
+        ENV="preprod"
+        ;;
     *)
         ENV="unknown"
         ;;
@@ -20,6 +23,9 @@ case $ENV in
         ;;
     "staging")
         echo "#[fg=color226] STGNG 🚜 "
+        ;;
+    "preprod")
+        echo "#[fg=color160] PREP 🚦 "
         ;;
     "prod")
         echo "#[fg=color0,bg=colour160] PROD ⚠️  "

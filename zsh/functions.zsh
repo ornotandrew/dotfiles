@@ -44,6 +44,9 @@ prod'
         "staging")
             kubectl config use-context main-cluster-stag-aks
             ;;
+        "prep")
+            kubectl config use-context main-cluster-prep-aks
+            ;;
         "prod")
             kubectl config use-context main-cluster-prod-aks
             ;;

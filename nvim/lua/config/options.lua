@@ -7,16 +7,16 @@ vim.o.mouse = 'a'
 vim.o.hidden = true
 vim.o.inccommand = 'split'                  -- show the effects of a substitute command in a separate window
 vim.o.spelllang = 'en_gb'
--- vim.o.completeopt = "menu,menuone,noselect" -- required by nvim-cmp
+vim.o.completeopt = "menu,menuone,noselect" -- required by nvim-cmp
 vim.o.spell = false
-vim.o.formatprg = 'par -w 80'
+vim.o.formatprg = 'par -w80'
 
 -- vim.g.python_host_prog = '/Users/andrew/.asdf/shims/python2'
 -- vim.g.python3_host_prog = '/Users/andrew/.asdf/shims/python2'
 
 -- Editor look & feel
 vim.o.cursorline = true
-vim.o.showmode = false -- use lightline instead
+vim.o.showmode = false -- use a custom statusline instead
 vim.o.listchars = 'eol:¬,tab:¦ ,trail:~,extends:>,precedes:<'
 vim.o.number = true
 vim.o.relativenumber = true

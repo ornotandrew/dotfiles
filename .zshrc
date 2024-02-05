@@ -12,7 +12,6 @@ ZSH_FILES=$HOME/.config/zsh
 source $ZSH_FILES/aliases.zsh
 source $ZSH_FILES/hashes.zsh
 source $ZSH_FILES/completion.zsh
-source $ZSH_FILES/base16_shell.zsh
 source $ZSH_FILES/editing.zsh
 source $ZSH_FILES/functions.zsh
 source $ZSH_FILES/history.zsh
@@ -25,11 +24,4 @@ export LC_ALL=en_US.UTF-8
 
 # Make sure any script-local changes to path are exported
 export PATH
-
-# pnpm
-export PNPM_HOME="/Users/andrew/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+source /Users/andrew/.commonsh

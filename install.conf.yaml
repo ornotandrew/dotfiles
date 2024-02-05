@@ -9,21 +9,14 @@
   - [git submodule update --init --recursive, Installing submodules]
 
 - link:
-    ~/.agignore: .agignore
     ~/.config/nvim: nvim
     ~/.gitconfig: .gitconfig
     ~/.gitconfig-work: .gitconfig-work
-    ~/.hgrc: .hgrc
     ~/.oh-my-zsh/themes/wraithy.zsh-theme: wraithy.zsh-theme
-    ~/.pylintrc: .pylintrc
-    ~/.config/pycodestyle: pycodestyle
     ~/.tmux.conf: .tmux.conf
     ~/.config/tmux: tmux
-    ~/.unittest.cfg: .unittest.cfg
     ~/.zshrc: .zshrc
     ~/.config/zsh: zsh
-    ~/.config/alacritty/alacritty.yml: alacritty.yml
     ~/.config/karabiner: karabiner
     ~/.config/mpv: mpv
-    ~/.config/yabai: yabai
     ~/.local/bin/tmux-kube-status: tmux_kube_status.sh
