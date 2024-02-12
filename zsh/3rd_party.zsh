@@ -15,7 +15,7 @@ path=("/usr/local/opt/gnu-sed/libexec/gnubin" $path)
 export RUST_BACKTRACE=1
 
 # asdf
-source /opt/homebrew/opt/asdf/libexec/asdf.sh
+# source /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # go
 export GOBIN="/Users/andrew/.local/bin/"
@@ -24,3 +24,13 @@ export GOBIN="/Users/andrew/.local/bin/"
 # dotnet_root="/usr/local/share/dotnet/x64"
 # path=($dotnet_root $path)
 # export DOTNET_ROOT=$dotnet_root
+
+# pnpm
+export PNPM_HOME="/Users/andrew/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# node
+path=('/Users/andrew/Library/pnpm/nodejs/20.10.0/bin' $path)

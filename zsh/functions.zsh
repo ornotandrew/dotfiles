@@ -55,15 +55,13 @@ prod'
     tmux refresh-client -S
 }
 
-clean-js-files() {
-    find ${1:-.} -name '*.ts' | sed 's/.ts$/.js/' | xargs rm -f
+k8s-auth() {
+    az account clear
+    az login
 }
 
-allow-sudo-touchid() {
-    sudo sed -i '' -e '/^#/a\'$'\n''auth       sufficient     pam_tid.so' /etc/pam.d/sudo
-    # needs https://github.com/fabianishere/pam_reattach if using tmux
-    # I've only gotten this to work by installing from source
-    sudo sed -i '' -e '/^#/a\'$'\n''auth     optional     pam_reattach.so' /etc/pam.d/sudo
+clean-js-files() {
+    find ${1:-.} -name '*.ts' | sed 's/.ts$/.js/' | xargs rm -f
 }
 
 # port-forward

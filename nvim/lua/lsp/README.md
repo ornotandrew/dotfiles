@@ -9,7 +9,6 @@ npm i -g \
     vscode-langservers-extracted \
     yaml-language-server \
     @fsouza/prettierd \
-    vscode-eslint-language-server \
     graphql-language-service-cli
 
 
