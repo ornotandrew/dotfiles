@@ -19,16 +19,16 @@ esac
 
 case $ENV in 
     "local")
-        echo "#[fg=colour10] LOCAL 🌱 "
+        echo "#[dim,fg=colour10] LOCAL 🌱 "
         ;;
     "staging")
-        echo "#[fg=color226] STGNG 🚜 "
+        echo "#[dim,fg=color226] STGNG 🚜 "
         ;;
     "preprod")
-        echo "#[fg=color160] PREP 🚦 "
+        echo "#[dim,fg=color160] PREP 🚦 "
         ;;
     "prod")
-        echo "#[fg=color0,bg=colour160] PROD ⚠️  "
+        echo "#[fg=color0,bg=colour160] PROD ⚠️  #[none,fg=color160,bg=color234]"
         ;;
     "unknown")
         echo " ?? "

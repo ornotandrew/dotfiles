@@ -3,9 +3,23 @@
 # git clone https://github.com/romkatv/gitstatus.git ~/.gitstatus
 source ~/.gitstatus/gitstatus.prompt.zsh
 
+function shorten() {
+    STR=$1
+    TARGET_LEN=$2
+    ACTUAL_LEN=${#STR} 
+    if [[ ACTUAL_LEN -gt TARGET_LEN ]]
+    then
+        PREFIX=$(echo $STR | head -c $((TARGET_LEN-8)))
+        SUFFIX=$(echo $STR | tail -c 7)
+        echo "$PREFIX..$SUFFIX"
+    else
+        echo $STR
+    fi
+}
+
 function git_info() {
     [[ "$VCS_STATUS_RESULT" == ok-sync ]] || return
-    local branch_or_commit=${VCS_STATUS_LOCAL_BRANCH:-"@${VCS_STATUS_COMMIT:0:12}"}
+    local branch_or_commit=$(shorten ${VCS_STATUS_LOCAL_BRANCH:-"@${VCS_STATUS_COMMIT:0:12}"} 50)
     local file_status=""
     [[ "$VCS_STATUS_HAS_STAGED"    == 1 ]] && file_status="${file_status}+"
     [[ "$VCS_STATUS_HAS_UNSTAGED"  == 1 ]] && file_status="${file_status}*"

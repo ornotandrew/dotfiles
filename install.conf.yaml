@@ -20,3 +20,4 @@
     ~/.config/karabiner: karabiner
     ~/.config/mpv: mpv
     ~/.local/bin/tmux-kube-status: tmux_kube_status.sh
+    ~/.local/bin/tmux-window-flags: tmux_window_flags.sh

@@ -12,7 +12,7 @@ return {
     config = function()
       local actions = require('telescope.actions')
       local builtin = require('telescope.builtin')
-      local themes = require('telescope.themes')
+      -- local themes = require('telescope.themes')
       local util = require('wraithy.telescope_util')
 
       require('telescope').setup({
@@ -24,9 +24,11 @@ return {
           mappings = {
             n = {
               ["<C-q>"] = actions.send_to_qflist,
+              ["<C-Enter>"] = actions.to_fuzzy_refine,
             },
             i = {
               ["<C-q>"] = actions.send_to_qflist,
+              ["<C-Enter>"] = actions.to_fuzzy_refine,
             },
           },
         },

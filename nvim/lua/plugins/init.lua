@@ -10,4 +10,5 @@ return {
   'nvim-lua/popup.nvim',
   'nvim-lua/plenary.nvim',
   'sjl/gundo.vim',
+  'itchyny/vim-qfedit',
 }

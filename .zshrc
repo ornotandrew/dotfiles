@@ -21,6 +21,9 @@ source $ZSH_FILES/3rd_party.zsh
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+# colors
+export TERM=xterm-24bit
+
 # Make sure any script-local changes to path are exported
 export PATH
 source /Users/andrew/.commonsh

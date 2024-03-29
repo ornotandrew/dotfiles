@@ -22,6 +22,10 @@ return {
       options = {
         theme = "base16",
         globalstatus = false,
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
+        -- component_separators = { left = '', right = '' },
+        -- section_separators = { left = '', right = '' },
       },
       disabled_filetypes = {
         statusline = { "TelescopePrompt" },

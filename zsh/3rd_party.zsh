@@ -32,5 +32,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-# node
-path=('/Users/andrew/Library/pnpm/nodejs/20.10.0/bin' $path)
+# java
+export JAVA_HOME="/opt/homebrew/opt/openjdk"
+path=("$JAVA_HOME/bin" $path)

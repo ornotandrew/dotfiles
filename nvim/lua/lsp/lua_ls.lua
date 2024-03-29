@@ -10,7 +10,7 @@ return {
       workspace = {
         checkThirdParty = false,
         library = {
-          vim.env.VIMRUNTIME
+          unpack(vim.api.nvim_get_runtime_file('', true))
           -- "${3rd}/luv/library"
           -- "${3rd}/busted/library",
         }
