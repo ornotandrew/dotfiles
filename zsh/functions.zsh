@@ -39,16 +39,22 @@ prod'
             echo $LIST_MSG
             ;;
         "local")
-            kubectl config use-context docker-desktop
+            kubectl config use-context rancher-desktop
             ;;
         "staging")
-            kubectl config use-context main-cluster-stag-aks
+            kubectl config use-context main-staging-aks-new
+            ;;
+        "pci-staging")
+            kubectl config use-context pci-stag-aks
             ;;
         "prep")
             kubectl config use-context main-cluster-prep-aks
             ;;
         "prod")
             kubectl config use-context main-cluster-prod-aks
+            ;;
+        "pci-prod")
+            kubectl config use-context pci-prod-aks
             ;;
     esac
 

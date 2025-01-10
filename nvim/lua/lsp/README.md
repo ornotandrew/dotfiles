@@ -9,15 +9,19 @@ npm i -g \
     vscode-langservers-extracted \
     yaml-language-server \
     @fsouza/prettierd \
+    eslint \
     graphql-language-service-cli
 
 
 brew install \
     hashicorp/tap/terraform-ls \
-    lua-language-server
+    lua-language-server \
+    pyright
 
 
 go install \
     github.com/sqls-server/sqls@latest \
     golang.org/x/tools/gopls@latest
+
+cargo install protols
 ```

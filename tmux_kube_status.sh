@@ -1,13 +1,19 @@
 CURRENT_CONTEXT=$(kubectl config current-context)
 case $CURRENT_CONTEXT in
-    "docker-desktop")
+    "rancher-desktop")
         ENV="local"
         ;;
-    "main-cluster-stag-aks")
+    "main-staging-aks-new")
         ENV="staging"
+        ;;
+    "pci-stag-aks")
+        ENV="pci-staging"
         ;;
     "main-cluster-prod-aks")
         ENV="prod"
+        ;;
+    "pci-prod-aks")
+        ENV="pci-prod"
         ;;
     "main-cluster-prep-aks")
         ENV="preprod"
@@ -24,11 +30,17 @@ case $ENV in
     "staging")
         echo "#[dim,fg=color226] STGNG 🚜 "
         ;;
+    "pci-staging")
+        echo "#[dim,fg=color226] STGNG 🔒 "
+        ;;
     "preprod")
         echo "#[dim,fg=color160] PREP 🚦 "
         ;;
     "prod")
-        echo "#[fg=color0,bg=colour160] PROD ⚠️  #[none,fg=color160,bg=color234]"
+        echo "#[fg=color0,bg=colour160] PROD 🟡#[none,fg=color160,bg=color234]"
+        ;;
+    "pci-prod")
+        echo "#[fg=color0,bg=colour160] PROD 🔒#[none,fg=color160,bg=color234]"
         ;;
     "unknown")
         echo " ?? "

@@ -5,6 +5,9 @@ return {
     return {
       delete_to_trash = true,
       use_default_keymaps = false,
+      view_options = {
+        show_hidden = true
+      },
       keymaps = {
         ["g?"] = "actions.show_help",
         ["<CR>"] = "actions.select",
@@ -13,6 +16,7 @@ return {
         ["<C-p>"] = "actions.preview",
         ["-"] = "actions.parent",
         ["_"] = "actions.open_cwd",
+        ["gc"] = "actions.cd",
         ["gs"] = "actions.change_sort",
         ["gx"] = "actions.open_external",
         ["g."] = "actions.toggle_hidden",

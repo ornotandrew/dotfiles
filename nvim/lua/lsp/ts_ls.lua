@@ -26,7 +26,14 @@ return {
     hostInfo = "neovim",
     preferences = {
       importModuleSpecifierPreference = "non-relative",
-      quotePreference = "single"
+      quotePreference = "single",
+      includeInlayParameterNameHints = 'literals', -- 'none' | 'literals' | 'all'
+      includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+      includeInlayFunctionParameterTypeHints = false,
+      includeInlayVariableTypeHints = false,
+      includeInlayPropertyDeclarationTypeHints = false,
+      includeInlayFunctionLikeReturnTypeHints = false,
+      includeInlayEnumMemberValueHints = true,
     }
   },
   root_dir = util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),

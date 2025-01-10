@@ -1,0 +1,36 @@
+font-family = "Hack Nerd Font Mono"
+font-size = 20
+
+theme = light:base16-default-light,dark:base16-default-dark
+macos-titlebar-style = hidden
+
+window-padding-y = 0,2
+window-padding-x = 4
+window-padding-color = extend
+
+
+# make cells slightly bigger to evenly fit my specific setup
+adjust-cell-width = 1%
+adjust-cell-height = 5%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

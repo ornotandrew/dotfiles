@@ -6,6 +6,9 @@ return {
         -- (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT'
       },
+      hint = {
+        enable = true
+      },
       -- Make the server aware of Neovim runtime files
       workspace = {
         checkThirdParty = false,

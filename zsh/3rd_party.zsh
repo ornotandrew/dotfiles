@@ -13,6 +13,7 @@ path=("/usr/local/opt/gnu-sed/libexec/gnubin" $path)
 
 # Rust
 export RUST_BACKTRACE=1
+path=("/Users/andrew/.cargo/bin" $path)
 
 # asdf
 # source /opt/homebrew/opt/asdf/libexec/asdf.sh
@@ -31,7 +32,17 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
+export NODE_OPTIONS=--no-deprecation
 
 # java
 export JAVA_HOME="/opt/homebrew/opt/openjdk"
 path=("$JAVA_HOME/bin" $path)
+
+# libpq, for postgres utils
+path=(/opt/homebrew/opt/libpq/bin $path)
+
+# fzf
+source <(fzf --zsh)
+
+# rancher desktop
+path=($HOME/.rd/bin $path)

@@ -1,0 +1,12 @@
+views:
+  v1/pods:
+    columns:
+      - NAME
+      - PF
+      - READY
+      - STATUS
+      - RESTARTS
+      - CPU
+      - MEM
+      - NODE
+      - AGE

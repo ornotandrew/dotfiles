@@ -21,3 +21,6 @@
     ~/.config/mpv: mpv
     ~/.local/bin/tmux-kube-status: tmux_kube_status.sh
     ~/.local/bin/tmux-window-flags: tmux_window_flags.sh
+    ~/.config/aerospace/aerospace.toml: aerospace.toml
+    "~/Library/Application Support/k9s/views.yaml": k9s/views.yaml
+    ~/.config/ghostty/: ghostty

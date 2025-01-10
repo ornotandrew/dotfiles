@@ -8,8 +8,8 @@ end
 
 function M.merge_tables(...)
   local t_new = {}
-  for _, given_table in ipairs({...}) do
-    for k,v in pairs(given_table) do t_new[k] = v end
+  for _, given_table in ipairs({ ... }) do
+    for k, v in pairs(given_table) do t_new[k] = v end
   end
   return t_new
 end
@@ -28,7 +28,7 @@ function M.set_spaces_per_tab(n)
 end
 
 function M.t(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 return M

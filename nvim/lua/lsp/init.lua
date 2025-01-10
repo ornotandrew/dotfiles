@@ -9,7 +9,7 @@ local servers = {
   eslint = {},
   rust_analyzer = {},
   lua_ls = require("lsp.lua_ls"),
-  tsserver = require("lsp.tsserver"),
+  ts_ls = require("lsp.ts_ls"),
   jsonls = {},
   yamlls = require("lsp.yamlls"),
   gopls = {},
@@ -17,6 +17,8 @@ local servers = {
   cssls = require("lsp.cssls"),
   omnisharp = require("lsp.omnisharp"),
   html = {},
+  protols = {},
+  elixirls = require("lsp.elixirls"),
 }
 
 -- Use on_attach to set up mappings/autocommands etc once LSP has attached to a buffer
@@ -53,6 +55,12 @@ local on_attach = function(client, bufnr)
 
   -- Show diagnostics on hover
   vim.api.nvim_create_autocmd('CursorHold', { callback = lsp_util.open_float })
+
+  -- Enable inlay hints
+  if client.server_capabilities.inlayHintProvider then
+    vim.g.inlay_hints_visible = true
+    vim.lsp.inlay_hint.enable(bufnr, true)
+  end
 end
 
 -- Call setup. Language servers are initialized here in order to support global
@@ -62,7 +70,7 @@ for name, opts in pairs(servers) do
     on_attach = on_attach,
     -- cmp_nvim_lsp.update_capabilities is deprecated, use cmp_nvim_lsp.default_capabilities instead.
     capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-    flags = { debounce_text_changes = 150 }
+    flags = { debounce_text_changes = 500 }
   }))
 end
 
@@ -73,7 +81,7 @@ vim.diagnostic.config({
   underline = true,
   update_in_insert = false,
   severity_sort = false,
-  virtual_text = true,
+  virtual_text = false,
   float = {
     source = "if_many",
   },

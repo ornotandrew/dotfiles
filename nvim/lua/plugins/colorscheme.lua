@@ -33,8 +33,9 @@ return {
     vim.api.nvim_command('highlight Normal guibg=NONE')
 
     -- make search highlights blend in, while still being visible at a glance
-    vim.api.nvim_command('highlight Search guifg=guifg guibg=guibg gui=bold,underline')
+    vim.api.nvim_command('highlight Search guifg=guifg guibg=guibg gui=bold,italic,underline')
     vim.api.nvim_command('highlight! link IncSearch Search')
+    vim.api.nvim_command('highlight! link CurSearch Search')
 
     -- floating windows
     vim.api.nvim_command('highlight NormalFloat guibg=none')

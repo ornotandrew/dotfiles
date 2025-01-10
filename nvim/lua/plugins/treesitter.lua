@@ -18,11 +18,15 @@ return {
       require('nvim-treesitter.configs').setup({
         highlight = { enable = true },
         indent = { enable = true },
+        sync_install = false,
+        auto_install = true,
+        ignore_install = {},
         ensure_installed = {
           "bash",
           "c",
           "c_sharp",
           "diff",
+          "elixir",
           "go",
           "graphql",
           "html",
@@ -46,6 +50,7 @@ return {
           "typescript",
           "vim",
           "vimdoc",
+          "xml",
           "yaml",
         },
         incremental_selection = {
