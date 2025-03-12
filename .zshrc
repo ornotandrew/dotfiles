@@ -27,3 +27,5 @@ export TERM=xterm-24bit
 # Make sure any script-local changes to path are exported
 export PATH
 source /Users/andrew/.commonsh
+
+. "$HOME/.local/bin/env"

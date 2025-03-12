@@ -18,9 +18,6 @@ path=("/Users/andrew/.cargo/bin" $path)
 # asdf
 # source /opt/homebrew/opt/asdf/libexec/asdf.sh
 
-# go
-export GOBIN="/Users/andrew/.local/bin/"
-
 # dotnet
 # dotnet_root="/usr/local/share/dotnet/x64"
 # path=($dotnet_root $path)
@@ -33,6 +30,7 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 export NODE_OPTIONS=--no-deprecation
+path=("/Users/andrew/Library/pnpm/nodejs/20.18.2/bin" $path)
 
 # java
 export JAVA_HOME="/opt/homebrew/opt/openjdk"
@@ -46,3 +44,6 @@ source <(fzf --zsh)
 
 # rancher desktop
 path=($HOME/.rd/bin $path)
+
+# ollama
+export OLLAMA_API_BASE=http://127.0.0.1:11434

@@ -59,7 +59,7 @@ local on_attach = function(client, bufnr)
   -- Enable inlay hints
   if client.server_capabilities.inlayHintProvider then
     vim.g.inlay_hints_visible = true
-    vim.lsp.inlay_hint.enable(bufnr, true)
+    vim.lsp.inlay_hint.enable(true)
   end
 end
 
@@ -76,17 +76,6 @@ end
 
 
 -- Visual elements (signs and highlight colors)
-vim.diagnostic.config({
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-  severity_sort = false,
-  virtual_text = false,
-  float = {
-    source = "if_many",
-  },
-})
-
 local colors = require("wraithy.colors")
 local fg_colors = {
   Error = colors.base08,
@@ -101,13 +90,20 @@ for level, fg in pairs(fg_colors) do
   vim.api.nvim_command('highlight DiagnosticSign' .. level .. ' guifg=' .. fg .. ' guibg=' .. signcolumn_bg_color)
 end
 
-local signs = {
-  Error = '✖',
-  Warn = '⚠',
-  Info = 'ℹ',
-  Hint = '?'
-}
-for level, sign in pairs(signs) do
-  local hl = "DiagnosticSign" .. level
-  vim.fn.sign_define(hl, { text = sign, texthl = hl, numhl = hl })
-end
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '✖',
+      [vim.diagnostic.severity.WARN] = '⚠',
+      [vim.diagnostic.severity.INFO] = 'ℹ',
+      [vim.diagnostic.severity.HINT] = '?',
+    }
+  },
+  underline = true,
+  update_in_insert = false,
+  severity_sort = false,
+  virtual_text = false,
+  float = {
+    source = "if_many",
+  },
+})

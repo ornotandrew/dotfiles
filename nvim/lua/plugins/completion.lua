@@ -1,8 +1,3 @@
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
 return {
   "hrsh7th/nvim-cmp",
   version = false, -- last release is way too old
@@ -16,14 +11,45 @@ return {
     'hrsh7th/cmp-cmdline',
     'andersevenrud/cmp-tmux',
     {
-      "zbirenbaum/copilot-cmp",
-      dependencies = "copilot.lua",
-      opts = {},
-    }
+      'milanglacier/minuet-ai.nvim',
+      config = function()
+        require('minuet').setup {
+          provider = 'openai_fim_compatible',
+          n_completions = 2, -- recommend for local model for resource saving
+          -- I recommend beginning with a small context window size and incrementally
+          -- expanding it, depending on your local computing power. A context window
+          -- of 512, serves as an good starting point to estimate your computing
+          -- power. Once you have a reliable estimate of your local computing power,
+          -- you should adjust the context window to a larger value.
+          context_window = 2048,
+          add_single_line_entry = false,
+          provider_options = {
+            openai_fim_compatible = {
+              api_key = 'TERM',
+              name = 'Ollama',
+              end_point = 'http://localhost:11434/v1/completions',
+              model = 'qwen2.5-coder',
+              stream = true,
+              optional = {
+                max_tokens = 1024,
+                top_p = 0.9,
+              },
+            },
+            claude = {
+              max_tokens = 512,
+              model = 'claude-3-7-sonnet-20250219',
+              stream = true,
+              api_key = 'ANTHROPIC_API_KEY',
+            },
+          },
+        }
+      end,
+    },
   },
   config = function()
     vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
+    local util = require("wraithy.util")
     local cmp = require("cmp")
     local defaults = require("cmp.config.default")()
     local lspkind = require('lspkind')
@@ -45,19 +71,10 @@ return {
       end,
       mapping = cmp.mapping.preset.insert({
         ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ["<Tab>"] = vim.schedule_wrap(function(fallback)
-          if cmp.visible() and has_words_before() then
-            cmp.select_next_item()
-          else
-            fallback()
-          end
-        end),
-        ['<S-Tab>'] = cmp.mapping(function()
-          if cmp.visible() then
-            cmp.select_prev_item()
-          end
-        end),
+        ['<C-CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-d>'] = cmp.mapping.scroll_docs(4),
+        ['<C-e>'] = cmp.mapping.abort(),
       }),
       snippet = {
         expand = function(args)
@@ -69,20 +86,24 @@ return {
         documentation = cmp.config.window.bordered(),
       },
       sources = cmp.config.sources({
-        { name = 'nvim_lsp', max_item_count = 5, keyword_length = 2 },
-        { name = 'copilot',  max_item_count = 2, keyword_length = 0 },
+        { name = 'nvim_lsp', max_item_count = 3, keyword_length = 2 },
+        -- { name = 'minuet',   max_item_count = 2 },
         { name = "luasnip",  max_item_count = 2 },
       }, {
         { name = 'buffer', max_item_count = 2 },
         { name = 'path',   max_item_count = 2 },
         { name = 'tmux',   keyword_length = 3 },
       }),
+      performance = {
+        fetching_timeout = 2000,
+      },
       formatting = {
         format = lspkind.cmp_format({
-          mode = 'text',
+          mode = 'symbol',
           maxwidth = 50,
           ellipsis_char = '...',
-        })
+          symbol_map = util.merge_tables(lspkind.presets.default, { Ollama = '󰳆', })
+        }),
       },
       experimental = {
         ghost_text = false,
