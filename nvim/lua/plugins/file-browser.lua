@@ -20,6 +20,7 @@ return {
         ["gs"] = "actions.change_sort",
         ["gx"] = "actions.open_external",
         ["g."] = "actions.toggle_hidden",
+        ["gr"] = "actions.refresh",
       }
     }
   end,

@@ -24,3 +24,4 @@
     ~/.config/aerospace/aerospace.toml: aerospace.toml
     "~/Library/Application Support/k9s/views.yaml": k9s/views.yaml
     ~/.config/ghostty/: ghostty
+    ~/.config/mcp/: mcp
