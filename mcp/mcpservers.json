@@ -1,12 +1,5 @@
 {
   "mcpServers": {
-    "fetch": {
-      "args": [
-        "mcp-server-fetch"
-      ],
-      "command": "uvx",
-      "disabled": false
-    },
     "git": {
       "args": [
         "mcp-server-git",
@@ -16,12 +9,27 @@
       "command": "uvx",
       "disabled": false
     },
+    "fetch": {
+      "args": [
+        "mcp-server-fetch"
+      ],
+      "command": "uvx",
+      "disabled": false
+    },
+    "stitch": {
+      "args": [
+        "/Users/andrew/github/agent-toolkit/src/python/modelcontextprotocol/server.py"
+      ],
+      "command": "/Users/andrew/github/agent-toolkit/src/python/modelcontextprotocol/.venv/bin/python",
+      "disabled": false
+    },
     "filesystem": {
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
         "/Users/andrew/code/",
-        "/Users/andrew/scratch/"
+        "/Users/andrew/scratch/",
+        "/Users/andrew/github/"
       ],
       "command": "npx",
       "disabled": false
@@ -37,7 +45,7 @@
         "mcp/puppeteer"
       ],
       "command": "docker",
-      "disabled": false
+      "disabled": true
     }
   }
 }

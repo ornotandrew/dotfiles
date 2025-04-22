@@ -29,3 +29,6 @@ export PATH
 source /Users/andrew/.commonsh
 
 . "$HOME/.local/bin/env"
+
+# Added by Windsurf
+export PATH="/Users/andrew/.codeium/windsurf/bin:$PATH"

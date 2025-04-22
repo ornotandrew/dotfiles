@@ -13,7 +13,8 @@ return {
       local actions = require('telescope.actions')
       local builtin = require('telescope.builtin')
       -- local themes = require('telescope.themes')
-      local util = require('wraithy.telescope_util')
+      local util = require('wraithy.util')
+      local custom_pickers = require('wraithy.telescope.pickers')
 
       require('telescope').setup({
         defaults = {
@@ -40,13 +41,19 @@ return {
       require("telescope").load_extension("ui-select")
 
 
-      util.set_leader_map('f', util.find_files())
-      util.set_leader_map('F', util.find_files({ path_display = { 'shorten' } }))
-      util.set_leader_map('d', util.find_files({ cwd = '~/.config/nvim/' }))
+      util.set_leader_map('f', custom_pickers.find_files())
+      util.set_leader_map('F', custom_pickers.find_files({ path_display = { 'shorten' } }))
+      util.set_leader_map('d', custom_pickers.find_files({ cwd = '~/.config/nvim/' }))
       util.set_leader_map('R', builtin.grep_string)
       util.set_leader_map('r', builtin.live_grep)
       util.set_leader_map('b', builtin.buffers)
-      util.set_leader_map('s', util.find_files({ cwd = '~/code/stitch/src/shared/' }))
+      util.set_leader_map('s', custom_pickers.find_files({ cwd = '~/code/stitch/src/shared/' }))
+      vim.keymap.set(
+        { 'n', 'v' },
+        '<leader>c',
+        custom_pickers.ai_action_palette,
+        { noremap = true }
+      )
     end
   },
 }

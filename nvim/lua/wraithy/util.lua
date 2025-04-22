@@ -31,4 +31,36 @@ function M.t(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+--- NOTE: This only works _after_ we've left visual mode
+--- @return table { start: number, stop: number }
+function M.get_previous_visual_selection_rows()
+  local start = vim.fn.getpos("'<'")
+  local start_row = start[2]
+  local stop = vim.fn.getpos("'>'")
+  local stop_row = stop[2]
+
+  if start_row < stop_row then
+    return { start = start_row, stop = stop_row }
+  else
+    return { start = stop_row, stop = start_row }
+  end
+end
+
+M.set_leader_map = function(key, fn)
+  vim.keymap.set(
+    'n',
+    '<leader>' .. key,
+    fn,
+    { noremap = true }
+  )
+end
+
+function M.shallow_copy(t)
+  local t2 = {}
+  for k, v in pairs(t) do
+    t2[k] = v
+  end
+  return t2
+end
+
 return M
