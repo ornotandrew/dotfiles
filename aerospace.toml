@@ -60,6 +60,8 @@ outer.right =      3
 [workspace-to-monitor-force-assignment]
 1 = 'secondary'
 2 = 'secondary'
+3 = 'secondary'
+D = 'secondary'
 
 [[on-window-detected]]
 if.app-id = 'org.jkiss.dbeaver.core.product'
@@ -81,12 +83,13 @@ if.app-id = 'company.thebrowser.Browser'
 run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
-if.app-id = 'com.exafunction.windsurf'
+if.app-id = 'com.mitchellh.ghostty'
 run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
-run = ['move-node-to-workspace 3']
+if.app-id = 'com.exafunction.windsurf'
+run = ['move-node-to-workspace E']
+
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
