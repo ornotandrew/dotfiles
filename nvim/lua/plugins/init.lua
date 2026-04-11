@@ -3,7 +3,6 @@ return {
   'rickhowe/diffchar.vim',
   'chrisbra/Colorizer',
   'tpope/vim-commentary',
-  'tpope/vim-fugitive',
   'tpope/vim-repeat',
   'tpope/vim-sensible',
   'tpope/vim-unimpaired',

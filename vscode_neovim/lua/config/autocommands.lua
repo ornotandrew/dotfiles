@@ -5,12 +5,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
-
-vim.api.nvim_create_autocmd("BufReadPost", {
-  pattern = "*",
-  callback = function()
-    vim.defer_fn(function()
-      vim.cmd("normal! zR")
-    end, 200)
-  end,
-})

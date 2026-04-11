@@ -30,7 +30,7 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 export NODE_OPTIONS=--no-deprecation
-path=("/Users/andrew/Library/pnpm/nodejs/20.18.2/bin" $path)
+path=("/Users/andrew/Library/pnpm/nodejs/22.22.2/bin" $path)
 
 # java
 export JAVA_HOME="/opt/homebrew/opt/openjdk"

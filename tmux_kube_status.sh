@@ -1,48 +1,55 @@
 CURRENT_CONTEXT=$(kubectl config current-context)
 case $CURRENT_CONTEXT in
-    "rancher-desktop")
+    "rancher-desktop"|"docker-desktop")
         ENV="local"
+        PERMISSIONS="rw"
         ;;
-    "main-staging-aks-new")
+    "staging-read")
         ENV="staging"
+        PERMISSIONS="r"
         ;;
-    "pci-stag-aks")
-        ENV="pci-staging"
+    "staging-write")
+        ENV="staging"
+        PERMISSIONS="rw"
         ;;
-    "main-cluster-prod-aks")
+    "prod-read")
         ENV="prod"
+        PERMISSIONS="r"
         ;;
-    "pci-prod-aks")
-        ENV="pci-prod"
-        ;;
-    "main-cluster-prep-aks")
-        ENV="preprod"
+    "prod-write")
+        ENV="prod"
+        PERMISSIONS="rw"
         ;;
     *)
         ENV="unknown"
         ;;
 esac
 
-case $ENV in 
-    "local")
-        echo "#[dim,fg=colour10] LOCAL 🌱 "
-        ;;
-    "staging")
-        echo "#[dim,fg=color226] STGNG 🚜 "
-        ;;
-    "pci-staging")
-        echo "#[dim,fg=color226] STGNG 🔒 "
-        ;;
-    "preprod")
-        echo "#[dim,fg=color160] PREP 🚦 "
-        ;;
-    "prod")
-        echo "#[fg=color0,bg=colour160] PROD 🟡#[none,fg=color160,bg=color234]"
-        ;;
-    "pci-prod")
-        echo "#[fg=color0,bg=colour160] PROD 🔒#[none,fg=color160,bg=color234]"
-        ;;
-    "unknown")
-        echo " ?? "
-        ;;
+case $PERMISSIONS in
+    "r")  EMOJI="🟢" ;;
+    "rw") EMOJI="🟡" ;;
+    *)    EMOJI="❓" ;;
 esac
+
+case $ENV in
+    "local")
+      DESCRIPTION="LOCAL"
+      COLOR="dim,fg=color10"
+      # Special case for local dev - we don't want a scary emoji there
+      EMOJI="🌱"
+      ;;
+    "staging")
+      DESCRIPTION="STGNG"
+      COLOR="dim,fg=color226"
+      ;;
+    "prod")
+      DESCRIPTION="PROD"
+      COLOR="fg=color0,bg=color160"
+      ;;
+    *)
+      DESCRIPTION="??"
+      COLOR="color160"
+      ;;
+esac
+
+echo "#[${COLOR}] ${DESCRIPTION} ${EMOJI} "

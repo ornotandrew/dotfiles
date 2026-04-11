@@ -1,5 +1,3 @@
-local visual_util = require("wraithy.visual_util")
-
 -- Read in 12 random hex chars
 local function generate_uuid(with_dashes)
   local chars
@@ -14,11 +12,13 @@ end
 
 vim.keymap.set('n', '<Leader>u', function() generate_uuid(false) end, { noremap = true })
 vim.keymap.set('n', '<Leader>U', function() generate_uuid(true) end, { noremap = true })
-
+--
 -- Get GitLab permalink for the selected lines
 local function get_gitlab_permalink()
   -- Get visual selection range
-  local start_line, end_line = visual_util.get_visual_selection_range()
+  local currentLine = vim.fn.getpos('.')[2]
+  local startOfSelection = vim.fn.getpos('v')[2]
+  local start_line, end_line = math.min(currentLine, startOfSelection), math.max(currentLine, startOfSelection)
 
   -- Get current file path relative to git root
   local file_path = vim.fn.expand('%:p')
@@ -50,28 +50,3 @@ end
 
 -- Visual mode mapping
 vim.keymap.set('v', '<Leader>gl', function() get_gitlab_permalink() end, { noremap = true, silent = true })
-
--- Copy the path of the current file to the clipboard
-vim.keymap.set('n', '<Leader>p', ":let @*=expand('%')<CR>", { noremap = true, silent = true })
-
--- Copy the path of the current file to the clipboard (with line numbers in visual mode)
-local function copy_file_path()
-  local relative_path = vim.fn.expand('%')
-
-  -- Check if we're in visual mode by getting visual selection positions
-  if visual_util.is_visualish_mode() then
-    local start_line, end_line = visual_util.get_visual_selection_range()
-
-    if start_line == end_line then
-      relative_path = string.format("@%s :%d", relative_path, start_line)
-    else
-      relative_path = string.format("@%s :%d-%d", relative_path, start_line, end_line)
-    end
-  end
-
-  vim.fn.setreg('*', relative_path)
-  vim.notify('Copied: ' .. relative_path)
-end
-
-vim.keymap.set('n', '<Leader>c', copy_file_path, { noremap = true, silent = true })
-vim.keymap.set('v', '<Leader>c', copy_file_path, { noremap = true, silent = true })

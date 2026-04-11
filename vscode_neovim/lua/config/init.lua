@@ -1,0 +1,5 @@
+require("config.autocommands")
+require("config.helpers")
+require("config.mappings")
+require("config.options")
+require("config.lazy")

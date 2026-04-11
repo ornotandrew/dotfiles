@@ -48,12 +48,6 @@ return {
       util.set_leader_map('r', builtin.live_grep)
       util.set_leader_map('b', builtin.buffers)
       util.set_leader_map('s', custom_pickers.find_files({ cwd = '~/code/stitch/src/shared/' }))
-      vim.keymap.set(
-        { 'n', 'v' },
-        '<leader>c',
-        custom_pickers.ai_action_palette,
-        { noremap = true }
-      )
     end
   },
 }

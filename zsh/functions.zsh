@@ -20,52 +20,6 @@ source-env () {
     set +o allexport
 }
 
-kenv () {
-    HELP_MSG='Usage
-
-    kenv list - Show possible environments
-    kenv <environment> - Switch to the given environment'
-    LIST_MSG='local
-test
-prod'
-
-    if [ -z "$1" ]
-    then
-        echo $HELP_MSG;
-    fi
-
-    case $1 in
-        "list")
-            echo $LIST_MSG
-            ;;
-        "local")
-            kubectl config use-context rancher-desktop
-            ;;
-        "staging")
-            kubectl config use-context main-staging-aks-new
-            ;;
-        "pci-staging")
-            kubectl config use-context pci-stag-aks
-            ;;
-        "prep")
-            kubectl config use-context main-cluster-prep-aks
-            ;;
-        "prod")
-            kubectl config use-context main-cluster-prod-aks
-            ;;
-        "pci-prod")
-            kubectl config use-context pci-prod-aks
-            ;;
-    esac
-
-    tmux refresh-client -S
-}
-
-k8s-auth() {
-    az account clear
-    az login
-}
-
 clean-js-files() {
     find ${1:-.} -name '*.ts' | sed 's/.ts$/.js/' | xargs rm -f
 }

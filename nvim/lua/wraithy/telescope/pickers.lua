@@ -1,14 +1,16 @@
 local util = require('wraithy.util')
 
-local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
 local builtin = require('telescope.builtin')
-local conf = require("telescope.config").values
-local finders = require("telescope.finders")
-local pickers = require("telescope.pickers")
 local themes = require('telescope.themes')
 
 local M = {}
+
+-- Common theme configuration
+local dropdown_config = { layout_config = { width = 120 } }
+
+local function get_dropdown_theme(extra_opts)
+  return themes.get_dropdown(util.merge_tables(dropdown_config, extra_opts or {}))
+end
 
 M.set_leader_map = function(key, fn)
   vim.keymap.set(
@@ -21,62 +23,81 @@ end
 
 M.find_files = function(extra_options)
   return function()
-    local opts = {
-      previewer = false,
-      layout_config = { width = 120 }
-    }
-    require('telescope.builtin').find_files(themes.get_dropdown(util.merge_tables(opts, extra_options)))
+    local opts = { previewer = false }
+    require('telescope.builtin').find_files(get_dropdown_theme(util.merge_tables(opts, extra_options)))
   end
 end
 
 M.lsp_references = function()
-  builtin.lsp_references(themes.get_dropdown({ layout_config = { width = 120 } }))
+  builtin.lsp_references(get_dropdown_theme())
 end
 
-M.ai_action_palette = function(opts)
-  opts = opts or {}
+M.lsp_actions = function()
+  local pickers = require('telescope.pickers')
+  local finders = require('telescope.finders')
+  local conf = require('telescope.config').values
+  local actions = require('telescope.actions')
+  local action_state = require('telescope.actions.state')
 
-  local codecompanion = require('codecompanion')
+  local lsp_actions = {
+    { name = "Find References", fn = M.lsp_references },
+    {
+      name = "Find Implementations",
+      fn = function()
+        builtin.lsp_implementations(get_dropdown_theme())
+      end
+    },
+    {
+      name = "Find Type Definition",
+      fn = function()
+        builtin.lsp_type_definitions(get_dropdown_theme())
+      end
+    },
+    {
+      name = "Incoming Calls",
+      fn = function()
+        builtin.lsp_incoming_calls(get_dropdown_theme())
+      end
+    },
+    {
+      name = "Outgoing Calls",
+      fn = function()
+        builtin.lsp_outgoing_calls(get_dropdown_theme())
+      end
+    },
+    {
+      name = "Document Symbols",
+      fn = function()
+        builtin.lsp_document_symbols(get_dropdown_theme())
+      end
+    },
+    {
+      name = "Workspace Symbols",
+      fn = function()
+        builtin.lsp_workspace_symbols(get_dropdown_theme())
+      end
+    },
+    { name = "Format",          fn = function() vim.lsp.buf.format({ async = true }) end },
+  }
 
-  local mode = vim.api.nvim_get_mode()['mode']
-  local is_visual = mode == "V" or mode == "v"
-  if is_visual then
-    -- get out of visual mode so that vim saves the '< and '> marks
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), 'x', true)
-  end
-  pickers.new(opts, {
-    prompt_title = "AI Chat",
-    finder = finders.new_table {
-      results = {
-        { "Chat - Claude",                  { codecompanion.chat, { fargs = { "anthropic" } } } },
-        { "Chat - Claude (Haiku)",          { codecompanion.chat, { fargs = { "anthropic_haiku" } } } },
-        { "Chat - Ollama (deepseek-r1:8b)", { codecompanion.chat, { fargs = { "ollama_deepseek" } } } },
-        { "Chat - Ollama (qwen2.5-coder)",  { codecompanion.chat, { fargs = { "ollama_qwen" } } } },
-        { "Chat - Ollama (qwq)",            { codecompanion.chat, { fargs = { "ollama_qwq" } } } },
-        { "Other actions",                  { codecompanion.actions, {} } },
-      },
+  pickers.new(get_dropdown_theme(), {
+    prompt_title = "LSP Actions",
+    finder = finders.new_table({
+      results = lsp_actions,
       entry_maker = function(entry)
         return {
           value = entry,
-          display = entry[1],
-          ordinal = entry[1],
+          display = entry.name,
+          ordinal = entry.name,
         }
       end,
-    },
-    sorter = conf.generic_sorter(opts),
+    }),
+    sorter = conf.generic_sorter({}),
     attach_mappings = function(prompt_bufnr, map)
       actions.select_default:replace(function()
         actions.close(prompt_bufnr)
         local selection = action_state.get_selected_entry()
-
-        local fn = selection.value[2][1]
-        local args = util.shallow_copy(selection.value[2][2])
-        if is_visual then
-          -- CodeCompanion will use this as a trigger to figure out the previous visual selection
-          -- based on '< and '>
-          args['range'] = 1
-        end
-        fn(args)
+        selection.value.fn()
       end)
       return true
     end,

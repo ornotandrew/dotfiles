@@ -22,7 +22,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # colors
-export TERM=xterm-24bit
+# Let the terminal emulator set TERM (Ghostty sets xterm-ghostty)
 
 # Make sure any script-local changes to path are exported
 export PATH
@@ -32,3 +32,6 @@ source /Users/andrew/.commonsh
 
 # Added by Windsurf
 export PATH="/Users/andrew/.codeium/windsurf/bin:$PATH"
+
+# opencode
+export PATH=/Users/andrew/.opencode/bin:$PATH

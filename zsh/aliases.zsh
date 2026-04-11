@@ -9,3 +9,5 @@ alias -g vim="nvim"
 alias notify='terminal-notifier -title "Terminal" -subtitle "A program has finished running." -message "Please check your terminal for the output"'
 alias da='deactivate'
 alias luamake='/Users/andrew/github/lua-language-server/3rd/luamake/luamake'
+alias oc='caffeinate -s opencode'
+alias claude='caffeinate -s claude --dangerously-skip-permissions'
