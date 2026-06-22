@@ -12,7 +12,7 @@ local servers = {
   ts_ls = require("lsp.ts_ls"),
   jsonls = {},
   yamlls = require("lsp.yamlls"),
-  gopls = {},
+  gopls = require("lsp.gopls"),
   graphql = require("lsp.graphql"),
   cssls = require("lsp.cssls"),
   omnisharp = require("lsp.omnisharp"),
@@ -38,7 +38,13 @@ local on_attach = function(client, bufnr)
 
   -- Mappings
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', '<c-]>', vim.lsp.buf.definition)
+  buf_set_keymap('n', '<c-]>', function()
+    if vim.bo[bufnr].filetype == "yaml"
+        and require("wraithy.openapi_ref").try_jump() then
+      return
+    end
+    vim.lsp.buf.definition()
+  end)
   buf_set_keymap('n', 'K', vim.lsp.buf.hover)
   buf_set_keymap('n', '<leader>n', vim.lsp.buf.rename)
   buf_set_keymap('n', '<leader>a', vim.lsp.buf.code_action)
